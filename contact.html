@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start a project · Atlas Studios</title>
+<meta name="description" content="Tell Atlas Studios about your brand, venue, or event.">
+<meta property="og:title" content="Start a project · Atlas Studios">
+<meta property="og:description" content="Tell Atlas Studios about your brand, venue, or event.">
+<meta property="og:image" content="/assets/img/favicon.png">
+<link rel="icon" href="/assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/assets/js/site.js" defer></script>
+
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Atlas Studios home"><img src="/assets/img/atlas-mark-charcoal.png" alt=""><span>Atlas</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav">
+      <a href="/work">Work</a>
+      <a href="/capabilities">Capabilities</a>
+      <a href="/events">Events</a>
+      <a href="/about">About</a>
+      <a class="btn" href="/contact">Start a project</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <span class="label">Start a project</span>
+      <h1 class="display" style="margin:12px 0 28px">Let's build<br><span class="italic">your world.</span></h1>
+      <p class="lede">Tell us about your brand, venue, or moment. We reply within two business days.</p>
+    </div>
+    <form data-table="inquiries" data-success="Received. We'll be in touch within two business days.">
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-row">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="company">Brand or company</label><input id="company" name="company"></div>
+        <div class="field"><label for="project_type">Project type</label>
+          <select id="project_type" name="project_type">
+            <option>Brand activation</option><option>Experience design</option><option>Partnership</option>
+            <option>Creative direction</option><option>Product and merchandise</option><option>Other</option>
+          </select></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option>Under $5K</option><option>$5K to $15K</option><option>$15K to $50K</option><option>$50K+</option><option>Not sure yet</option>
+          </select></div>
+        <div class="field"><label for="timeline">Timeline</label><input id="timeline" name="timeline" placeholder="Event date or launch window"></div>
+      </div>
+      <div class="field"><label for="message">Tell us about it</label><textarea id="message" name="message" required></textarea></div>
+      <button class="btn solid" type="submit">Send</button>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <img src="/assets/img/atlas-mark-bone.png" alt="Atlas Studios">
+        <p class="display-sm" style="margin:0 0 24px">Culture you can step into.</p>
+        <form class="inline-form" data-table="subscribers" data-success="You're on the list.">
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="email" name="email" required placeholder="Email for invites and drops" aria-label="Email">
+          <button class="btn" type="submit">Join</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="/work">Work</a></li>
+          <li><a href="/capabilities">Capabilities</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li>Atlanta, Georgia</li>
+          <li><a data-config-link="email" href="#">Email</a></li>
+          <li><a data-config-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a data-config-link="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span data-year>2026</span> Atlas Creative Studios LLC</span>
+      <span>Brand activations · Partnerships · Experiences</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

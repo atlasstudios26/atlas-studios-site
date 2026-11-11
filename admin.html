@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Atlas Studios</title>
+<link rel="icon" href="/assets/img/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/admin.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/img/atlas-mark-charcoal.png" alt=""><span>Atlas</span></a>
+    <nav class="site-nav" style="display:flex"><a href="/">View site</a><a href="#" id="signout" hidden>Sign out</a></nav>
+  </div>
+</header>
+<main class="admin">
+  <div class="wrap">
+    <span class="label">Studio admin</span>
+    <h1 class="display-md" style="margin:8px 0 32px">Manage your site</h1>
+
+    <div class="notice" id="no-config" hidden>Supabase isn't connected yet. Add your Project URL and anon key to assets/js/config.js (Claude does this for you in Step 2).</div>
+
+    <div class="panel" id="login" hidden>
+      <form id="login-form" style="max-width:420px">
+        <div class="field"><label for="le">Email</label><input id="le" type="email" required></div>
+        <div class="field"><label for="lp">Password</label><input id="lp" type="password" required></div>
+        <button class="btn solid" type="submit">Sign in</button>
+        <p class="form-status" id="login-status"></p>
+      </form>
+    </div>
+
+    <div id="app" hidden>
+      <div class="tabs" role="tablist">
+        <button class="btn" data-tab="cases" aria-selected="true">Case studies</button>
+        <button class="btn" data-tab="media" aria-selected="false">Photos &amp; videos</button>
+        <button class="btn" data-tab="inquiries" aria-selected="false">Inquiries</button>
+        <button class="btn" data-tab="subscribers" aria-selected="false">Email list</button>
+      </div>
+
+      <section class="panel" data-pane="cases" style="padding:32px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+          <h2 class="display-sm" style="margin:0">Case studies</h2>
+          <button class="btn solid" id="new-case">New case study</button>
+        </div>
+        <table style="margin-top:20px"><thead><tr><th>Order</th><th>Title</th><th>Category</th><th>Live</th><th></th></tr></thead><tbody id="case-rows"></tbody></table>
+
+        <form id="case-form" hidden style="margin-top:32px">
+          <input type="hidden" name="id">
+          <div class="form-row">
+            <div class="field"><label>Title</label><input name="title" required></div>
+            <div class="field"><label>Link name (no spaces, e.g. park-100)</label><input name="slug" required></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Client / partners</label><input name="client"></div>
+            <div class="field"><label>Category</label><input name="category" placeholder="Experience Design"></div>
+          </div>
+          <div class="field"><label>One line summary (shows on cards)</label><input name="summary"></div>
+          <div class="field"><label>Context</label><textarea name="context"></textarea></div>
+          <div class="field"><label>Insight</label><textarea name="insight"></textarea></div>
+          <div class="field"><label>Objective (one per line)</label><textarea name="objective"></textarea></div>
+          <div class="field"><label>Execution (one per line)</label><textarea name="execution"></textarea></div>
+          <div class="field"><label>Results (one per line)</label><textarea name="results"></textarea></div>
+          <div class="form-row">
+            <div class="field"><label>Cover image</label><input type="file" name="cover" accept="image/*"><small id="cover-current"></small></div>
+            <div class="field"><label>Order (1 shows first)</label><input name="sort_order" type="number" value="10"></div>
+          </div>
+          <div class="field" style="flex-direction:row;align-items:center;gap:10px"><input type="checkbox" name="published" id="pub" checked style="width:auto"><label for="pub" style="margin:0">Show on site</label></div>
+          <button class="btn solid" type="submit">Save</button>
+          <button class="btn" type="button" id="cancel-case">Cancel</button>
+          <p class="form-status" id="case-status"></p>
+        </form>
+      </section>
+
+      <section class="panel" data-pane="media" hidden>
+        <h2 class="display-sm" style="margin:0 0 16px">Photos &amp; videos</h2>
+        <form id="media-form">
+          <div class="form-row">
+            <div class="field"><label>Files</label><input type="file" name="files" accept="image/*,video/*" multiple required></div>
+            <div class="field"><label>Event name</label><input name="event_name" placeholder="Park 100: Oak Bluffs Edition"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Caption (optional)</label><input name="caption"></div>
+            <div class="field"><label>Attach to case study (optional)</label><select name="case_study_id" id="media-case"><option value="">None, archive only</option></select></div>
+          </div>
+          <button class="btn solid" type="submit">Upload</button>
+          <p class="form-status" id="media-status"></p>
+        </form>
+        <div class="thumbs" id="media-list" style="margin-top:24px"></div>
+      </section>
+
+      <section class="panel" data-pane="inquiries" hidden>
+        <h2 class="display-sm" style="margin:0 0 16px">Inquiries</h2>
+        <table><thead><tr><th>Date</th><th>Name</th><th>Brand</th><th>Type</th><th>Budget</th><th>Message</th></tr></thead><tbody id="inq-rows"></tbody></table>
+      </section>
+
+      <section class="panel" data-pane="subscribers" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+          <h2 class="display-sm" style="margin:0">Email list</h2>
+          <button class="btn" id="export-subs">Download CSV</button>
+        </div>
+        <table style="margin-top:16px"><thead><tr><th>Date</th><th>Email</th></tr></thead><tbody id="sub-rows"></tbody></table>
+      </section>
+    </div>
+  </div>
+</main>
+</body>
+</html>
