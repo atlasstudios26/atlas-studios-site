@@ -11,7 +11,7 @@
 <link rel="icon" href="/assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
 <script src="/assets/js/config.js"></script>
 <script src="/assets/js/data.js"></script>
@@ -36,15 +36,19 @@
 <main>
 
 <section class="hero">
-  <div class="hero-media" data-hero-video><img class="hero-mark" src="/assets/img/atlas-mark-bone.png" alt=""></div>
+  <div class="hero-media">
+    <video class="hero-video" data-hero-film autoplay muted loop playsinline preload="metadata"
+      poster="/assets/video/atlas-worlds-wide-poster.jpg"
+      data-wide="/assets/video/atlas-worlds-wide.mp4" data-tall="/assets/video/atlas-worlds-tall.mp4"
+      data-wide-poster="/assets/video/atlas-worlds-wide-poster.jpg" data-tall-poster="/assets/video/atlas-worlds-tall-poster.jpg"
+      aria-label="The Atlas logo forming, then built across eight worlds"></video>
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap">
     <span class="label">Atlas Studios · Atlanta</span>
-    <h1 class="display">We create<br><span class="italic">worlds.</span></h1>
-    <div class="worlds" aria-label="Worlds we build">
-      <span>Spirits</span><span>Hospitality</span><span>Fashion</span><span>Culture</span><span>Community</span>
-    </div>
+    <h1 class="display hero-title">We create worlds.</h1>
     <div class="hero-foot">
-      <p class="lede">A cultural and experiential studio creating brand activations, partnerships, and intimate moments that move modern culture.</p>
+      <p class="lede">Worldbuilders for brands that matter in culture. Space, product, identity, content, community and result: one story, every layer.</p>
       <a class="btn" href="/contact">Start a project</a>
     </div>
   </div>

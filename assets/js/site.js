@@ -161,12 +161,15 @@
   }
 
   function heroVideo() {
-    const slot = $("[data-hero-video]");
-    if (!slot || !cfg.heroVideo) return;
-    const v = el("video", { src: cfg.heroVideo, autoplay: "", muted: "", playsinline: "", class: "hero-video" });
+    // Widescreen film on computers, tall film on phones. Reduced motion: poster only.
+    const v = $("[data-hero-film]");
+    if (!v) return;
+    const tall = matchMedia("(max-aspect-ratio: 1/1)").matches;
+    v.poster = tall ? v.dataset.tallPoster : v.dataset.widePoster;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); return; }
+    v.src = (cfg.heroVideo && !tall) ? cfg.heroVideo : (tall ? v.dataset.tall : v.dataset.wide);
     v.muted = true;
-    slot.replaceChildren(v);
-    slot.classList.add("has-video");
+    const p = v.play(); if (p && p.catch) p.catch(() => {});
   }
 
   function revealOnScroll() {
