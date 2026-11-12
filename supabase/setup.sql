@@ -97,6 +97,15 @@ drop policy if exists "admin deletes subscribers" on public.subscribers;
 create policy "admin deletes subscribers" on public.subscribers
   for delete to authenticated using (public.is_admin());
 
+-- Grants for the website's public key
+grant usage on schema public to anon, authenticated;
+grant select on public.case_studies, public.media to anon, authenticated;
+grant insert on public.inquiries, public.subscribers to anon, authenticated;
+grant select, insert, update, delete on public.case_studies, public.media, public.inquiries, public.subscribers to authenticated;
+grant execute on function public.is_admin() to anon, authenticated;
+notify pgrst, 'reload schema';
+
+
 -- 3. Photo and video storage ---------------------------------------------
 insert into storage.buckets (id, name, public) values ('media', 'media', true)
 on conflict (id) do nothing;

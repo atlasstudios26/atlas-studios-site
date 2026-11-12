@@ -133,7 +133,8 @@
         const { error } = await db.from(form.dataset.table).insert(data);
         btn.disabled = false;
         if (error) {
-          status.textContent = error.code === "23505" ? "You're already on the list." : "Something went wrong. Please try again.";
+          console.error("Atlas form error", error);
+          status.textContent = error.code === "23505" ? "You're already on the list." : `Something went wrong. Please try again. (${error.code || error.message || "error"})`;
           return;
         }
         form.reset();
