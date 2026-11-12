@@ -172,6 +172,22 @@
     const p = v.play(); if (p && p.catch) p.catch(() => {});
   }
 
+  function headerOverFilm() {
+    // Home page: header sits clear over the film, turns solid once you scroll past it or open the menu.
+    if (!document.body.classList.contains("over-film")) return;
+    const header = $(".site-header"), hero = $(".hero");
+    if (!header || !hero) return;
+    const update = () => {
+      const past = hero.getBoundingClientRect().bottom <= header.offsetHeight;
+      const menuOpen = $(".site-nav") && $(".site-nav").classList.contains("open");
+      header.classList.toggle("solid", past || menuOpen);
+    };
+    addEventListener("scroll", update, { passive: true });
+    addEventListener("resize", update);
+    const btn = $(".nav-toggle"); if (btn) btn.addEventListener("click", () => setTimeout(update));
+    update();
+  }
+
   function revealOnScroll() {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     document.documentElement.classList.add("anim");
@@ -183,7 +199,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); heroVideo(); revealOnScroll();
+    wireNav(); wireForms(); heroVideo(); headerOverFilm(); revealOnScroll();
     renderWorkGrids(); renderGallery(); renderCaseStudy();
   });
 })();
