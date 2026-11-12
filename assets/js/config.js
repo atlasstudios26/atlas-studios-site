@@ -3,7 +3,7 @@
 // Both are safe to be public. NEVER put the service_role / secret key here.
 window.ATLAS_CONFIG = {
   supabaseUrl: "https://soxugpgcopfrsddbdyrj.supabase.co",
-  supabaseAnonKey: "",  // starts with "eyJ..." or "sb_publishable_..."
+  supabaseAnonKey: "sb_publishable_sHBEvTtINn2CS-Ur5HY3qw_9_AiO2_l",
   heroVideo: "",        // optional: URL of the We Create Worlds video (mp4) for the homepage
   instagram: "",        // optional: full Instagram URL
   linkedin: "",         // optional: full LinkedIn URL
