@@ -63,7 +63,9 @@ window.ATLAS_FALLBACK = {
         "A new on premise partnership: The James Room added a Just Add Honey and Edmond's Honor cocktail to its menu",
         "A repeatable experiential format bridging adjacent categories"
       ],
-      cover_url: "",
+      cover_url: "/assets/work/the-art-of-blending/founders.jpg",
+      hero_url: "/assets/work/the-art-of-blending/founders-wide.jpg",
+      gallery: ["/assets/work/the-art-of-blending/pour.jpg", "/assets/work/the-art-of-blending/tasting-table.jpg", "/assets/work/the-art-of-blending/bottle-display.jpg", "/assets/work/the-art-of-blending/bookmarks.jpg", "/assets/work/the-art-of-blending/guests.jpg", "/assets/work/the-art-of-blending/bitters.jpg", "/assets/work/the-art-of-blending/cocktail.jpg"],
       sort_order: 1
     },
     {

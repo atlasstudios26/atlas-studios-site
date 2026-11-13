@@ -25,6 +25,11 @@
       const { data, error } = await db.from("case_studies").select("*").eq("published", true).order("sort_order", { ascending: true });
       if (!error && data && data.length) {
         // Case studies built into the site (pinned) show alongside the ones managed in /admin.
+        // Built-in photos and video fill in anything a managed case study is missing.
+        data.forEach((c) => {
+          const f = fallback.caseStudies.find((x) => x.slug === c.slug);
+          if (f) ["cover_url", "hero_url", "video_url", "gallery", "chapters", "stat", "served"].forEach((k) => { if (!c[k] && f[k]) c[k] = f[k]; });
+        });
         const have = new Set(data.map((c) => c.slug));
         const pinned = fallback.caseStudies.filter((c) => c.pinned && !have.has(c.slug));
         return data.concat(pinned).sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99));
@@ -44,6 +49,8 @@
     const box = el("div", { class: cls || "card-cover" });
     if (cs.video_url && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
       box.append(el("video", { src: cs.video_url, poster: cs.cover_url || null, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata", "aria-label": cs.title }));
+    } else if (cls === "cs-cover" && cs.hero_url) {
+      box.append(el("img", { src: cs.hero_url, alt: cs.title }));
     } else if (cs.cover_url) box.append(el("img", { src: cs.cover_url, alt: cs.title, loading: "lazy" }));
     else box.append(el("img", { src: "/assets/img/atlas-mark-bone.png", alt: "", class: "cover-mark" }));
     return box;
@@ -152,6 +159,9 @@
       el("div", { class: "cs-results" }, el("span", { class: "label", text: "Results" }), ul(cs.results)),
       cs.served ? el("div", { class: "cs-served" }, el("span", { class: "label", text: "Who it served" }), el("p", { class: "display-sm", text: cs.served })) : null
     ].filter(Boolean));
+    if (cs.gallery && cs.gallery.length) {
+      root.append(el("div", { class: "cs-gallery" }, cs.gallery.map((src) => el("figure", {}, el("img", { src, alt: "", loading: "lazy" })))));
+    }
     $$("video", root).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
     if (cs.id) {
       const media = await getMedia(cs.id);

@@ -265,3 +265,6 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--o
 .cs-served { margin-top: 2px; padding: 40px; background: var(--olive); color: var(--bone); }
 .cs-served .label { color: var(--bone-2); }
 .cs-served p { margin: 14px 0 0; max-width: 40ch; }
+.cs-gallery { margin-top: 64px; columns: 3 280px; column-gap: 12px; }
+.cs-gallery figure { margin: 0 0 12px; break-inside: avoid; }
+.cs-gallery img { width: 100%; display: block; }
