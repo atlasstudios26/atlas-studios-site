@@ -75,14 +75,14 @@ body.over-film .site-header.solid .nav-toggle { color: var(--charcoal); }
   linear-gradient(180deg, rgba(41,36,32,0.55) 0, rgba(41,36,32,0) 150px),
   linear-gradient(0deg, rgba(41,36,32,0.75) 0, rgba(41,36,32,0) 32%); }
 .hero .wrap { position: relative; width: 100%; }
-.hero-row { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
-.world-label { margin: 0 0 10px; min-height: 1.4em; display: flex; gap: 12px; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bone); text-shadow: 0 1px 12px rgba(0,0,0,0.6); opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; text-align: right; }
+.hero-row { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.world-label { margin: 0 0 10px; min-height: 1.4em; display: flex; gap: 12px; align-items: baseline; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bone); text-shadow: 0 1px 12px rgba(0,0,0,0.6); opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; justify-content: center; }
 .world-label.show { opacity: 1; transform: none; }
 .world-label a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
 .world-label .world-num { opacity: .7; }
 .world-label .world-note { opacity: .7; letter-spacing: 0.16em; }
-@media (max-width: 760px) { .hero-row { flex-direction: column-reverse; align-items: start; gap: 10px; } .world-label { text-align: left; margin: 0; } }
-.hero-title { font-size: clamp(40px, 5.6vw, 84px); color: var(--bone); text-shadow: 0 2px 24px rgba(0,0,0,0.45); opacity: 0; transform: translateY(12px); animation: heroIn 1.2s ease 2.6s forwards; }
+@media (max-width: 760px) { .hero-row { gap: 10px; } .world-label { margin: 0; flex-wrap: wrap; } }
+.hero-title { font-size: clamp(40px, 5.6vw, 84px); color: rgba(229,227,221,0.42); -webkit-text-stroke: 1px rgba(229,227,221,0.95); text-shadow: 0 0 2px rgba(0,0,0,0.45), 0 2px 22px rgba(0,0,0,0.35); text-align: center; opacity: 0; transform: translateY(12px); animation: heroIn 1.2s ease 2.6s forwards; }
 @keyframes heroIn { to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .hero-title { animation: none; opacity: 1; transform: none; } }
 
