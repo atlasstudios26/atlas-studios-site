@@ -3,6 +3,42 @@
 window.ATLAS_FALLBACK = {
   caseStudies: [
     {
+      slug: "nightmare-on-westside",
+      pinned: true,
+      title: "Nightmare on Westside",
+      client: "Emerging 100 of Atlanta × The Social Club, with Aguasol Tequila",
+      category: "Partnership & Experience Design",
+      summary: "Two of Atlanta's party communities, one Halloween night, one question: which side are you on?",
+      stat: "Sold out · 850+ guests",
+      cover_url: "/assets/work/nightmare-on-westside/recap-poster.jpg",
+      video_url: "/assets/work/nightmare-on-westside/recap.mp4",
+      served: "Proceeds went to Emerging 100's mission: scholarships and year-round programming for Atlanta students.",
+      chapters: [
+        { label: "01 · The partnership", title: "Two worlds, one night.",
+          body: "Atlas brought Emerging 100 of Atlanta and The Social Club together and structured an equitable split, so both organizations shared the work, the stage and the upside.",
+          media: ["/assets/work/nightmare-on-westside/dance-floor.jpg"] },
+        { label: "02 · The theme", title: "Everyone has another side.",
+          body: "The concept, Worlds Collide, became Nightmare on Westside: a night built on mirrors, reflections and alter egos, and one question for every guest. Which side is calling you?",
+          media: ["/assets/work/nightmare-on-westside/flyer-02.jpg"] },
+        { label: "03 · The assets", title: "Nine flyers, one idea.",
+          body: "Each flyer shows a guest facing their reflection's alter ego. Both partners' logos live inside every scene, as a mirror sticker, an air freshener, a wrist tattoo or an elevator plate, so the partnership reads as part of the world instead of a footer.",
+          media: ["/assets/work/nightmare-on-westside/flyer-01.jpg", "/assets/work/nightmare-on-westside/flyer-05.jpg", "/assets/work/nightmare-on-westside/flyer-06.jpg", "/assets/work/nightmare-on-westside/flyer-07.jpg", "/assets/work/nightmare-on-westside/flyer-08.jpg", "/assets/work/nightmare-on-westside/flyer-09.jpg"] },
+        { label: "04 · The room", title: "The theme, built.",
+          body: "Co-branded mirrors framed in candlelight, a red-curtained Confessional set for guest content, the arch entrance and the DJ booth visuals. Three women DJs carried the night at the Westside Cultural Arts Center.",
+          media: ["/assets/work/nightmare-on-westside/mirror-candles.jpg", "/assets/work/nightmare-on-westside/dj-booth.jpg", "/assets/work/nightmare-on-westside/confessional.jpg", "/assets/work/nightmare-on-westside/guests-costumes.jpg"] },
+        { label: "05 · The partner", title: "Aguasol, inside the world.",
+          body: "Aguasol, a returning Park 100 sponsor, came on as spirit partner: a branded satellite bar, a tasting moment, a themed drink menu led by the Midnight Mischief strawberry margarita, guest giveaways and preferred bottles in sections. Atlas wrote the agreement and pitched it alongside Emerging 100 president Daniel Farr.",
+          media: ["/assets/work/nightmare-on-westside/aguasol.mp4", "/assets/work/nightmare-on-westside/aguasol-bottle.jpg", "/assets/work/nightmare-on-westside/drink-menu.jpg", "/assets/work/nightmare-on-westside/aguasol-bar.jpg"] }
+      ],
+      results: [
+        "Sold out, with 850+ guests",
+        "A shared night between two of Atlanta's party communities, split equitably",
+        "A spirit partnership that put Aguasol inside the theme, from menu to bar to bottles",
+        "Proceeds supporting Emerging 100's mission"
+      ],
+      sort_order: 0
+    },
+    {
       slug: "the-art-of-blending",
       title: "The Art of Blending",
       client: "Just Add Honey Tea Company × Edmond's Honor Bourbon",

@@ -23,7 +23,12 @@
   async function getCaseStudies() {
     if (db) {
       const { data, error } = await db.from("case_studies").select("*").eq("published", true).order("sort_order", { ascending: true });
-      if (!error && data && data.length) return data;
+      if (!error && data && data.length) {
+        // Case studies built into the site (pinned) show alongside the ones managed in /admin.
+        const have = new Set(data.map((c) => c.slug));
+        const pinned = fallback.caseStudies.filter((c) => c.pinned && !have.has(c.slug));
+        return data.concat(pinned).sort((a, b) => (a.sort_order ?? 99) - (b.sort_order ?? 99));
+      }
     }
     return fallback.caseStudies.slice().sort((a, b) => a.sort_order - b.sort_order);
   }
@@ -37,7 +42,9 @@
 
   function cover(cs, cls) {
     const box = el("div", { class: cls || "card-cover" });
-    if (cs.cover_url) box.append(el("img", { src: cs.cover_url, alt: cs.title, loading: "lazy" }));
+    if (cs.video_url && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      box.append(el("video", { src: cs.video_url, poster: cs.cover_url || null, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata", "aria-label": cs.title }));
+    } else if (cs.cover_url) box.append(el("img", { src: cs.cover_url, alt: cs.title, loading: "lazy" }));
     else box.append(el("img", { src: "/assets/img/atlas-mark-bone.png", alt: "", class: "cover-mark" }));
     return box;
   }
@@ -73,12 +80,46 @@
     });
   }
 
+  // Home page: a few hand-picked projects as large rows.
+  async function renderFeatured() {
+    const box = $("[data-featured]");
+    if (!box) return;
+    const list = await getCaseStudies();
+    const want = box.dataset.featured.split(",").map((x) => x.trim());
+    const items = want.map((slug) => list.find((c) => c.slug === slug)).filter(Boolean);
+    box.replaceChildren(...items.map((cs, i) => el("a", { class: "feature reveal in", href: `/case-study?slug=${encodeURIComponent(cs.slug)}` },
+      cover(cs, "feature-media"),
+      el("div", { class: "feature-text" },
+        el("span", { class: "label", text: String(i + 1).padStart(2, "0") + " · " + (cs.category || "") }),
+        el("h3", { class: "display-md", text: cs.title }),
+        el("p", { class: "feature-client", text: cs.client || "" }),
+        el("p", { class: "feature-summary", text: cs.summary || "" }),
+        cs.stat ? el("p", { class: "feature-stat", text: cs.stat }) : null,
+        el("span", { class: "feature-link", text: "View the world" })
+      ))));
+    $$("video", box).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+  }
+
   async function renderGallery() {
     const g = $("[data-gallery]");
     if (!g) return;
     const media = await getMedia();
     if (!media.length) { g.closest("section")?.setAttribute("hidden", ""); return; }
     g.replaceChildren(...media.map(mediaItem));
+  }
+
+  function chapters(list) {
+    const media = (src) => /\.mp4$/i.test(src)
+      ? el("video", { src, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata" })
+      : el("img", { src, alt: "", loading: "lazy" });
+    return el("div", { class: "chapters" }, list.map((c) =>
+      el("section", { class: "chapter reveal in" },
+        el("div", { class: "chapter-text" },
+          el("span", { class: "label", text: c.label }),
+          el("h2", { class: "display-md", text: c.title }),
+          el("p", { class: "lede", text: c.body })),
+        (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.length, 6) }, c.media.map((m) => el("figure", {}, media(m)))) : null
+      )));
   }
 
   async function renderCaseStudy() {
@@ -92,21 +133,26 @@
     document.title = `${cs.title} · Atlas Studios`;
     const block = (label, body) => el("div", { class: "cs-block" }, el("span", { class: "label", text: label }), body);
     const ul = (items) => el("ul", { class: "cs-list" }, asList(items).map((t) => el("li", { text: t })));
-    root.replaceChildren(
-      el("header", { class: "cs-head" },
-        el("span", { class: "label", text: cs.category || "" }),
-        el("h1", { class: "display", text: cs.title }),
-        el("p", { class: "cs-client", text: cs.client || "" })
-      ),
-      cover(cs, "cs-cover"),
-      el("div", { class: "cs-grid" },
+    const head = el("header", { class: "cs-head" },
+      el("span", { class: "label", text: cs.category || "" }),
+      el("h1", { class: "display", text: cs.title }),
+      el("p", { class: "cs-client", text: cs.client || "" }),
+      cs.stat ? el("p", { class: "cs-stat", text: cs.stat }) : null,
+      cs.chapters && cs.summary ? el("p", { class: "lede", text: cs.summary }) : null);
+    root.replaceChildren(...[
+      cs.chapters ? el("div", { class: "cs-top" }, head, cover(cs, "cs-cover tall")) : head,
+      cs.chapters ? null : cover(cs, "cs-cover"),
+      cs.chapters ? chapters(cs.chapters) : null,
+      cs.chapters ? null : el("div", { class: "cs-grid" },
         block("Context", el("p", { text: cs.context || "" })),
         block("Insight", el("p", { text: cs.insight || "" })),
         block("Objective", ul(cs.objective)),
         block("Execution", ul(cs.execution))
       ),
-      el("div", { class: "cs-results" }, el("span", { class: "label", text: "Results" }), ul(cs.results))
-    );
+      el("div", { class: "cs-results" }, el("span", { class: "label", text: "Results" }), ul(cs.results)),
+      cs.served ? el("div", { class: "cs-served" }, el("span", { class: "label", text: "Who it served" }), el("p", { class: "display-sm", text: cs.served })) : null
+    ].filter(Boolean));
+    $$("video", root).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
     if (cs.id) {
       const media = await getMedia(cs.id);
       if (media.length) root.append(el("div", { class: "gallery" }, media.map(mediaItem)));
@@ -188,6 +234,34 @@
     update();
   }
 
+  // Names each world in the opening film as it plays.
+  function worldLabels() {
+    const v = $("[data-hero-film]"), out = $("[data-world-label]");
+    if (!v || !out) return;
+    const worlds = (window.ATLAS_WORLDS || []);
+    let current = -2;
+    const tick = () => {
+      const t = v.currentTime;
+      const i = worlds.findIndex((w) => t >= w.start && t < w.start + w.length);
+      if (i !== current) {
+        current = i;
+        out.classList.remove("show");
+        if (i >= 0) {
+          const w = worlds[i];
+          setTimeout(() => {
+            out.replaceChildren(...[
+              el("span", { class: "world-num", text: String(i + 1).padStart(2, "0") }),
+              w.href ? el("a", { href: w.href, text: w.name }) : el("span", { text: w.name }),
+              w.note ? el("span", { class: "world-note", text: w.note }) : null].filter(Boolean));
+            out.classList.add("show");
+          }, 180);
+        }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
   function revealOnScroll() {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     document.documentElement.classList.add("anim");
@@ -199,7 +273,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); heroVideo(); headerOverFilm(); revealOnScroll();
-    renderWorkGrids(); renderGallery(); renderCaseStudy();
+    wireNav(); wireForms(); heroVideo(); worldLabels(); headerOverFilm(); revealOnScroll();
+    renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();
