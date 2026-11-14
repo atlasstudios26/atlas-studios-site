@@ -288,6 +288,26 @@
     requestAnimationFrame(tick);
   }
 
+  // Repeat the logo row so the loop never runs out on wide screens.
+  function fillMarquee() {
+    const track = $(".marquee-track");
+    if (!track) return;
+    const set = $$("li:not([aria-hidden])", track);
+    const fill = () => {
+      const setWidth = set.reduce((w, li) => w + li.getBoundingClientRect().width, 0);
+      if (!setWidth) return;
+      $$("li[aria-hidden]", track).forEach((li) => li.remove());
+      const copies = Math.max(1, Math.ceil(innerWidth / setWidth));
+      const half = [];
+      for (let c = 1; c < copies; c++) set.forEach((li) => half.push(li.cloneNode(true)));
+      const clones = [...half.map((n) => n), ...set.map((li) => li.cloneNode(true)), ...half.map((n) => n.cloneNode(true))];
+      clones.forEach((n) => { n.setAttribute("aria-hidden", "true"); const i = n.querySelector("img"); if (i) i.alt = ""; track.append(n); });
+      track.style.animationDuration = Math.round(track.scrollWidth / 2 / 40) + "s"; // same pace on every screen
+    };
+    Promise.all($$("img", track).map((i) => i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; }))).then(fill);
+    let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(fill, 250); });
+  }
+
   function revealOnScroll() {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     document.documentElement.classList.add("anim");
@@ -299,7 +319,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); revealOnScroll();
+    wireNav(); wireForms(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); revealOnScroll();
     renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();
