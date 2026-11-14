@@ -10,10 +10,10 @@ window.ATLAS_FALLBACK = {
       client: "Emerging 100 of Atlanta",
       category: "Experience Design & Fundraising",
       summary: "Emerging 100's 10th annual summer fundraiser, reimagined as one night in Oak Bluffs, Martha's Vineyard, without leaving Atlanta.",
-      stat: "10th anniversary · Labor Day weekend 2026",
+      stat: "1,250+ guests · $22,000+ in student programming",
       cover_url: "/assets/work/park-100-oak-bluffs/arch-entry.jpg",
       quote: "We don't just plan parties. We direct stories.",
-      served: "Every ticket and keepsake funds Emerging 100's year-round work with B.E.S.T. Academy and Collegiate 100 Atlanta.",
+      served: "Park 100 funded more than $22,000 of programming outside Emerging 100's normal budget: a five-week ACT and SAT prep bootcamp for 61 B.E.S.T. Academy students, a history trip to Gettysburg, and new uniforms for graduating seniors.",
       chapters: [
         { label: "01 · The story", title: "An idea, three months out.",
           body: "Oak Bluffs started as an idea tossed around in a meeting. For the 10th Park 100, the brief became a story: transport every guest to Martha's Vineyard for one night. Avery led it as Emerging 100's Social & Fundraising Chair, with co-chairs Brandon Smith and Jordan Watson.",
@@ -32,9 +32,11 @@ window.ATLAS_FALLBACK = {
           media: ["/assets/work/park-100-oak-bluffs/ticket-reveal.jpg", "/assets/work/park-100-oak-bluffs/tote-wall.jpg", "/assets/work/park-100-oak-bluffs/keepsakes-table.jpg", "/assets/work/park-100-oak-bluffs/golf-balls.jpg", "/assets/work/park-100-oak-bluffs/scarf.jpg", "/assets/work/park-100-oak-bluffs/guests-tote.jpg"] }
       ],
       results: [
-        "The 10th anniversary edition of Emerging 100's signature summer fundraiser",
-        "One story, from the sponsorship deck to the last party favor",
-        "Raised enough to continue mission-driven programming for students across Atlanta"
+        "1,250+ guests at the 10th anniversary edition",
+        "498,000 views and 227,000 accounts reached across the campaign",
+        "17,669 likes, comments and shares",
+        "Six brand partners, including returning sponsors who renewed for the holiday season",
+        "One story, from the sponsorship deck to the last party favor"
       ],
       sort_order: 1
     },
