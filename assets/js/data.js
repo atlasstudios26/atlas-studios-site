@@ -93,11 +93,11 @@ window.ATLAS_FALLBACK = {
           body: "Each flyer shows a guest facing their reflection's alter ego. Both partners' logos live inside every scene, as a mirror sticker, an air freshener, a wrist tattoo or an elevator plate, so the partnership reads as part of the world instead of a footer.",
           media: ["/assets/work/nightmare-on-westside/flyer-01.jpg", "/assets/work/nightmare-on-westside/flyer-05.jpg", "/assets/work/nightmare-on-westside/flyer-06.jpg", "/assets/work/nightmare-on-westside/flyer-07.jpg", "/assets/work/nightmare-on-westside/flyer-08.jpg", "/assets/work/nightmare-on-westside/flyer-09.jpg"] },
         { label: "04 · The room", title: "The theme, built.",
-          body: "Co-branded mirrors framed in candlelight, a red-curtained Confessional set for guest content, the arch entrance and the DJ booth visuals. Three women DJs carried the night at the Westside Cultural Arts Center.",
+          body: "Co-branded mirrors framed in candlelight, the Confessional (a red-curtained set Avery conceived so guests could confess their alter egos on camera), the arch entrance and the DJ booth visuals. Three women DJs carried the night at the Westside Cultural Arts Center.",
           media: ["/assets/work/nightmare-on-westside/mirror-candles.jpg", "/assets/work/nightmare-on-westside/dj-booth.jpg", "/assets/work/nightmare-on-westside/confessional.jpg", "/assets/work/nightmare-on-westside/guests-costumes.jpg"] },
         { label: "05 · The partner", title: "Aguasol, inside the world.",
           body: "Aguasol, a returning Park 100 sponsor, came on as spirit partner: a branded satellite bar, a tasting moment, a themed drink menu led by the Midnight Mischief strawberry margarita, guest giveaways and preferred bottles in sections. Atlas wrote the agreement and pitched it alongside Emerging 100 president Daniel Farr.",
-          media: ["/assets/work/nightmare-on-westside/aguasol.mp4", "/assets/work/nightmare-on-westside/aguasol-bottle.jpg", "/assets/work/nightmare-on-westside/drink-menu.jpg", "/assets/work/nightmare-on-westside/aguasol-bar.jpg"] }
+          media: ["/assets/work/nightmare-on-westside/aguasol.mp4", "/assets/work/nightmare-on-westside/aguasol-bottle.jpg", "/assets/work/nightmare-on-westside/aguasol-matchbooks.jpg", "/assets/work/nightmare-on-westside/drink-menu.jpg"] }
       ],
       results: [
         "Sold out, with 850+ guests",
@@ -193,32 +193,6 @@ window.ATLAS_FALLBACK = {
       cover_url: "",
       sort_order: 3
     },
-    {
-      slug: "women-who-set-the-bar",
-      title: "Women Who Set the Bar",
-      client: "Women's Appreciation Month",
-      category: "Experiential Programming",
-      summary: "A panel reimagined as an intimate, hospitality driven experience.",
-      context: "Co created and moderated Women Who Set the Bar, an intimate Women's Appreciation Month panel celebrating women across spirits, hospitality, entrepreneurship, and culture.",
-      objective: [
-        "Transform a traditional panel into a hospitality driven experience",
-        "Foster authentic connection among professional women across industries",
-        "Celebrate women shaping culture, hospitality, entrepreneurship, and spirits"
-      ],
-      insight: "Professional audiences are drawn to experiences that feel intentional, emotionally resonant, and rooted in real connection rather than transactional networking.",
-      execution: [
-        "Moderated a live conversation with women across spirits, entrepreneurship, and culture",
-        "Curated hospitality moments: floral gifting, branded scarves, and live watercolor portraits",
-        "Designed an intimate atmosphere built for real conversation and community"
-      ],
-      results: [
-        "Nearly double the RSVP interest relative to venue capacity",
-        "Meaningful connections across business, hospitality, and culture",
-        "Overwhelmingly positive feedback on the intimacy and intention of the experience"
-      ],
-      cover_url: "",
-      sort_order: 4
-    }
   ],
   media: []
 };
