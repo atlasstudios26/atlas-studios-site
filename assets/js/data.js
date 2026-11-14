@@ -17,19 +17,19 @@ window.ATLAS_FALLBACK = {
       chapters: [
         { label: "01 · The story", title: "An idea, three months out.",
           body: "Oak Bluffs started as an idea tossed around in a meeting. For the 10th Park 100, the brief became a story: transport every guest to Martha's Vineyard for one night. Avery led it as Emerging 100's Social & Fundraising Chair, with co-chairs Brandon Smith and Jordan Watson.",
-          media: ["/assets/work/park-100-oak-bluffs/e100-letters.jpg"] },
+          media: ["/assets/work/park-100-oak-bluffs/arch-night.jpg", "/assets/work/park-100-oak-bluffs/e100-letters.jpg", "/assets/work/park-100-oak-bluffs/dance-floor.jpg"] },
         { label: "02 · The partners", title: "A deck that sold the world.",
           body: "Sponsorship decks built in three tiers, The Marketplace, The Bluff Lodge and Sections, brought partners into the story before a single tent went up, including Edmond's Honor, Aguasol Tequila, Tito's, Cutwater, Viarae and ViiV Healthcare.",
-          media: ["/assets/work/park-100-oak-bluffs/viarae-fan.jpg", "/assets/work/park-100-oak-bluffs/titos-cart.jpg", "/assets/work/park-100-oak-bluffs/golf-wall.jpg", "/assets/work/park-100-oak-bluffs/viarae-guest.jpg"] },
+          media: ["/assets/work/park-100-oak-bluffs/marketplace-flyer.jpg", "/assets/work/park-100-oak-bluffs/viarae-fan.jpg", "/assets/work/park-100-oak-bluffs/titos-cart.jpg", "/assets/work/park-100-oak-bluffs/golf-wall.jpg"] },
         { label: "03 · The look", title: "Guests dressed the part.",
-          body: "A look book had guests dressing head to toe for the theme, and the marketing rollout carried Oak Bluffs from the first invite to the front gate.",
-          media: ["/assets/work/park-100-oak-bluffs/summer-house-guest.jpg", "/assets/work/park-100-oak-bluffs/putting.jpg", "/assets/work/park-100-oak-bluffs/flower-bar.jpg"] },
+          body: "The Park Bluffs style guide and look book told guests what to wear and why: Oak Bluffs as a summer haven Black families have returned to for generations. Guests showed up head to toe in the theme, and the rollout carried it from the first invite to the front gate.",
+          media: ["/assets/work/park-100-oak-bluffs/style-guide.jpg", "/assets/work/park-100-oak-bluffs/summer-house-guest.jpg", "/assets/work/park-100-oak-bluffs/arch-day-guest.jpg", "/assets/work/park-100-oak-bluffs/putting.jpg", "/assets/work/park-100-oak-bluffs/lookbook-wide-1.jpg"] },
         { label: "04 · The grounds", title: "Martha's Vineyard, in Atlanta.",
           body: "The Neighborhood, Summer House, a sailcloth Park Bluff wall and a putting green, built out with Jasmine George Amiker, turned Park Tavern into the Vineyard. Atlanta's small businesses sat at the center, from Pecan Jacks ice cream to Scent Souk perfumery to live fashion illustration.",
-          media: ["/assets/work/park-100-oak-bluffs/the-neighborhood.jpg", "/assets/work/park-100-oak-bluffs/park-bluff-sails.jpg", "/assets/work/park-100-oak-bluffs/pecan-jacks.jpg", "/assets/work/park-100-oak-bluffs/scent-souk.jpg", "/assets/work/park-100-oak-bluffs/live-illustration.jpg", "/assets/work/park-100-oak-bluffs/beauty-bar.jpg"] },
+          media: ["/assets/work/park-100-oak-bluffs/the-neighborhood.jpg", "/assets/work/park-100-oak-bluffs/park-bluff-sails.jpg", "/assets/work/park-100-oak-bluffs/pecan-jacks.jpg", "/assets/work/park-100-oak-bluffs/scent-souk.jpg", "/assets/work/park-100-oak-bluffs/illustration-guest.jpg", "/assets/work/park-100-oak-bluffs/beauty-bar.jpg"] },
         { label: "05 · The keepsakes", title: "The last party favor.",
-          body: "Scarves, fans, tennis balls and golf balls: gifting designed as part of the world, so the story went home with every guest.",
-          media: ["/assets/work/park-100-oak-bluffs/keepsakes-table.jpg", "/assets/work/park-100-oak-bluffs/golf-balls.jpg", "/assets/work/park-100-oak-bluffs/scarf.jpg"] }
+          body: "A \"What comes with your ticket\" reveal set it up; a wall of crested tote bags at the arch delivered it. Scarves printed with Oak Bluffs and Atlanta landmarks, fans, tennis balls and golf balls: gifting designed as part of the world, so the story went home with every guest.",
+          media: ["/assets/work/park-100-oak-bluffs/ticket-reveal.jpg", "/assets/work/park-100-oak-bluffs/tote-wall.jpg", "/assets/work/park-100-oak-bluffs/keepsakes-table.jpg", "/assets/work/park-100-oak-bluffs/golf-balls.jpg", "/assets/work/park-100-oak-bluffs/scarf.jpg", "/assets/work/park-100-oak-bluffs/guests-tote.jpg"] }
       ],
       results: [
         "The 10th anniversary edition of Emerging 100's signature summer fundraiser",

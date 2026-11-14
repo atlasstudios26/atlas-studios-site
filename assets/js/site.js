@@ -126,7 +126,7 @@
           el("h2", { class: "display-md", text: c.title }),
           el("p", { class: "lede", text: c.body }),
           c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
-        (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.length, 6) }, c.media.map((m) => el("figure", {}, media(m)))) : null
+        (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.filter((m) => !/-wide/.test(m)).length, 6) }, c.media.map((m) => el("figure", { class: /-wide/.test(m) ? "wide" : null }, media(m)))) : null
       )));
   }
 
