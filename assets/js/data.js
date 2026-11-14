@@ -12,6 +12,7 @@ window.ATLAS_FALLBACK = {
       summary: "Emerging 100's 10th annual summer fundraiser, reimagined as one night in Oak Bluffs, Martha's Vineyard, without leaving Atlanta.",
       stat: "1,250+ guests · $22,000+ in student programming",
       cover_url: "/assets/work/park-100-oak-bluffs/arch-entry.jpg",
+      video_url: "/assets/work/park-100-oak-bluffs/recap.mp4",
       quote: "We don't just plan parties. We direct stories.",
       served: "Park 100 funded more than $22,000 of programming outside Emerging 100's normal budget: a five-week ACT and SAT prep bootcamp for 61 B.E.S.T. Academy students, a history trip to Gettysburg, and new uniforms for graduating seniors.",
       chapters: [
