@@ -28,7 +28,7 @@
         // Built-in photos and video fill in anything a managed case study is missing.
         data.forEach((c) => {
           const f = fallback.caseStudies.find((x) => x.slug === c.slug);
-          if (f) ["cover_url", "hero_url", "video_url", "gallery", "chapters", "stat", "served"].forEach((k) => { if (!c[k] && f[k]) c[k] = f[k]; });
+          if (f) ["cover_url", "hero_url", "video_url", "world_url", "gallery", "chapters", "stat", "served", "quote", "note"].forEach((k) => { if (!c[k] && f[k]) c[k] = f[k]; });
         });
         const have = new Set(data.map((c) => c.slug));
         const pinned = fallback.caseStudies.filter((c) => c.pinned && !have.has(c.slug));
@@ -124,7 +124,8 @@
         el("div", { class: "chapter-text" },
           el("span", { class: "label", text: c.label }),
           el("h2", { class: "display-md", text: c.title }),
-          el("p", { class: "lede", text: c.body })),
+          el("p", { class: "lede", text: c.body }),
+          c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
         (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.length, 6) }, c.media.map((m) => el("figure", {}, media(m)))) : null
       )));
   }
@@ -140,14 +141,22 @@
     document.title = `${cs.title} · Atlas Studios`;
     const block = (label, body) => el("div", { class: "cs-block" }, el("span", { class: "label", text: label }), body);
     const ul = (items) => el("ul", { class: "cs-list" }, asList(items).map((t) => el("li", { text: t })));
+    const world = cs.world_url ? el("section", { class: "hero cs-world" },
+      el("div", { class: "hero-media" }, el("video", { class: "hero-video", src: cs.world_url, poster: cs.world_url.replace(/\.mp4$/, ".jpg"), muted: "", loop: "", playsinline: "", autoplay: "", preload: "auto", "aria-hidden": "true" })),
+      el("div", { class: "hero-shade", "aria-hidden": "true" }),
+      el("div", { class: "wrap hero-row" },
+        el("span", { class: "label world-tag", text: "The world" }),
+        el("h1", { class: "display hero-title", text: cs.title }))) : null;
     const head = el("header", { class: "cs-head" },
       el("span", { class: "label", text: cs.category || "" }),
-      el("h1", { class: "display", text: cs.title }),
+      world ? null : el("h1", { class: "display", text: cs.title }),
       el("p", { class: "cs-client", text: cs.client || "" }),
       cs.stat ? el("p", { class: "cs-stat", text: cs.stat }) : null,
-      cs.chapters && cs.summary ? el("p", { class: "lede", text: cs.summary }) : null);
+      cs.chapters && cs.summary ? el("p", { class: "lede", text: cs.summary }) : null,
+      cs.quote ? el("blockquote", { class: "cs-quote display-sm", text: cs.quote }) : null);
+    const hasCover = cs.cover_url || cs.video_url;
     root.replaceChildren(...[
-      cs.chapters ? el("div", { class: "cs-top" }, head, cover(cs, "cs-cover tall")) : head,
+      cs.chapters ? (hasCover ? el("div", { class: "cs-top" }, head, cover(cs, "cs-cover tall")) : head) : head,
       cs.chapters ? null : cover(cs, "cs-cover"),
       cs.chapters ? chapters(cs.chapters) : null,
       cs.chapters ? null : el("div", { class: "cs-grid" },
@@ -156,9 +165,16 @@
         block("Objective", ul(cs.objective)),
         block("Execution", ul(cs.execution))
       ),
-      el("div", { class: "cs-results" }, el("span", { class: "label", text: "Results" }), ul(cs.results)),
+      asList(cs.results).length ? el("div", { class: "cs-results" }, el("span", { class: "label", text: "Results" }), ul(cs.results)) : null,
+      cs.note ? el("p", { class: "cs-note label", text: cs.note }) : null,
       cs.served ? el("div", { class: "cs-served" }, el("span", { class: "label", text: "Who it served" }), el("p", { class: "display-sm", text: cs.served })) : null
     ].filter(Boolean));
+    if (world) {
+      root.closest("section").before(world);
+      document.body.classList.add("over-film");
+      $$("video", world).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+      headerOverFilm();
+    }
     if (cs.gallery && cs.gallery.length) {
       root.append(el("div", { class: "cs-gallery" }, cs.gallery.map((src) => el("figure", {}, el("img", { src, alt: "", loading: "lazy" })))));
     }
@@ -283,7 +299,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); heroVideo(); worldLabels(); headerOverFilm(); revealOnScroll();
+    wireNav(); wireForms(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); revealOnScroll();
     renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();

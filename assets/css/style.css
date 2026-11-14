@@ -268,3 +268,34 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--o
 .cs-gallery { margin-top: 64px; columns: 3 280px; column-gap: 12px; }
 .cs-gallery figure { margin: 0 0 12px; break-inside: avoid; }
 .cs-gallery img { width: 100%; display: block; }
+
+/* Case study: opening world */
+.cs-world { height: 100svh; min-height: 560px; }
+.cs-world .hero-title { font-size: clamp(36px, 5vw, 76px); animation-delay: .5s; }
+.cs-world .world-tag { color: var(--bone); opacity: .8; text-shadow: 0 1px 12px rgba(0,0,0,0.6); }
+.cs-world + .cs { padding-top: clamp(48px, 7vw, 96px); }
+.cs-quote { margin: 28px 0 0; padding-left: 20px; border-left: 2px solid var(--water); font-family: var(--display); }
+.chapter:not(:has(.chapter-media)) { grid-template-columns: 4fr 7fr; }
+.chapter:not(:has(.chapter-media)) .chapter-text { grid-column: 1 / -1; max-width: 760px; position: static; }
+.chapter-list { list-style: none; counter-reset: m; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.chapter-list li { counter-increment: m; display: grid; grid-template-columns: 40px 1fr 1.6fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.chapter-list li::before { content: counter(m, decimal-leading-zero); font-size: 12px; letter-spacing: .2em; color: var(--ink-soft); }
+.chapter-list strong { font-family: var(--display); font-weight: 400; font-size: 20px; }
+.chapter-list span { color: var(--ink-soft); }
+@media (max-width: 640px) { .chapter-list li { grid-template-columns: 32px 1fr; } .chapter-list span { grid-column: 2; } }
+.cs-note { margin: 40px 0 0; }
+
+/* Capabilities: lenses */
+.lenses { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); }
+.lenses video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: var(--charcoal); margin-bottom: 18px; }
+.lenses p { margin: 10px 0 0; color: var(--ink-soft); }
+@media (max-width: 860px) { .lenses { grid-template-columns: 1fr; } }
+
+.chapters:not(:has(.chapter-media)) { gap: clamp(48px, 6vw, 88px); }
+@media (max-aspect-ratio: 1/1) {
+  .cs-world { height: auto; min-height: 0; display: block; padding: 0; }
+  .cs-world .hero-media { position: relative; aspect-ratio: 16 / 9; margin-top: 64px; }
+  .cs-world .hero-shade { display: none; }
+  .cs-world .hero-row { padding: 22px 0 30px; }
+  .cs-world .hero-title { text-shadow: none; }
+}

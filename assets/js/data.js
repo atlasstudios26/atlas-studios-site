@@ -3,8 +3,74 @@
 window.ATLAS_FALLBACK = {
   caseStudies: [
     {
+      slug: "park-100-oak-bluffs",
+      pinned: true,
+      world_url: "/assets/worlds/park-100-oak-bluffs.mp4",
+      title: "Park 100: Oak Bluffs Edition",
+      client: "Emerging 100 of Atlanta",
+      category: "Experience Design & Fundraising",
+      summary: "Emerging 100's 10th annual summer fundraiser, reimagined as one night in Oak Bluffs, Martha's Vineyard, without leaving Atlanta.",
+      stat: "10th anniversary · Labor Day weekend 2026",
+      quote: "We don't just plan parties. We direct stories.",
+      served: "Every ticket and keepsake funds Emerging 100's year-round work with B.E.S.T. Academy and Collegiate 100 Atlanta.",
+      chapters: [
+        { label: "01 · The story", title: "An idea, three months out.",
+          body: "Oak Bluffs started as an idea tossed around in a meeting. For the 10th Park 100, the brief became a story: transport every guest to Martha's Vineyard for one night. Avery led it as Emerging 100's Social & Fundraising Chair, with co-chairs Brandon Smith and Jordan Watson.",
+          media: [] },
+        { label: "02 · The partners", title: "A deck that sold the world.",
+          body: "Sponsorship decks built in three tiers, The Marketplace, The Bluff Lodge and Sections, brought partners into the story before a single tent went up, including Edmond's Honor, Aguasol Tequila, Tito's, Cutwater, Viarae and ViiV Healthcare.",
+          media: [] },
+        { label: "03 · The look", title: "Guests dressed the part.",
+          body: "A look book had guests dressing head to toe for the theme, and the marketing rollout carried Oak Bluffs from the first invite to the front gate.",
+          media: [] },
+        { label: "04 · The grounds", title: "Martha's Vineyard, in Atlanta.",
+          body: "Activations put Atlanta's small businesses at the center, and decor build-outs, brought to life with Jasmine George Amiker, turned Park Tavern into the Vineyard.",
+          media: [] },
+        { label: "05 · The keepsakes", title: "The last party favor.",
+          body: "Scarves, fans, tennis balls and golf balls: gifting designed as part of the world, so the story went home with every guest.",
+          media: [] }
+      ],
+      results: [
+        "The 10th anniversary edition of Emerging 100's signature summer fundraiser",
+        "One story, from the sponsorship deck to the last party favor",
+        "Raised enough to continue mission-driven programming for students across Atlanta"
+      ],
+      sort_order: 1
+    },
+    {
+      slug: "house-of-rouge",
+      pinned: true,
+      world_url: "/assets/worlds/house-of-rouge.mp4",
+      title: "House of Rouge",
+      client: "Emerging 100 of Atlanta · 15th Annual Holiday Soirée & Benefit",
+      category: "Concept & Experience Design · Coming soon",
+      summary: "Santa's workshop, reborn as a couture atelier.",
+      stat: "December 12, 2026 · Coca-Cola Roxy",
+      cover_url: "/assets/work/house-of-rouge/flyer.jpg",
+      served: "Every dollar raised expands scholarships and year-round programming for students at B.E.S.T. Academy and Collegiate 100 Atlanta.",
+      note: "Photos and the recap reel arrive after December 12.",
+      chapters: [
+        { label: "01 · The concept", title: "Not a Christmas party with a fashion theme.",
+          body: "This year Santa is the creative director of House of Rouge, a fictional fashion house built on a single color story: red. His elves are the seamstresses. Every marketing asset and every corner of the room comes from the same design language, so the party doesn't reference the concept. It lives inside it.",
+          media: [] },
+        { label: "02 · The room", title: "Six moments inside the House.",
+          body: "Each moment is built to be photographed, and each one is available to a partner to make its own.",
+          list: [
+            ["The Rouge Arch", "A floral arch of red and ivory roses. The first photo of the night."],
+            ["The Rouge Room", "Ring the brass bell, and a white-gloved hand serves a cocktail through velvet."],
+            ["The Fitting Room", "Velvet-curtained fitting rooms framed by couture sketches and gowns."],
+            ["The Creative Director's Chair", "A holiday portrait with Santa, the House's creative director."],
+            ["The Wish List", "A vintage red phone booth that records guest wishes for the recap reel."],
+            ["The Gift Atelier", "A boxed, co-branded House of Rouge ornament for every guest."]
+          ],
+          media: [] }
+      ],
+      sort_order: 6
+    },
+    {
       slug: "nightmare-on-westside",
       pinned: true,
+      world_url: "/assets/worlds/nightmare-on-westside.mp4",
       title: "Nightmare on Westside",
       client: "Emerging 100 of Atlanta × The Social Club, with Aguasol Tequila",
       category: "Partnership & Experience Design",
@@ -70,6 +136,7 @@ window.ATLAS_FALLBACK = {
     },
     {
       slug: "black-history-month-campaign",
+      world_url: "/assets/worlds/black-history-month-campaign.mp4",
       title: "Black History Month Campaign",
       client: "The James Room × Edmond's Honor Bourbon",
       category: "Creative Direction",
