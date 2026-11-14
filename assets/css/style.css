@@ -300,3 +300,5 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--o
   .cs-world .hero-row { padding: 22px 0 30px; }
   .cs-world .hero-title { text-shadow: none; }
 }
+.chapter-media.count-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) { .chapter-media.count-3 { grid-template-columns: 1fr 1fr; } }
