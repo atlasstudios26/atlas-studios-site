@@ -7,5 +7,5 @@ window.ATLAS_CONFIG = {
   heroVideo: "",        // optional: URL of the We Create Worlds video (mp4) for the homepage
   instagram: "",        // optional: full Instagram URL
   linkedin: "",         // optional: full LinkedIn URL
-  email: ""             // optional: public contact email
+  email: "averyjordanj@gmail.com"   // public contact email (switch to an Atlas address once bought)
 };

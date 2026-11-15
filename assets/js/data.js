@@ -79,7 +79,7 @@ window.ATLAS_FALLBACK = {
       client: "Emerging 100 of Atlanta × The Social Club, with Aguasol Tequila",
       category: "Partnership & Experience Design",
       summary: "Two of Atlanta's party communities, one Halloween night, one question: which side are you on?",
-      stat: "Sold out · 850+ guests",
+      stat: "Sold out · 850+ guests · $14,000 raised",
       cover_url: "/assets/work/nightmare-on-westside/recap-poster.jpg",
       video_url: "/assets/work/nightmare-on-westside/recap.mp4",
       served: "Proceeds went to Emerging 100's mission: scholarships and year-round programming for Atlanta students.",
@@ -102,9 +102,10 @@ window.ATLAS_FALLBACK = {
       ],
       results: [
         "Sold out, with 850+ guests",
+        "$14,000 raised for Emerging 100's mission",
         "A shared night between two of Atlanta's party communities, split equitably",
         "A spirit partnership that put Aguasol inside the theme, from menu to bar to bottles",
-        "Proceeds supporting Emerging 100's mission"
+        "A partner-ready model both organizations can run again"
       ],
       sort_order: 0
     },
