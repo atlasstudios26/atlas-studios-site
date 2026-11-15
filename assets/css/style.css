@@ -644,3 +644,40 @@ body.dark-page .cs-stat { font-size: clamp(28px, 2.6vw, 42px); }
 .offer-num { align-self: end; padding-bottom: 28px; }
 .card-cover video { width: 100%; height: 100%; object-fit: cover; display: block; }
 body.dark-page .work-grid h3, body.dark-page .card h3 { font-size: clamp(26px, 2.6vw, 40px); }
+
+/* Planets drawn in the same line style as the rest of the page */
+.planet-body { position: relative; background: var(--charcoal) !important; border: 1.4px solid var(--bone); box-shadow: none; }
+.planet-body::before, .planet-body::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid rgba(229,227,221,.45); }
+.planet-body::before { transform: scaleY(.34); }
+.planet-body::after { transform: scaleX(.34); }
+.o3 .planet-body::after { inset: -22%; border-color: var(--water); transform: rotate(-20deg) scaleY(.28); }
+.o2 .planet-body::after { transform: scaleX(.62); }
+.planet.on .planet-body { background: rgba(127,155,200,.22) !important; border-color: var(--water); box-shadow: 0 0 0 10px rgba(127,155,200,.12), 0 0 70px rgba(127,155,200,.45); }
+.planet.on .planet-body::before, .planet.on .planet-body::after { border-color: var(--water); }
+.sun { background: var(--charcoal); box-shadow: 0 0 0 1px rgba(229,227,221,.5), 0 0 0 14px var(--charcoal), 0 0 0 15px rgba(229,227,221,.18), 0 0 140px rgba(127,155,200,.25); }
+.orbit { border-color: rgba(229,227,221,.2); }
+.o2 { border-style: dashed; }
+
+/* Fill the space: wider lines, larger text */
+body.dark-page .lede { font-size: clamp(20px, 1.8vw, 28px); max-width: 72ch; }
+body.dark-page .feature-summary { font-size: clamp(20px, 1.8vw, 28px); max-width: 52ch; }
+body.dark-page .feature-client { font-size: clamp(17px, 1.3vw, 21px); }
+.offer-body p { font-size: clamp(20px, 1.7vw, 27px); max-width: 56ch; }
+.offer-for { font-size: clamp(18px, 1.5vw, 23px); }
+.scrub-md { font-size: clamp(28px, 3.4vw, 58px); max-width: 44ch; }
+.scrub { max-width: 40ch; }
+.ab-title { max-width: 26ch; }
+.ab-hint { font-size: clamp(19px, 1.6vw, 25px); }
+.proc-step p { font-size: clamp(20px, 1.8vw, 28px); max-width: 56ch; }
+.process-grid { grid-template-columns: 5fr 7fr; }
+.serve-row p:not(.serve-num) { font-size: clamp(19px, 1.6vw, 25px); max-width: 60ch; }
+.founder-line { font-size: clamp(28px, 3vw, 50px); max-width: 40ch; }
+.founder-bio { font-size: clamp(20px, 1.8vw, 28px); max-width: 72ch; }
+.ab-mv p { font-size: clamp(24px, 2.4vw, 38px); max-width: 52ch; }
+body.dark-page .chapter { grid-template-columns: 1fr 1fr; }
+body.dark-page .chapter-text .lede { font-size: clamp(20px, 1.7vw, 27px); max-width: 60ch; }
+body.dark-page .included span, body.dark-page .lenses p, body.dark-page .layers p { font-size: clamp(18px, 1.4vw, 22px); }
+body.dark-page .split { grid-template-columns: 1fr 2fr; }
+body.dark-page .split .display-sm { font-size: clamp(30px, 3.4vw, 54px); max-width: 40ch; }
+body.dark-page .cs-served p { max-width: 46ch; }
+body.dark-page .feature-link, body.dark-page .text-link { font-size: 14px; }
