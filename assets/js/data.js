@@ -104,8 +104,7 @@ window.ATLAS_FALLBACK = {
         "Sold out, with 850+ guests",
         "$14,000 raised for Emerging 100's mission",
         "A shared night between two of Atlanta's party communities, split equitably",
-        "A spirit partnership that put Aguasol inside the theme, from menu to bar to bottles",
-        "A partner-ready model both organizations can run again"
+        "A spirit partnership that put Aguasol inside the theme, from menu to bar to bottles"
       ],
       sort_order: 0
     },
