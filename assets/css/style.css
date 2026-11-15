@@ -979,3 +979,6 @@ body.dark-page .cap-how .clients-list li { font-size: clamp(18px, 1.5vw, 24px); 
 .tile input:checked + span { color: #E5E3DD; }
 .steps { max-width: none; }
 .tiles { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+/* Orbits are drawn on top of each other: let clicks pass through to every planet */
+.orbit, .orbit-spin { pointer-events: none; }
+.planet, .sun { pointer-events: auto; }
