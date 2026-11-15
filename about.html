@@ -36,10 +36,20 @@
 <main>
 
 <section class="hero ab-hero">
-  <div class="wrap">
-    <p class="ab-coords" data-split>33.7490° N · 84.3880° W · Atlanta</p>
-    <h1 class="ab-title" data-split>Atlas builds worlds that serve the people inside them.</h1>
-    <a class="ab-scroll" href="#ecosystem">Enter the world <span aria-hidden="true">↓</span></a>
+  <div class="wrap ab-hero-grid">
+    <div>
+      <p class="ab-coords">33.7490° N · 84.3880° W · Atlanta</p>
+      <h1 class="ab-title" data-split>Atlas builds worlds that serve the people inside them.</h1>
+      <a class="ab-scroll" href="#ecosystem">Enter the world <span aria-hidden="true">↓</span></a>
+    </div>
+    <svg class="ab-globe" viewBox="0 0 400 400" aria-hidden="true">
+      <circle cx="200" cy="200" r="188" class="g-dash"/>
+      <g class="g-spin"><circle cx="200" cy="12" r="5" class="g-sat"/><circle cx="388" cy="200" r="4" class="g-sat"/></g>
+      <circle cx="200" cy="200" r="118" class="g-line"/>
+      <g class="g-meridians"><ellipse cx="200" cy="200" rx="118" ry="40"/><ellipse cx="200" cy="200" rx="40" ry="118"/><ellipse cx="200" cy="200" rx="86" ry="118"/><line x1="82" y1="200" x2="318" y2="200"/></g>
+      <ellipse cx="200" cy="200" rx="178" ry="56" class="g-ring" transform="rotate(-18 200 200)"/>
+      <circle cx="200" cy="200" r="6" class="g-core"/>
+    </svg>
   </div>
 </section>
 

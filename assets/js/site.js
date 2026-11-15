@@ -542,6 +542,28 @@
     new MutationObserver(() => $$(SEL).forEach(add)).observe(document.body, { childList: true, subtree: true });
   }
 
+  // Capabilities: pick a service, its panel swaps in.
+  function serviceTabs() {
+    const tabs = $$("[data-svc]"); if (!tabs.length) return;
+    const panels = $$("[data-svc-panel]");
+    const show = (i) => {
+      tabs.forEach((t) => t.classList.toggle("on", t.dataset.svc === i));
+      panels.forEach((p) => p.classList.toggle("on", p.dataset.svcPanel === i));
+    };
+    tabs.forEach((t) => {
+      t.addEventListener("click", () => show(t.dataset.svc));
+      if (matchMedia("(hover: hover)").matches) t.addEventListener("mouseenter", () => show(t.dataset.svc));
+    });
+  }
+
+  // Ticket buttons switch to the ticket link once it's set in config.js.
+  function ticketLinks() {
+    $$("[data-ticket-link]").forEach((a) => {
+      const url = cfg.houseOfRougeTickets;
+      if (a.dataset.ticketLink === "houseOfRouge" && url) { a.href = url; a.textContent = "Get tickets"; a.target = "_blank"; a.rel = "noopener"; }
+    });
+  }
+
   function revealOnScroll() {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     document.documentElement.classList.add("anim");
@@ -553,7 +575,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
+    wireNav(); wireForms(); serviceTabs(); ticketLinks(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
     renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();
