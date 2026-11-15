@@ -1052,3 +1052,48 @@ body.dark-page .cap-how .clients-list li { font-size: clamp(18px, 1.5vw, 24px); 
 .work-next .display { margin: 16px 0 32px; }
 @media (max-width: 860px) { .work-next .wrap { grid-template-columns: 1fr; } .work-next svg { max-width: 260px; } }
 @media (max-width: 760px) { .work-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--pad)); padding: 0 var(--pad); } .work-filters::-webkit-scrollbar { display: none; } .work-filters button { white-space: nowrap; } .work-views { display: none; } }
+
+/* ===== Mobile pass ===== */
+html, body { overflow-x: clip; }
+.foot-top > div, .split > *, .cap-how-grid > *, .ha-grid > *, .ab-hero-grid > *, .hf-grid > *, .process-grid > *, .serve-row > *, .story-row > *, .svc-grid > *, .chapter > *, .gate-grid > *, .join-row > *, .upcoming > *, .feature > * { min-width: 0; }
+.inline-form { display: flex; gap: 10px; flex-wrap: wrap; max-width: 100%; }
+.inline-form input[type=email] { flex: 1 1 180px; min-width: 0; }
+@media (max-width: 760px) {
+  .nav-toggle { min-height: 44px; padding: 0 4px; font-size: 14px; }
+  .site-nav.open a { font-size: 18px; padding: 10px 0; }
+  .site-nav.open .btn { padding: 14px 20px; }
+  .text-link, .feature-link, .ab-scroll { display: inline-block; padding: 12px 0 8px; }
+  .label { font-size: 13px; letter-spacing: .16em; }
+  body.dark-page { font-size: 18px; }
+  section { padding: 64px 0; }
+  .hero-title { font-size: clamp(34px, 11vw, 56px) !important; }
+  .display, body.dark-page .display { font-size: clamp(42px, 12vw, 64px); }
+  .display-md, body.dark-page .display-md { font-size: clamp(32px, 9vw, 48px); }
+  .ab-title { font-size: clamp(40px, 11.5vw, 60px); }
+  .story-h, .ab-h2 { font-size: clamp(36px, 10vw, 54px); }
+  .proc-step h3 { font-size: clamp(42px, 12vw, 64px); }
+  .serve-num { font-size: clamp(60px, 18vw, 96px); }
+  .numbers .num { font-size: clamp(40px, 11vw, 60px); }
+  .w-title { font-size: clamp(32px, 9vw, 46px); }
+  .offer-title, .svc-tab { font-size: clamp(30px, 8.5vw, 44px); }
+  .ev-track { font-size: clamp(44px, 13vw, 72px); }
+  .belief-lines li { font-size: clamp(30px, 8.5vw, 44px); }
+  .founder-name { font-size: clamp(48px, 14vw, 72px); }
+  .cs-world { min-height: 0; }
+  .orbit-system { --size: min(94vw, 520px) !important; }
+  .planet-name { font-size: 13px; }
+  .planet-name em { font-size: 9px; }
+  .planet-body { width: clamp(36px, 10vw, 54px) !important; }
+  .planet-card { width: 100%; }
+  .tile span { min-height: 96px; font-size: 22px; }
+  .step-q { font-size: clamp(32px, 9vw, 46px); }
+  .step-dots { gap: 14px; flex-wrap: wrap; }
+  .chapter-media, .chapter-media.count-1, .chapter-media.count-3, .chapter-media.count-6 { columns: 1; }
+  .cs-gallery { columns: 2 140px; }
+  .foot-bottom { flex-direction: column; }
+  .marquee-track li { padding: 0 22px; }
+  .up-date { width: 76px; height: 76px; font-size: 32px; }
+  .deck-lock { grid-template-columns: 1fr auto; }
+  .deck-lock-icon { display: none; }
+}
+@media (max-width: 760px) { .feature-media.has-video::after { content: none; } .eco-home .orbit-system, .ab-eco .orbit-system { --size: min(96vw, 520px) !important; } .planet-name { font-size: 12px; } }
