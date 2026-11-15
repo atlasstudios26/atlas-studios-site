@@ -1097,3 +1097,48 @@ html, body { overflow-x: clip; }
   .deck-lock-icon { display: none; }
 }
 @media (max-width: 760px) { .feature-media.has-video::after { content: none; } .eco-home .orbit-system, .ab-eco .orbit-system { --size: min(96vw, 520px) !important; } .planet-name { font-size: 12px; } }
+
+/* About: mission & vision inside the story */
+.mv-pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 64px); }
+.mv-text { font-family: var(--display); color: var(--bone) !important; font-size: clamp(24px, 2.4vw, 38px) !important; line-height: 1.25 !important; margin: 12px 0 0 !important; }
+.svc-name { display: none; }
+
+/* ===== Mobile fixes, round 2 ===== */
+@media (max-width: 860px) {
+  /* Capabilities */
+  .svc-name { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(32px, 9vw, 44px); line-height: 1.02; margin: 8px 0 6px; }
+  .svc-panel figure { height: auto; display: block; }
+  .svc-panel figure img { width: 100%; height: auto; max-height: 60vh; object-fit: cover; }
+  .svc-panel, .svc-panel.on { gap: 14px; padding-bottom: 36px; margin-bottom: 36px; }
+  .svc-for { font-size: 22px; }
+  .svc-desc { font-size: 18px; }
+  .cap-how-grid { grid-template-columns: 1fr; gap: 56px; }
+  body.dark-page .cap-how .included li { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
+  body.dark-page .cap-how .included strong { font-size: 28px; }
+  body.dark-page .cap-how .included span { font-size: 18px; }
+  body.dark-page .cap-how .clients-list li { font-size: 16px; padding: 10px 16px; }
+  .cap-decide { font-size: 19px; }
+  .filmstrip img { height: 200px; }
+  /* About: process */
+  .process-grid { grid-template-columns: 1fr; gap: 0; }
+  .process-visual { position: sticky; top: 64px; z-index: 3; background: var(--charcoal); padding: 8px 0 14px; border-bottom: 1px solid var(--line); }
+  .process-sticky { position: static; height: auto; display: grid; grid-template-columns: 120px 1fr; grid-template-rows: auto auto; align-items: center; gap: 4px 18px; }
+  .process-sticky .label { grid-column: 1 / -1; }
+  .world-form { width: 120px; height: 120px; max-height: none; }
+  .process-count { font-size: 18px; }
+  .process-steps .ab-h2 { margin-top: 28px; }
+  .proc-step { min-height: 52vh; }
+  .proc-step p { font-size: 19px; }
+  /* About: who it serves, founder, mission */
+  .serve-row { grid-template-columns: 1fr; gap: 10px; }
+  .serve-row p:not(.serve-num) { font-size: 18px; }
+  .ab-founder { grid-template-columns: 1fr; min-height: 0; }
+  .founder-full { min-height: 0; height: auto; aspect-ratio: 4 / 5; }
+  .founder-copy { padding: 40px var(--pad) 56px; }
+  .founder-line { font-size: 26px; }
+  .founder-bio { font-size: 18px; }
+  .mv-pair { grid-template-columns: 1fr; gap: 28px; }
+  .mv-text { font-size: 24px !important; }
+  .story-num { font-size: 36px; }
+}
+.founder-full img { object-position: 50% 20%; } @media (max-width: 860px) { .world-form { width: 150px; height: 150px; } .process-sticky { grid-template-columns: 150px 1fr; } }
