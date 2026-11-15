@@ -308,6 +308,87 @@
     let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(fill, 250); });
   }
 
+
+  // About: the six-layer wheel. Each segment opens a real example.
+  function ecoWheel() {
+    const box = $("[data-eco-wheel]"), panel = $("[data-eco-panel]");
+    const layers = window.ATLAS_LAYERS;
+    if (!box || !panel || !layers) return;
+    const NS = "http://www.w3.org/2000/svg", cx = 250, cy = 250, R = 220, r = 128, gap = 2.2;
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 500 500");
+    const pt = (rad, deg) => { const a = (deg - 90) * Math.PI / 180; return [cx + rad * Math.cos(a), cy + rad * Math.sin(a)]; };
+    const segs = layers.map((L, i) => {
+      const a0 = i * 60 + gap, a1 = (i + 1) * 60 - gap;
+      const [x0, y0] = pt(R, a0), [x1, y1] = pt(R, a1), [x2, y2] = pt(r, a1), [x3, y3] = pt(r, a0);
+      const g = document.createElementNS(NS, "g");
+      g.setAttribute("class", "eco-seg"); g.setAttribute("tabindex", "0"); g.setAttribute("role", "button");
+      g.setAttribute("aria-label", L.name);
+      const path = document.createElementNS(NS, "path");
+      path.setAttribute("d", `M${x0},${y0} A${R},${R} 0 0 1 ${x1},${y1} L${x2},${y2} A${r},${r} 0 0 0 ${x3},${y3} Z`);
+      const [tx, ty] = pt((R + r) / 2, i * 60 + 30);
+      const num = document.createElementNS(NS, "text");
+      num.setAttribute("x", tx); num.setAttribute("y", ty - 9); num.setAttribute("class", "eco-num"); num.textContent = String(i + 1).padStart(2, "0");
+      const t = document.createElementNS(NS, "text");
+      t.setAttribute("x", tx); t.setAttribute("y", ty + 11); t.textContent = L.name;
+      g.append(path, num, t);
+      g.addEventListener("click", () => { stop(); show(i); });
+      g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); stop(); show(i); } });
+      g.addEventListener("mouseenter", () => { if (matchMedia("(hover: hover)").matches) { stop(); show(i); } });
+      svg.append(g); return g;
+    });
+    const core = document.createElementNS(NS, "g"); core.setAttribute("class", "eco-core");
+    const c = document.createElementNS(NS, "circle"); c.setAttribute("cx", cx); c.setAttribute("cy", cy); c.setAttribute("r", r - 14);
+    const img = document.createElementNS(NS, "image"); img.setAttribute("href", "/assets/img/atlas-mark-bone.png");
+    img.setAttribute("x", cx - 34); img.setAttribute("y", cy - 52); img.setAttribute("width", 68); img.setAttribute("height", 68);
+    const ct = document.createElementNS(NS, "text"); ct.setAttribute("x", cx); ct.setAttribute("y", cy + 42); ct.textContent = "The story";
+    core.append(c, img, ct); svg.append(core);
+    box.append(svg);
+    let current = -1, timer = null;
+    function show(i) {
+      if (i === current) return; current = i;
+      segs.forEach((g, j) => g.classList.toggle("on", j === i));
+      const L = layers[i];
+      panel.classList.remove("in");
+      panel.replaceChildren(
+        el("figure", {}, el("img", { src: L.img, alt: "" })),
+        el("span", { class: "label", text: String(i + 1).padStart(2, "0") + " · " + L.name }),
+        el("h3", { class: "display-sm", text: L.line }),
+        el("p", { text: L.example }),
+        el("a", { class: "text-link", href: L.href, text: "See it built" }));
+      requestAnimationFrame(() => panel.classList.add("in"));
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    show(0);
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Turn the wheel slowly until someone takes over.
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting && !timer && current !== -2) timer = setInterval(() => show((current + 1) % layers.length), 4200);
+        if (!e.isIntersecting) stop();
+      }), { threshold: 0.4 });
+      io.observe(box);
+      box.addEventListener("pointerdown", () => { stop(); current = current; io.disconnect(); }, { once: true });
+      segs.forEach((g) => g.addEventListener("click", () => io.disconnect()));
+    }
+  }
+
+  // About: step-by-step track for how a world gets built.
+  function buildTrack() {
+    const track = $("[data-build-track]");
+    if (!track) return;
+    const list = $("ol", track), items = $$("li", list), bar = $("[data-build-bar]");
+    const step = () => items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(list).columnGap || 0);
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      if (bar) bar.style.width = (max > 0 ? 18 + 82 * track.scrollLeft / max : 100) + "%";
+    };
+    track.addEventListener("scroll", update, { passive: true });
+    const prev = $("[data-build-prev]"), next = $("[data-build-next]");
+    if (prev) prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+    if (next) next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+    update();
+  }
+
   function revealOnScroll() {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     document.documentElement.classList.add("anim");
@@ -319,7 +400,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); revealOnScroll();
+    wireNav(); wireForms(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); ecoWheel(); buildTrack(); revealOnScroll();
     renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();
