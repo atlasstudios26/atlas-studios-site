@@ -926,3 +926,14 @@ body.dark-page .cap-how .clients-list li { font-size: clamp(18px, 1.5vw, 24px); 
 .svc-for { font-size: clamp(28px, 2.8vw, 46px); }
 .svc-desc { font-size: clamp(20px, 1.7vw, 27px); }
 .cap-how-grid { grid-template-columns: 1.2fr 1fr; }
+
+/* About: the Atlas story */
+.ab-story { padding: clamp(60px, 8vw, 130px) 0; }
+.story-row { display: grid; grid-template-columns: 120px 1fr; gap: clamp(20px, 3vw, 48px); padding: clamp(40px, 5vw, 80px) 0; border-top: 1px solid var(--line); }
+.story-row:first-of-type { margin-top: 24px; }
+.story-num { font-family: var(--display); font-size: clamp(40px, 4vw, 72px); color: var(--water); line-height: 1; }
+.story-h { font-family: var(--display); font-weight: 400; font-size: clamp(44px, 6vw, 108px); line-height: 1; margin: 0 0 28px; }
+.story-row p { font-size: clamp(21px, 1.9vw, 30px); line-height: 1.5; color: var(--bone-2); margin: 0 0 20px; max-width: 70ch; }
+.story-goals { list-style: none; margin: 0 0 32px; padding: 0; }
+.story-goals li { font-family: var(--display); font-size: clamp(28px, 3.4vw, 58px); line-height: 1.1; padding: 16px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 760px) { .story-row { grid-template-columns: 1fr; } }
