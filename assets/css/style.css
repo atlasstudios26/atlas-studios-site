@@ -562,3 +562,85 @@ body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
 .founder-bio { font-size: clamp(19px, 1.6vw, 25px); max-width: 64ch; color: var(--bone); opacity: .88; }
 .belief-lines li { font-size: clamp(34px, 5vw, 88px); }
 .ab-mv p { max-width: 44ch; }
+
+/* ===== One world: the whole site in charcoal ===== */
+body.dark-page { --line: rgba(229,227,221,.14); --ink-soft: #A39C93; --water: #7F9BC8; --wrap: 1440px; background: var(--charcoal); color: var(--bone); }
+body.dark-page section, body.dark-page .dark, body.dark-page .olive { background: transparent; color: var(--bone); }
+body.dark-page .label, body.dark-page .olive .label, body.dark-page .dark .label { color: var(--bone-2); }
+body.dark-page .lede, body.dark-page .dark .lede { color: var(--bone-2); font-size: clamp(19px, 1.6vw, 25px); max-width: 60ch; }
+body.dark-page .site-header { background: rgba(41,36,32,.92); border-color: var(--line); color: var(--bone); }
+body.dark-page .site-header .mark-dark { display: none; }
+body.dark-page .site-header .mark-light { display: block; }
+body.dark-page .site-nav a:hover, body.dark-page .site-nav a[aria-current="page"] { border-color: var(--bone); }
+body.dark-page .site-nav .btn { border-color: var(--bone); }
+body.dark-page .site-nav .btn:hover, body.dark-page .btn:hover { background: var(--bone); color: var(--charcoal); border-color: var(--bone); }
+body.dark-page .nav-toggle { color: var(--bone); }
+@media (max-width: 860px) { body.dark-page .site-nav { background: var(--charcoal); } }
+body.dark-page.over-film .site-header:not(.solid) { background: transparent; border-color: transparent; }
+body.dark-page.over-film .site-header.solid { background: rgba(41,36,32,.94); color: var(--bone); border-color: var(--line); }
+body.dark-page.over-film .site-header.solid .mark-dark { display: none; }
+body.dark-page.over-film .site-header.solid .mark-light { display: block; }
+body.dark-page.over-film .site-header.solid .site-nav .btn, body.dark-page.over-film .site-header.solid .nav-toggle { border-color: var(--bone); color: var(--bone); }
+body.dark-page input, body.dark-page select, body.dark-page textarea { color: var(--bone); border-color: rgba(229,227,221,.5); }
+body.dark-page select option { color: var(--charcoal); }
+body.dark-page .marquee-track img { filter: invert(1) brightness(.92); opacity: .62; }
+body.dark-page .marquee-track li:hover img { opacity: 1; }
+body.dark-page .site-footer { border-top: 1px solid var(--line); }
+body.dark-page .chapter-media figure { background: #1f1b18; }
+body.dark-page .cs-results { background: rgba(229,227,221,.04); border: 1px solid var(--line); }
+body.dark-page .cs-served { background: transparent; border-left: 2px solid var(--water); padding: 8px 0 8px 32px; margin-top: 48px; }
+body.dark-page .feature-client, body.dark-page .cs-client { color: var(--bone-2); }
+body.dark-page section + section { border-top: 1px solid var(--line); }
+body.dark-page .hero + section, body.dark-page .ab-hero + section { border-top: 0; }
+
+/* Bigger type everywhere */
+body.dark-page .display { font-size: clamp(52px, 8vw, 144px); line-height: .96; }
+body.dark-page .display-md { font-size: clamp(38px, 5.2vw, 88px); line-height: 1.02; }
+body.dark-page .display-sm { font-size: clamp(28px, 3vw, 46px); }
+.scrub-md { font-size: clamp(26px, 3vw, 48px); max-width: 38ch; margin: 0; line-height: 1.18; }
+body.dark-page .split > div:first-child { padding-top: 10px; }
+
+/* Home: bigger work rows */
+body.dark-page .features { gap: clamp(80px, 11vw, 180px); }
+body.dark-page .feature { grid-template-columns: 3fr 2fr; }
+body.dark-page .feature:nth-child(even) { grid-template-columns: 2fr 3fr; }
+body.dark-page .feature-media { max-height: 88svh; }
+body.dark-page .feature-text h3 { font-size: clamp(40px, 5.4vw, 92px); margin: 18px 0 14px; }
+body.dark-page .feature-summary { font-size: clamp(19px, 1.6vw, 24px); max-width: 40ch; }
+body.dark-page .feature-stat { font-size: clamp(26px, 2.4vw, 38px); }
+body.dark-page .layers h4 { font-size: clamp(26px, 2.6vw, 40px); }
+body.dark-page .layers p { font-size: 17px; }
+body.dark-page .cta .display { font-size: clamp(56px, 8vw, 150px); }
+
+/* Capabilities: services as big scrolling rows */
+.offer { grid-template-columns: 56px 1fr 1fr; align-items: center; padding: clamp(48px, 7vw, 110px) 0; }
+.offer-title { font-family: var(--display); font-weight: 400; font-size: clamp(42px, 5.6vw, 96px); line-height: .98; margin: 0 0 16px; transition: color .3s; }
+.offer:hover .offer-title { color: var(--water); }
+.offer-for { font-size: clamp(17px, 1.3vw, 20px); }
+.offer-body { grid-column: 2; }
+.offer-body p { font-size: clamp(19px, 1.5vw, 23px); max-width: 44ch; color: var(--bone-2); }
+.offer-img { grid-column: 3; grid-row: 1 / span 2; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+.offer-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.offer:hover .offer-img img { transform: scale(1.04); }
+
+@media (max-width: 860px) {
+  .offer { grid-template-columns: 1fr; }
+  .offer-num, .offer-head, .offer-body, .offer-img { grid-column: 1; grid-row: auto; }
+  .offer-img { order: -1; aspect-ratio: 4 / 3; }
+}
+body.dark-page .included strong { font-size: clamp(24px, 2.4vw, 36px); }
+body.dark-page .included span { font-size: 18px; }
+body.dark-page .clients-list li { font-size: 18px; padding: 12px 22px; }
+body.dark-page .lenses p { font-size: 18px; color: var(--bone-2); }
+
+/* Case studies */
+body.dark-page .chapter { grid-template-columns: 5fr 7fr; }
+body.dark-page .chapter-text .lede { font-size: clamp(19px, 1.5vw, 23px); }
+body.dark-page .cs-results .cs-list li { font-size: clamp(24px, 2.4vw, 38px); }
+body.dark-page .cs-served p { font-size: clamp(26px, 2.6vw, 42px); max-width: 32ch; }
+body.dark-page .cs-stat { font-size: clamp(28px, 2.6vw, 42px); }
+.offer-head { align-self: end; }
+.offer-body { align-self: start; }
+.offer-num { align-self: end; padding-bottom: 28px; }
+.card-cover video { width: 100%; height: 100%; object-fit: cover; display: block; }
+body.dark-page .work-grid h3, body.dark-page .card h3 { font-size: clamp(26px, 2.6vw, 40px); }

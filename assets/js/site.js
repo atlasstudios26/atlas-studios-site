@@ -124,7 +124,7 @@
       el("section", { class: "chapter reveal in" },
         el("div", { class: "chapter-text" },
           el("span", { class: "label", text: c.label }),
-          el("h2", { class: "display-md", text: c.title }),
+          el("h2", { class: "display-md", text: c.title, "data-split": "" }),
           el("p", { class: "lede", text: c.body }),
           c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
         (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.filter((m) => !/-wide/.test(m)).length, 6) }, c.media.map((m) => el("figure", { class: /-wide/.test(m) ? "wide" : null }, media(m)))) : null
@@ -153,7 +153,7 @@
       world ? null : el("h1", { class: "display", text: cs.title }),
       el("p", { class: "cs-client", text: cs.client || "" }),
       cs.stat ? el("p", { class: "cs-stat", text: cs.stat }) : null,
-      cs.chapters && cs.summary ? el("p", { class: "lede", text: cs.summary }) : null,
+      cs.chapters && cs.summary ? el("p", { class: "scrub scrub-md", "data-scrub": "", text: cs.summary }) : null,
       cs.quote ? el("blockquote", { class: "cs-quote display-sm", text: cs.quote }) : null);
     const hasCover = cs.cover_url || cs.video_url;
     root.replaceChildren(...[
@@ -170,6 +170,7 @@
       cs.note ? el("p", { class: "cs-note label", text: cs.note }) : null,
       cs.served ? el("div", { class: "cs-served" }, el("span", { class: "label", text: "Who it served" }), el("p", { class: "display-sm", text: cs.served })) : null
     ].filter(Boolean));
+    splitWords(); scrubText();
     if (world) {
       root.closest("section").before(world);
       document.body.classList.add("over-film");
@@ -413,8 +414,9 @@
 
   // A paragraph whose words light up as you scroll through it.
   function scrubText() {
-    const nodes = $$("[data-scrub]");
+    const nodes = $$("[data-scrub]:not([data-scrub-done])");
     if (!nodes.length) return;
+    nodes.forEach((n) => n.setAttribute("data-scrub-done", ""));
     nodes.forEach((node) => {
       const words = node.textContent.trim().split(/\s+/);
       node.setAttribute("aria-label", node.textContent.trim());
