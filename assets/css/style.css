@@ -998,3 +998,12 @@ body.dark-page .cap-how .clients-list li { font-size: clamp(18px, 1.5vw, 24px); 
 .ha-world .g-meridians { transform-origin: 200px 200px; animation: globeTurn 14s ease-in-out infinite alternate; }
 @media (max-width: 860px) { .ha-atlas { width: min(80%, 420px); order: -1; margin-top: 18%; } }
 @media (prefers-reduced-motion: reduce) { .ha-world { transform: none; opacity: 1; transition: none; } .ha-world .g-spin, .ha-world .g-meridians { animation: none; } }
+
+/* About opening: Atlas striding forward with the world */
+.ab-atlas { position: relative; width: min(100%, 520px); aspect-ratio: 1024 / 1536; justify-self: center; }
+.ab-atlas > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ab-atlas .ha-world { left: -8.34%; top: -13.17%; width: 124.43%; height: 82.95%; }
+@media (max-width: 860px) { .ab-atlas { width: min(78%, 400px); order: -1; } }
+.ab-atlas.in .ha-world { transform: none; opacity: 1; }
+.ab-hero { padding-top: clamp(110px, 10vw, 150px); }
+.ab-hero-grid { align-items: end; }

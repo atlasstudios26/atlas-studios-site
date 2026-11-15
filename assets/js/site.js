@@ -226,8 +226,9 @@
   // Contact: three-step form.
   // The world settles onto Atlas's shoulders when it comes into view.
   function atlasSettle() {
-    const a = $("[data-atlas]"); if (!a) return;
-    new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { a.classList.add("in"); o.disconnect(); } }), { threshold: 0.35 }).observe(a);
+    $$("[data-atlas]").forEach((a) => {
+      new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { setTimeout(() => a.classList.add("in"), 200); o.disconnect(); } }), { threshold: 0.1 }).observe(a);
+    });
   }
 
   function wireSteps() {
