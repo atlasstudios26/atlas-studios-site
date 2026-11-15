@@ -224,6 +224,12 @@
   }
 
   // Contact: three-step form.
+  // The world settles onto Atlas's shoulders when it comes into view.
+  function atlasSettle() {
+    const a = $("[data-atlas]"); if (!a) return;
+    new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { a.classList.add("in"); o.disconnect(); } }), { threshold: 0.35 }).observe(a);
+  }
+
   function wireSteps() {
     const form = $("[data-steps]"); if (!form) return;
     const steps = $$(".step", form), dots = $$(".step-dots li", form);
@@ -602,7 +608,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); wireSteps(); serviceTabs(); ticketLinks(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
+    wireNav(); wireForms(); atlasSettle(); wireSteps(); serviceTabs(); ticketLinks(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
     renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();

@@ -982,3 +982,19 @@ body.dark-page .cap-how .clients-list li { font-size: clamp(18px, 1.5vw, 24px); 
 /* Orbits are drawn on top of each other: let clicks pass through to every planet */
 .orbit, .orbit-spin { pointer-events: none; }
 .planet, .sun { pointer-events: auto; }
+
+/* Home: Atlas holding up the world (still figure, moving globe) */
+.ha-atlas { position: relative; width: min(100%, 520px); aspect-ratio: 1024 / 1536; justify-self: center; margin-top: 12%; }
+.ha-atlas > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ha-world { position: absolute; left: -9.37%; top: -12.76%; width: 117.34%; height: 81.0%; overflow: visible; transform: translateY(-6%); opacity: 0; transition: transform 1.6s cubic-bezier(.2,.75,.15,1), opacity 1s; }
+.ha-atlas.in .ha-world { transform: none; opacity: 1; }
+.ha-world * { vector-effect: non-scaling-stroke; }
+.ha-world .g-line { fill: var(--charcoal); stroke: var(--bone); stroke-width: 1.6; }
+.ha-world .g-meridians * { fill: none; stroke: var(--bone); stroke-width: 1; opacity: .4; }
+.ha-world .g-ring { fill: none; stroke: var(--water); stroke-width: 1.8; }
+.ha-world .g-dash { fill: none; stroke: var(--bone); stroke-dasharray: 3 9; opacity: .4; }
+.ha-world .g-sat { fill: var(--bone); }
+.ha-world .g-spin { transform-origin: 200px 200px; animation: spin 30s linear infinite; }
+.ha-world .g-meridians { transform-origin: 200px 200px; animation: globeTurn 14s ease-in-out infinite alternate; }
+@media (max-width: 860px) { .ha-atlas { width: min(80%, 420px); order: -1; margin-top: 18%; } }
+@media (prefers-reduced-motion: reduce) { .ha-world { transform: none; opacity: 1; transition: none; } .ha-world .g-spin, .ha-world .g-meridians { animation: none; } }
