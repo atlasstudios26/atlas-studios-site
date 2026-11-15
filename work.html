@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Work · Atlas Studios</title>
-<meta name="description" content="Select work from Atlas Studios: experience design, creative direction, product, and experiential programming.">
+<meta name="description" content="Worlds Atlas Studios has built: launches, cultural moments, signature events, partnerships, merch and campaign creative.">
 <meta property="og:title" content="Work · Atlas Studios">
-<meta property="og:description" content="Select work from Atlas Studios: experience design, creative direction, product, and experiential programming.">
+<meta property="og:description" content="Worlds Atlas Studios has built: launches, cultural moments, signature events, partnerships, merch and campaign creative.">
 <meta property="og:image" content="/assets/img/favicon.png">
 <link rel="icon" href="/assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,19 +35,29 @@
 </header>
 <main>
 
-<section>
+<section class="work-page">
   <div class="wrap">
-    <div class="section-head">
-      <div><span class="label">Work</span><h1 class="display" data-split style="margin-top:12px">Select work</h1></div>
-      <p class="lede">Events are not the end goal. They are platforms for storytelling, proof of execution, and catalysts for deeper brand partnerships.</p>
+    <span class="label">Work</span>
+    <h1 class="display" data-split style="margin:12px 0 20px">Worlds we've built.</h1>
+    <p class="lede">Every project here is a whole world: the idea, the partners, the room and the result.</p>
+    <div class="work-bar">
+      <div class="work-filters" data-filters role="group" aria-label="Filter by service">
+        <button class="on" data-filter="all">All</button><button data-filter="Launch Worlds">Launch Worlds</button><button data-filter="Cultural Moments">Cultural Moments</button><button data-filter="Signature Events">Signature Events</button><button data-filter="Partnerships">Partnerships</button><button data-filter="Merch">Merch</button><button data-filter="Campaign Creative">Campaign Creative</button>
+      </div>
+      <div class="work-views" role="group" aria-label="View"><button class="on" data-view="index">Index</button><button data-view="grid">Grid</button></div>
     </div>
-    <div class="case-grid" data-case-grid></div>
+    <div class="work-list" data-work-list></div>
+    <div class="work-peek" data-work-peek aria-hidden="true"></div>
   </div>
 </section>
-<section class="dark">
+<section class="work-next">
   <div class="wrap">
-    <div class="section-head"><div><span class="label">From the archive</span><h2 class="display-md" data-split style="margin-top:12px">In the room.</h2></div></div>
-    <div class="gallery" data-gallery></div>
+    <svg viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="188" class="d"/><ellipse cx="200" cy="200" rx="178" ry="56" class="r" transform="rotate(-18 200 200)"/><circle cx="200" cy="200" r="118" class="l"/><g class="s"><circle cx="200" cy="12" r="5"/></g></svg>
+    <div>
+      <span class="label">Your world, next</span>
+      <h2 class="display" data-split>What should we build together?</h2>
+      <a class="btn" href="/contact">Start a project</a>
+    </div>
   </div>
 </section>
 </main>

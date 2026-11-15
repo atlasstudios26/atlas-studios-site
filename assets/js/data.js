@@ -4,6 +4,7 @@ window.ATLAS_FALLBACK = {
   caseStudies: [
     {
       slug: "park-100-oak-bluffs",
+      services: ["Cultural Moments","Signature Events","Partnerships","Merch"],
       pinned: true,
       world_url: "/assets/worlds/park-100-oak-bluffs.mp4",
       title: "Park 100: Oak Bluffs Edition",
@@ -44,6 +45,7 @@ window.ATLAS_FALLBACK = {
     },
     {
       slug: "house-of-rouge",
+      services: ["Signature Events","Partnerships","Campaign Creative","Merch"],
       pinned: true,
       world_url: "/assets/worlds/house-of-rouge.mp4",
       title: "House of Rouge",
@@ -74,6 +76,7 @@ window.ATLAS_FALLBACK = {
     },
     {
       slug: "nightmare-on-westside",
+      services: ["Signature Events","Partnerships","Campaign Creative"],
       pinned: true,
       world_url: "/assets/worlds/nightmare-on-westside.mp4",
       title: "Nightmare on Westside",
@@ -111,6 +114,7 @@ window.ATLAS_FALLBACK = {
     },
     {
       slug: "the-art-of-blending",
+      services: ["Launch Worlds","Partnerships"],
       title: "The Art of Blending",
       client: "Just Add Honey Tea Company × Edmond's Honor Bourbon",
       category: "Experience Design",
@@ -141,6 +145,7 @@ window.ATLAS_FALLBACK = {
     },
     {
       slug: "black-history-month-campaign",
+      services: ["Campaign Creative"],
       world_url: "/assets/worlds/black-history-month-campaign.mp4",
       title: "Black History Month Campaign",
       client: "The James Room × Edmond's Honor Bourbon",
@@ -170,6 +175,7 @@ window.ATLAS_FALLBACK = {
     },
     {
       slug: "legacy-class-varsity-jacket",
+      services: ["Merch"],
       title: "The Legacy Class Jacket",
       client: "Emerging 100 of Atlanta, Class of 2025",
       category: "Product & Design",

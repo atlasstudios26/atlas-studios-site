@@ -76,6 +76,68 @@
     return fig;
   }
 
+  // Work page: index of worlds with hover previews, a grid view and service filters.
+  async function renderWorkPage() {
+    const box = $("[data-work-list]"); if (!box) return;
+    const list = await getCaseStudies();
+    const peek = $("[data-work-peek]");
+    let view = "index", filter = "all";
+    const decks = new Set();
+    if (db) { const { data } = await db.from("decks").select("case_study_slug").eq("published", true); (data || []).forEach((d) => d.case_study_slug && decks.add(d.case_study_slug)); }
+    const soon = (cs) => /coming soon/i.test(cs.category || "");
+    const tags = (cs) => el("span", { class: "w-tags" },
+      soon(cs) ? el("b", { class: "tag-soon", text: "Coming soon" }) : null,
+      decks.has(cs.slug) ? el("b", { class: "tag-lock", text: "🔒︎ Private deck" }) : null);
+    const draw = () => {
+      const items = list.filter((c) => filter === "all" || (c.services || []).includes(filter));
+      box.className = "work-list view-" + view;
+      if (!items.length) { box.replaceChildren(el("p", { class: "lede", text: "No worlds here yet. This one could be yours." })); return; }
+      if (view === "index") {
+        box.replaceChildren(...items.map((cs, i) => el("a", { class: "w-row", href: `/case-study?slug=${encodeURIComponent(cs.slug)}`, "data-slug": cs.slug },
+          el("span", { class: "w-num", text: String(i + 1).padStart(2, "0") }),
+          el("span", { class: "w-title", text: cs.title }),
+          el("span", { class: "w-meta" }, el("span", { text: cs.client || "" }), el("span", { class: "w-stat", text: (cs.stat && !soon(cs)) ? cs.stat : (cs.services || []).join(" · ") }), tags(cs)),
+          el("span", { class: "w-go", text: "→" }))));
+      } else {
+        box.replaceChildren(...items.map((cs) => {
+          const fig = el("div", { class: "w-media" });
+          if (cs.cover_url) fig.append(el("img", { src: cs.cover_url, alt: cs.title, loading: "lazy" }));
+          else fig.append(el("span", { class: "w-media-type", text: cs.title }));
+          if (cs.video_url && !reduceMotion()) { const v = el("video", { class: "hover-video", src: cs.video_url, muted: "", loop: "", playsinline: "", preload: "none" }); v.muted = true; fig.append(v); }
+          const card = el("a", { class: "w-card", href: `/case-study?slug=${encodeURIComponent(cs.slug)}` }, fig,
+            el("span", { class: "label", text: (cs.services || []).join(" · ") }),
+            el("h3", { text: cs.title }), el("p", { text: cs.client || "" }), cs.stat && !soon(cs) ? el("p", { class: "w-stat", text: cs.stat }) : null, tags(cs));
+          const v = $("video", card);
+          if (v) { card.addEventListener("mouseenter", () => { card.classList.add("playing"); v.play().catch(() => {}); }); card.addEventListener("mouseleave", () => { card.classList.remove("playing"); v.pause(); }); }
+          return card;
+        }));
+      }
+    };
+    // Cursor-following preview for the index.
+    const hover = matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!hover) view = "grid";
+    let tx = 0, ty = 0, px = 0, py = 0, running = false;
+    const loop = () => { px += (tx - px) * 0.18; py += (ty - py) * 0.18; peek.style.transform = `translate(${px}px, ${py}px)`; if (running) requestAnimationFrame(loop); };
+    box.addEventListener("pointermove", (e) => { tx = e.clientX + 28; ty = e.clientY - 140; });
+    box.addEventListener("pointerover", (e) => {
+      const row = e.target.closest(".w-row"); if (!row || view !== "index" || !hover) return;
+      const cs = list.find((c) => c.slug === row.dataset.slug);
+      peek.replaceChildren();
+      if (cs.video_url && !reduceMotion()) { const v = el("video", { src: cs.video_url, muted: "", loop: "", playsinline: "", autoplay: "" }); v.muted = true; peek.append(v); v.play().catch(() => {}); }
+      else if (cs.cover_url) peek.append(el("img", { src: cs.cover_url, alt: "" }));
+      else peek.append(el("span", { text: "Photos coming soon" }));
+      peek.classList.add("show"); box.classList.add("peeking"); row.classList.add("hot");
+      if (!running) { running = true; px = tx; py = ty; loop(); }
+    });
+    box.addEventListener("pointerout", (e) => {
+      const row = e.target.closest(".w-row"); if (row && !row.contains(e.relatedTarget)) row.classList.remove("hot");
+      if (!box.contains(e.relatedTarget)) { peek.classList.remove("show"); box.classList.remove("peeking"); running = false; }
+    });
+    $$("[data-filter]").forEach((b) => b.addEventListener("click", () => { filter = b.dataset.filter; $$("[data-filter]").forEach((x) => x.classList.toggle("on", x === b)); draw(); }));
+    $$("[data-view]").forEach((b) => { b.classList.toggle("on", b.dataset.view === view); b.addEventListener("click", () => { view = b.dataset.view; $$("[data-view]").forEach((x) => x.classList.toggle("on", x === b)); draw(); }); });
+    draw();
+  }
+
   async function renderWorkGrids() {
     const grids = $$("[data-case-grid]");
     if (!grids.length) return;
@@ -610,6 +672,6 @@
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
     wireNav(); wireForms(); atlasSettle(); wireSteps(); serviceTabs(); ticketLinks(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
-    renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
+    renderWorkGrids(); renderWorkPage(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();
