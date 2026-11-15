@@ -198,7 +198,18 @@ window.ATLAS_FALLBACK = {
         "Extended the organization's story beyond a single moment",
         "A repeatable framework for translating narrative into physical product"
       ],
-      cover_url: "",
+      cover_url: "/assets/work/legacy-class-jacket/design-back.jpg",
+      chapters: [
+        { label: "01 · The idea", title: "Legacy you can wear.",
+          body: "The Class of 2025 needed something that would outlast the year: a jacket members would wear with pride, rooted in the organization's identity and in Atlanta, from the 1996 Olympic torch to the city skyline.",
+          media: [] },
+        { label: "02 · The design", title: "Every patch tells part of the story.",
+          body: "A crest on the back: \"God Bless the Emerging,\" the Atlanta skyline with the Olympic torch, and a Legacy XXV banner. On the front, a chenille E marked Est. 2015, the organization's vision in script, an Atlanta Chapter wordmark, and sleeve patches for the class, the chapter and its servant-leadership title.",
+          media: ["/assets/work/legacy-class-jacket/design-back.jpg", "/assets/work/legacy-class-jacket/design-front.jpg"] },
+        { label: "03 · The jacket", title: "Made real.",
+          body: "Finished photos of the jackets are coming soon.",
+          media: [] }
+      ],
       sort_order: 3
     },
   ],
