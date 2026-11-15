@@ -233,8 +233,8 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--o
 @media (max-width: 860px) { .feature, .feature:nth-child(even) { grid-template-columns: 1fr; } .feature:nth-child(even) .feature-media { order: 0; } }
 
 /* Approach: six layers */
-.layers { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(229,227,221,0.2); }
-.layers li { display: grid; grid-template-columns: 48px 1fr 1.3fr; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid rgba(229,227,221,0.2); }
+.layers { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.layers li { display: grid; grid-template-columns: 48px 1fr 1.3fr; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); }
 .layers h4 { font-family: var(--display); font-weight: 400; font-size: clamp(22px, 2vw, 28px); margin: 0; }
 .layers p { margin: 0; color: var(--bone-2); font-size: 15px; }
 @media (max-width: 520px) { .layers li { grid-template-columns: 40px 1fr; } .layers p { grid-column: 2; } }
@@ -425,11 +425,11 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--o
 body.dark-page { background: var(--charcoal); color: var(--bone); }
 body.dark-page main { background: var(--charcoal); }
 body.dark-page .label { color: var(--bone-2); }
-body.dark-page .site-header.solid { background: rgba(41,36,32,.94); border-color: rgba(229,227,221,.12); color: var(--bone); }
+body.dark-page .site-header.solid { background: rgba(41,36,32,.94); border-color: rgba(41,36,32,.12); color: var(--bone); }
 body.dark-page .site-header.solid .mark-dark { display: none; }
 body.dark-page .site-header.solid .mark-light { display: block; }
 body.dark-page .site-header.solid .site-nav .btn, body.dark-page .site-header.solid .nav-toggle { border-color: var(--bone); color: var(--bone); }
-body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
+body.dark-page .site-footer { border-top: 1px solid rgba(41,36,32,.1); }
 .ab-hero { height: 100svh; background: var(--charcoal); padding-bottom: clamp(48px, 8vw, 110px); }
 .ab-coords { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--bone-2); margin: 0 0 28px; }
 .ab-title { font-family: var(--display); font-weight: 400; font-size: clamp(52px, 9.2vw, 168px); line-height: .95; letter-spacing: -.01em; margin: 0; max-width: 14ch; }
@@ -438,7 +438,7 @@ body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
 @keyframes bob { 50% { transform: translateY(5px); } }
 .ab-statement { padding: clamp(80px, 14vw, 200px) 0; }
 .scrub { font-family: var(--display); font-size: clamp(32px, 4.6vw, 76px); line-height: 1.12; margin: 0; max-width: 22ch; }
-.sw { color: rgba(229,227,221,.16); transition: color .35s; }
+.sw { color: rgba(41,36,32,.16); transition: color .35s; }
 .sw.lit { color: var(--bone); }
 .ab-h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 6vw, 104px); line-height: 1; margin: 16px 0 24px; max-width: 16ch; }
 .ab-hint { color: var(--bone-2); font-size: 18px; max-width: 44ch; margin: 0; }
@@ -447,10 +447,10 @@ body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
 .ab-eco { padding: clamp(60px, 8vw, 120px) 0 clamp(40px, 6vw, 80px); overflow: hidden; }
 .eco-stage { position: relative; display: grid; place-items: center; margin-top: clamp(24px, 4vw, 60px); }
 .orbit-system { --size: min(94vw, 86vh, 960px); position: relative; width: var(--size); height: var(--size); }
-.sun { position: absolute; inset: 0; margin: auto; width: 22%; height: 22%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3d3631, #1c1916 70%); box-shadow: 0 0 0 1px rgba(229,227,221,.12), 0 0 120px rgba(79,107,151,.35); display: grid; place-items: center; align-content: center; gap: 8px; z-index: 2; }
+.sun { position: absolute; inset: 0; margin: auto; width: 22%; height: 22%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #efede8, #d9d6ce 70%); box-shadow: 0 0 0 1px rgba(41,36,32,.12), 0 0 120px rgba(79,107,151,.35); display: grid; place-items: center; align-content: center; gap: 8px; z-index: 2; }
 .sun img { width: 40%; }
 .sun span { font-family: var(--display); font-size: clamp(14px, 1.6vw, 22px); }
-.orbit { position: absolute; inset: 0; margin: auto; border-radius: 50%; border: 1px solid rgba(229,227,221,.14); }
+.orbit { position: absolute; inset: 0; margin: auto; border-radius: 50%; border: 1px solid rgba(41,36,32,.14); }
 .o1 { width: 46%; height: 46%; } .o2 { width: 70%; height: 70%; } .o3 { width: 96%; height: 96%; }
 .orbit-spin { position: absolute; inset: 0; animation: spin var(--dur) linear infinite; }
 .o1 { --dur: 70s; } .o2 { --dur: 110s; animation-direction: reverse; } .o3 { --dur: 160s; }
@@ -470,7 +470,7 @@ body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
 .planet.on .planet-body { background: radial-gradient(circle at 35% 30%, #a9bde0, #4F6B97 60%, #2a3b57); box-shadow: 0 0 0 10px rgba(79,107,151,.18), 0 0 60px rgba(79,107,151,.6); transform: scale(1.2); }
 .orbit-system:hover .orbit-spin, .orbit-system:hover .planet-inner, .orbit-system.focused .orbit-spin, .orbit-system.focused .planet-inner { animation-play-state: paused; }
 .orbit-system.focused .planet:not(.on) { opacity: .45; }
-.planet-card { position: absolute; right: max(24px, calc((100vw - 1280px) / 2 + 24px)); top: 50%; width: min(400px, 34vw); transform: translate(24px, -50%); opacity: 0; pointer-events: none; background: rgba(28,25,22,.92); backdrop-filter: blur(10px); border: 1px solid rgba(229,227,221,.14); padding: 22px 22px 26px; transition: opacity .4s, transform .4s; z-index: 5; }
+.planet-card { position: absolute; right: max(24px, calc((100vw - 1280px) / 2 + 24px)); top: 50%; width: min(400px, 34vw); transform: translate(24px, -50%); opacity: 0; pointer-events: none; background: rgba(229,227,221,.94); backdrop-filter: blur(10px); border: 1px solid rgba(41,36,32,.14); padding: 22px 22px 26px; transition: opacity .4s, transform .4s; z-index: 5; }
 .planet-card.in { opacity: 1; transform: translate(0, -50%); pointer-events: auto; }
 .planet-card figure { margin: 0 0 18px; aspect-ratio: 4 / 3; overflow: hidden; }
 .planet-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -514,7 +514,7 @@ body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
 
 /* Who it serves */
 .ab-serves { padding: clamp(60px, 8vw, 120px) 0; }
-.serve-row { display: grid; grid-template-columns: 7fr 4fr; gap: 24px 48px; align-items: end; padding: clamp(28px, 4vw, 48px) 0; border-top: 1px solid rgba(229,227,221,.16); }
+.serve-row { display: grid; grid-template-columns: 7fr 4fr; gap: 24px 48px; align-items: end; padding: clamp(28px, 4vw, 48px) 0; border-top: 1px solid rgba(41,36,32,.16); }
 .serve-num { font-family: var(--display); font-size: clamp(64px, 12vw, 210px); line-height: .9; margin: 0; letter-spacing: -.02em; }
 .serve-row h3 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.4vw, 36px); margin: 0 0 10px; color: var(--water); filter: brightness(1.5); }
 .serve-row p:not(.serve-num) { color: var(--bone-2); font-size: 18px; margin: 0; }
@@ -533,11 +533,11 @@ body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
 /* Beliefs + CTA */
 .ab-beliefs { padding: clamp(80px, 10vw, 160px) 0; }
 .belief-lines { list-style: none; margin: 20px 0 clamp(60px, 8vw, 120px); padding: 0; }
-.belief-lines li { font-family: var(--display); font-size: clamp(36px, 6vw, 104px); line-height: 1.02; padding: 18px 0; border-bottom: 1px solid rgba(229,227,221,.14); }
+.belief-lines li { font-family: var(--display); font-size: clamp(36px, 6vw, 104px); line-height: 1.02; padding: 18px 0; border-bottom: 1px solid rgba(41,36,32,.14); }
 .ab-mv { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 .ab-mv p { font-family: var(--display); font-size: clamp(22px, 2vw, 30px); line-height: 1.3; margin: 14px 0 0; }
 @media (max-width: 860px) { .ab-mv { grid-template-columns: 1fr; } }
-.ab-cta { padding: clamp(80px, 12vw, 180px) 0; border-top: 1px solid rgba(229,227,221,.12); }
+.ab-cta { padding: clamp(80px, 12vw, 180px) 0; border-top: 1px solid rgba(41,36,32,.12); }
 .ab-cta .btn { margin-top: 40px; border-color: var(--bone); color: var(--bone); }
 .ab-cta .btn:hover { background: var(--bone); color: var(--charcoal); }
 /* Start each orbit at a different angle so the planets spread around the sun */
@@ -564,7 +564,7 @@ body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
 .ab-mv p { max-width: 44ch; }
 
 /* ===== One world: the whole site in charcoal ===== */
-body.dark-page { --line: rgba(229,227,221,.14); --ink-soft: #A39C93; --water: #7F9BC8; --wrap: 1440px; background: var(--charcoal); color: var(--bone); }
+body.dark-page { --line: rgba(41,36,32,.14); --ink-soft: #A39C93; --water: #7F9BC8; --wrap: 1440px; background: var(--charcoal); color: var(--bone); }
 body.dark-page section, body.dark-page .dark, body.dark-page .olive { background: transparent; color: var(--bone); }
 body.dark-page .label, body.dark-page .olive .label, body.dark-page .dark .label { color: var(--bone-2); }
 body.dark-page .lede, body.dark-page .dark .lede { color: var(--bone-2); font-size: clamp(19px, 1.6vw, 25px); max-width: 60ch; }
@@ -581,13 +581,13 @@ body.dark-page.over-film .site-header.solid { background: rgba(41,36,32,.94); co
 body.dark-page.over-film .site-header.solid .mark-dark { display: none; }
 body.dark-page.over-film .site-header.solid .mark-light { display: block; }
 body.dark-page.over-film .site-header.solid .site-nav .btn, body.dark-page.over-film .site-header.solid .nav-toggle { border-color: var(--bone); color: var(--bone); }
-body.dark-page input, body.dark-page select, body.dark-page textarea { color: var(--bone); border-color: rgba(229,227,221,.5); }
+body.dark-page input, body.dark-page select, body.dark-page textarea { color: var(--bone); border-color: rgba(41,36,32,.5); }
 body.dark-page select option { color: var(--charcoal); }
 body.dark-page .marquee-track img { filter: invert(1) brightness(.92); opacity: .62; }
 body.dark-page .marquee-track li:hover img { opacity: 1; }
 body.dark-page .site-footer { border-top: 1px solid var(--line); }
-body.dark-page .chapter-media figure { background: #1f1b18; }
-body.dark-page .cs-results { background: rgba(229,227,221,.04); border: 1px solid var(--line); }
+body.dark-page .chapter-media figure { background: #d9d6ce; }
+body.dark-page .cs-results { background: rgba(41,36,32,.04); border: 1px solid var(--line); }
 body.dark-page .cs-served { background: transparent; border-left: 2px solid var(--water); padding: 8px 0 8px 32px; margin-top: 48px; }
 body.dark-page .feature-client, body.dark-page .cs-client { color: var(--bone-2); }
 body.dark-page section + section { border-top: 1px solid var(--line); }
@@ -647,15 +647,15 @@ body.dark-page .work-grid h3, body.dark-page .card h3 { font-size: clamp(26px, 2
 
 /* Planets drawn in the same line style as the rest of the page */
 .planet-body { position: relative; background: var(--charcoal) !important; border: 1.4px solid var(--bone); box-shadow: none; }
-.planet-body::before, .planet-body::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid rgba(229,227,221,.45); }
+.planet-body::before, .planet-body::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid rgba(41,36,32,.45); }
 .planet-body::before { transform: scaleY(.34); }
 .planet-body::after { transform: scaleX(.34); }
 .o3 .planet-body::after { inset: -22%; border-color: var(--water); transform: rotate(-20deg) scaleY(.28); }
 .o2 .planet-body::after { transform: scaleX(.62); }
 .planet.on .planet-body { background: rgba(127,155,200,.22) !important; border-color: var(--water); box-shadow: 0 0 0 10px rgba(127,155,200,.12), 0 0 70px rgba(127,155,200,.45); }
 .planet.on .planet-body::before, .planet.on .planet-body::after { border-color: var(--water); }
-.sun { background: var(--charcoal); box-shadow: 0 0 0 1px rgba(229,227,221,.5), 0 0 0 14px var(--charcoal), 0 0 0 15px rgba(229,227,221,.18), 0 0 140px rgba(127,155,200,.25); }
-.orbit { border-color: rgba(229,227,221,.2); }
+.sun { background: var(--charcoal); box-shadow: 0 0 0 1px rgba(41,36,32,.5), 0 0 0 14px var(--charcoal), 0 0 0 15px rgba(41,36,32,.18), 0 0 140px rgba(127,155,200,.25); }
+.orbit { border-color: rgba(41,36,32,.2); }
 .o2 { border-style: dashed; }
 
 /* Fill the space: wider lines, larger text */
@@ -681,3 +681,59 @@ body.dark-page .split { grid-template-columns: 1fr 2fr; }
 body.dark-page .split .display-sm { font-size: clamp(30px, 3.4vw, 54px); max-width: 40ch; }
 body.dark-page .cs-served p { max-width: 46ch; }
 body.dark-page .feature-link, body.dark-page .text-link { font-size: 14px; }
+
+
+/* ===== Bone world: same layouts and motion, light background ===== */
+body.dark-page { --bone: #292420; --charcoal: #E5E3DD; --bone-2: #5F5852; --ink-soft: #6B645D; --line: rgba(41,36,32,.16); --water: #4F6B97; --wrap: 1640px; --pad: clamp(20px, 3.4vw, 56px); }
+body.dark-page .hero:not(.ab-hero), body.dark-page .cs-world { --bone: #E5E3DD; --charcoal: #292420; --bone-2: #D9D6CE; }
+body.dark-page .ab-hero { background: transparent; }
+body.dark-page .site-header { background: rgba(229,227,221,.94); color: #292420; }
+body.dark-page .site-header .mark-dark, body.dark-page.over-film .site-header.solid .mark-dark { display: block; }
+body.dark-page .site-header .mark-light, body.dark-page.over-film .site-header.solid .mark-light { display: none; }
+body.dark-page.over-film .site-header.solid { background: rgba(229,227,221,.94); color: #292420; }
+body.dark-page.over-film .site-header:not(.solid) { color: #E5E3DD; }
+body.dark-page.over-film .site-header:not(.solid) .mark-dark { display: none; }
+body.dark-page.over-film .site-header:not(.solid) .mark-light { display: block; }
+body.dark-page.over-film .site-header:not(.solid) .site-nav .btn, body.dark-page.over-film .site-header:not(.solid) .nav-toggle { border-color: #E5E3DD; color: #E5E3DD; }
+body.dark-page.over-film .site-header:not(.solid) .site-nav a:hover { border-color: #E5E3DD; }
+body.dark-page .marquee-track img { filter: none; opacity: .78; }
+body.dark-page select option { color: #292420; }
+body.dark-page .feature-media, body.dark-page .card-cover { background: #4F5C47; }
+.planet-card { box-shadow: 0 20px 60px rgba(41,36,32,.18); }
+
+/* Fill the screen */
+body.dark-page { font-size: 19px; }
+body.dark-page .lede { font-size: clamp(21px, 1.9vw, 30px); max-width: 80ch; }
+body.dark-page .display { font-size: clamp(56px, 8.6vw, 168px); }
+body.dark-page .display-md { font-size: clamp(40px, 5.6vw, 100px); }
+.scrub-md { font-size: clamp(30px, 3.8vw, 66px); max-width: 52ch; }
+.scrub { max-width: 46ch; }
+.offer-body p { max-width: 64ch; }
+.proc-step p, .founder-bio, .serve-row p:not(.serve-num) { max-width: 80ch; }
+
+/* Home: numbers band */
+.numbers { padding: clamp(56px, 7vw, 110px) 0; }
+.numbers-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.numbers .num { font-family: var(--display); font-size: clamp(48px, 6.4vw, 120px); line-height: .95; margin: 0 0 12px; letter-spacing: -.02em; }
+@media (max-width: 860px) { .numbers-row { grid-template-columns: 1fr 1fr; } }
+
+/* Home: selected work, one wide lead then two per row */
+body.dark-page .features { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 5vw, 80px) clamp(24px, 3vw, 48px); }
+body.dark-page .feature, body.dark-page .feature:nth-child(even) { grid-template-columns: 1fr; gap: 22px; align-items: start; }
+body.dark-page .feature:nth-child(even) .feature-media { order: 0; }
+body.dark-page .feature-media { aspect-ratio: 4 / 5; max-height: none; }
+body.dark-page .feature:first-child { grid-column: 1 / -1; grid-template-columns: 3fr 2fr; align-items: end; gap: clamp(28px, 4vw, 64px); }
+body.dark-page .feature:first-child .feature-media { aspect-ratio: 16 / 10; }
+body.dark-page .feature-text h3 { font-size: clamp(36px, 4vw, 72px); margin: 12px 0 8px; }
+body.dark-page .feature:first-child .feature-text h3 { font-size: clamp(44px, 5.4vw, 100px); }
+body.dark-page .feature:not(:first-child) .feature-summary { display: none; }
+body.dark-page .feature-stat { margin-top: 12px; }
+body.dark-page .feature-link { margin-top: 18px; }
+@media (max-width: 860px) { body.dark-page .features { grid-template-columns: 1fr; } body.dark-page .feature:first-child { grid-template-columns: 1fr; } }
+.layers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 clamp(24px, 3vw, 48px); margin: clamp(48px, 6vw, 88px) 0 32px; border-top: 0; }
+.layers-grid li { grid-template-columns: 48px 1fr; border-top: 1px solid var(--line); border-bottom: 0; padding: 24px 0 28px; }
+.layers-grid li p { grid-column: 2; }
+@media (max-width: 860px) { .layers-grid { grid-template-columns: 1fr; } }
+body.dark-page .planet-name { text-shadow: none; }
+body.dark-page .serve-row h3 { filter: none; }
+body.dark-page .hero-title { color: rgba(229,227,221,0.42); -webkit-text-stroke-color: rgba(229,227,221,.95); }
