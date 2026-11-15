@@ -43,6 +43,7 @@
         <button class="btn" data-tab="media" aria-selected="false">Photos &amp; videos</button>
         <button class="btn" data-tab="inquiries" aria-selected="false">Inquiries</button>
         <button class="btn" data-tab="subscribers" aria-selected="false">Email list</button>
+        <button class="btn" data-tab="decks" aria-selected="false">Private decks</button>
       </div>
 
       <section class="panel" data-pane="cases" style="padding:32px">
@@ -108,6 +109,29 @@
         </div>
         <table style="margin-top:16px"><thead><tr><th>Date</th><th>Email</th></tr></thead><tbody id="sub-rows"></tbody></table>
       </section>
+      <section class="panel" data-pane="decks" hidden>
+        <h2 class="display-sm" style="margin:0 0 8px">Private decks</h2>
+        <p style="margin:0 0 20px">Upload a deck (PDF, pricing removed), approve who can see it, then send them their personal code.</p>
+        <form id="deck-form" style="display:grid;gap:14px;max-width:640px">
+          <div class="field"><label>Deck title</label><input name="title" required placeholder="Park 100: Partnership Deck"></div>
+          <div class="field"><label>Short name for the link (letters and dashes)</label><input name="slug" required placeholder="park-100-partners"></div>
+          <div class="field"><label>Case study it belongs to (optional)</label><select name="case_study_slug" id="deck-case"><option value="">None</option></select></div>
+          <div class="field"><label>PDF</label><input type="file" name="file" accept="application/pdf" required></div>
+          <button class="btn solid" type="submit">Upload deck</button>
+          <p class="form-status" id="deck-status"></p>
+        </form>
+        <table style="margin-top:28px"><thead><tr><th>Deck</th><th>Link</th><th>Live</th><th></th></tr></thead><tbody id="deck-rows"></tbody></table>
+
+        <h3 class="display-sm" style="margin:40px 0 12px">Requests and access</h3>
+        <form id="grant-form" style="display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:20px">
+          <div class="field"><label>Name</label><input name="name" required></div>
+          <div class="field"><label>Email</label><input name="email" type="email" required></div>
+          <div class="field"><label>Deck</label><select name="deck_id" id="grant-deck" required></select></div>
+          <button class="btn" type="submit">Give access</button>
+        </form>
+        <table><thead><tr><th>Date</th><th>Person</th><th>Deck</th><th>Why</th><th>Status</th><th>Code</th><th>Devices</th><th></th></tr></thead><tbody id="req-rows"></tbody></table>
+      </section>
+
     </div>
   </div>
 </main>

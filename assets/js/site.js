@@ -201,6 +201,13 @@
       $$("video", world).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
       headerOverFilm();
     }
+    // Private decks for this project appear as locked cards (set up in /admin).
+    if (db) db.from("decks").select("slug, title").eq("case_study_slug", cs.slug).eq("published", true).then(({ data }) => {
+      (data || []).forEach((d) => root.append(el("a", { class: "deck-lock", href: `/deck?d=${encodeURIComponent(d.slug)}` },
+        el("span", { class: "deck-lock-icon", "aria-hidden": "true", text: "🔒︎" }),
+        el("div", {}, el("span", { class: "label", text: "Private deck · access code required" }), el("h3", { text: d.title }), el("p", { text: "See the strategy behind the world. Request access or enter your code." })),
+        el("span", { class: "deck-lock-go", text: "→" }))));
+    });
     if (cs.gallery && cs.gallery.length) {
       root.append(el("div", { class: "cs-gallery" }, cs.gallery.map((src) => el("figure", {}, el("img", { src, alt: "", loading: "lazy" })))));
     }

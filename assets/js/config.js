@@ -7,6 +7,6 @@ window.ATLAS_CONFIG = {
   heroVideo: "",        // optional: URL of the We Create Worlds video (mp4) for the homepage
   instagram: "",        // optional: full Instagram URL
   linkedin: "",         // optional: full LinkedIn URL
-  houseOfRougeTickets: "",   // paste the POSH ticket link here
+  houseOfRougeTickets: "https://posh.vip/e/emerging-100-of-atlanta-15th-annual-holiday-soiree",
   email: "averyjordanj@gmail.com"   // public contact email (switch to an Atlas address once bought)
 };

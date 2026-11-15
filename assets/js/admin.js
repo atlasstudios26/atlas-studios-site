@@ -10,9 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function session() { return (await db.auth.getSession()).data.session; }
   async function boot() {
-    const s = await session();
+    let s = await session();
+    if (s && s.user.is_anonymous) { await db.auth.signOut(); s = null; }
     show($("#login"), !s); show($("#app"), !!s); show($("#signout"), !!s);
-    if (s) { await loadCases(); loadMedia(); loadInquiries(); loadSubscribers(); }
+    if (s) { await loadCases(); loadMedia(); loadInquiries(); loadSubscribers(); loadDecks(); }
   }
 
   $("#login-form").addEventListener("submit", async (e) => {
@@ -51,6 +52,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         (() => { const b = el("button", { class: "btn", type: "button" }, "Delete"); b.onclick = () => removeCase(c); return b; })()
       )
     )));
+    const dsel = $("#deck-case");
+    if (dsel) dsel.replaceChildren(el("option", { value: "" }, "None"), ...cases.map((c) => el("option", { value: c.slug }, c.title)));
     const sel = $("#media-case");
     sel.replaceChildren(el("option", { value: "" }, "None, archive only"), ...cases.map((c) => el("option", { value: c.id }, c.title)));
   }
@@ -143,6 +146,71 @@ document.addEventListener("DOMContentLoaded", async () => {
     const a = el("a", { href: URL.createObjectURL(new Blob([csv], { type: "text/csv" })), download: "atlas-email-list.csv" });
     document.body.append(a); a.click(); a.remove();
   };
+
+
+  // ----- Private decks -----
+  let decks = [];
+  const btn = (label, fn) => { const b = el("button", { class: "btn", type: "button" }, label); b.onclick = fn; return b; };
+  const newCode = () => "ATLAS-" + Array.from(crypto.getRandomValues(new Uint8Array(6)), (n) => "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"[n % 32]).join("");
+  const deckUrl = (d) => `${location.origin}/deck?d=${encodeURIComponent(d.slug)}`;
+  async function loadDecks() {
+    const { data, error } = await db.from("decks").select("*").order("created_at", { ascending: false });
+    if (error) { $("#deck-rows").replaceChildren(el("tr", {}, el("td", { colspan: 4, text: "Run supabase/private-decks.sql first. (" + error.message + ")" }))); return; }
+    decks = data || [];
+    $("#deck-rows").replaceChildren(...decks.map((d) => el("tr", {},
+      el("td", { text: d.title }), el("td", {}, el("a", { href: deckUrl(d), target: "_blank" }, "/deck?d=" + d.slug)),
+      el("td", { text: d.published ? "Yes" : "No" }),
+      el("td", { class: "row-actions" },
+        btn(d.published ? "Hide" : "Show", async () => { await db.from("decks").update({ published: !d.published }).eq("id", d.id); loadDecks(); }),
+        btn("Delete", async () => { if (!confirm(`Delete ${d.title}? Everyone loses access.`)) return; await db.storage.from("decks").remove([d.storage_path]); await db.from("decks").delete().eq("id", d.id); loadDecks(); })))));
+    $("#grant-deck").replaceChildren(...decks.map((d) => el("option", { value: d.id }, d.title)));
+    loadRequests();
+  }
+  $("#deck-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget, st = $("#deck-status"), file = f.elements.file.files[0];
+    const slug = f.elements.slug.value.trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+    st.textContent = "Uploading…";
+    const path = `${slug}/${Date.now()}.pdf`;
+    const up = await db.storage.from("decks").upload(path, file, { contentType: "application/pdf" });
+    if (up.error) { st.textContent = up.error.message; return; }
+    const { error } = await db.from("decks").insert({ slug, title: f.elements.title.value.trim(), case_study_slug: f.elements.case_study_slug.value || null, storage_path: path });
+    st.textContent = error ? error.message : "Uploaded. Share link: " + deckUrl({ slug });
+    if (!error) { f.reset(); loadDecks(); }
+  });
+  function inviteMail(r, d) {
+    const body = `Hi ${r.name.split(" ")[0]},\n\nHere's your private access to ${d.title}:\n\n${deckUrl(d)}\nYour personal code: ${r.code}\n\nThis deck is confidential and for viewing only. Please don't share the link, the code, or any information in it.\n\nAvery Jordan\nAtlas Creative Studios`;
+    return `mailto:${r.email}?subject=${encodeURIComponent("Your private Atlas deck: " + d.title)}&body=${encodeURIComponent(body)}`;
+  }
+  async function loadRequests() {
+    const { data } = await db.from("deck_requests").select("*").order("created_at", { ascending: false });
+    const byId = Object.fromEntries(decks.map((d) => [d.id, d]));
+    $("#req-rows").replaceChildren(...(data || []).map((r) => {
+      const d = byId[r.deck_id] || { title: "?", slug: "" };
+      const approve = async () => { await db.from("deck_requests").update({ status: "approved", code: r.code || newCode(), approved_at: new Date().toISOString() }).eq("id", r.id); loadRequests(); };
+      const set = (status) => async () => { await db.from("deck_requests").update({ status }).eq("id", r.id); loadRequests(); };
+      return el("tr", {},
+        el("td", { text: day(r.created_at) }),
+        el("td", {}, r.name, el("br"), el("a", { href: `mailto:${r.email}` }, r.email), r.company ? el("br") : "", r.company || ""),
+        el("td", { text: d.title }), el("td", { text: r.reason || "" }), el("td", { text: r.status }),
+        el("td", { text: r.code || "" }), el("td", { text: `${r.uses} of ${r.max_uses}` }),
+        el("td", { class: "row-actions" },
+          r.status === "pending" ? btn("Approve", approve) : "",
+          r.status === "pending" ? btn("Deny", set("denied")) : "",
+          r.status === "approved" ? el("a", { class: "btn", href: inviteMail(r, d) }, "Email code") : "",
+          r.status === "approved" ? btn("Revoke", set("revoked")) : "",
+          r.status === "revoked" || r.status === "denied" ? btn("Restore", approve) : ""));
+    }));
+  }
+  $("#grant-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const { error } = await db.from("deck_requests").insert({ deck_id: f.elements.deck_id.value, name: f.elements.name.value.trim(), email: f.elements.email.value.trim() });
+    if (error) { alert(error.message); return; }
+    const { data } = await db.from("deck_requests").select("id").eq("email", f.elements.email.value.trim()).order("created_at", { ascending: false }).limit(1);
+    if (data && data[0]) await db.from("deck_requests").update({ status: "approved", code: newCode(), approved_at: new Date().toISOString() }).eq("id", data[0].id);
+    f.reset(); loadRequests();
+  });
 
   db.auth.onAuthStateChange(() => {});
   boot();

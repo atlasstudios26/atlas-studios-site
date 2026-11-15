@@ -869,3 +869,25 @@ body.dark-page .features { align-items: start; }
 .cap-decide { font-size: clamp(19px, 1.5vw, 23px); color: var(--bone-2); margin: 0 0 28px; max-width: 54ch; }
 .cap-decide strong { color: var(--bone); font-family: var(--display); font-weight: 400; font-size: 1.3em; display: block; margin-bottom: 6px; }
 @media (max-width: 860px) { .cap-how-grid { grid-template-columns: 1fr; } }
+
+/* Private decks */
+.gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); margin-top: clamp(40px, 5vw, 72px); align-items: start; }
+.gate-card { border: 1px solid var(--line); padding: clamp(24px, 3vw, 40px); display: grid; gap: 18px; }
+.gate-card .field { display: grid; gap: 6px; }
+.gate-card label { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--bone-2); }
+.gate-card input, .gate-card textarea { width: 100%; }
+@media (max-width: 860px) { .gate-grid { grid-template-columns: 1fr; } }
+.deck-view { padding-top: 120px; }
+.deck-notice { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 16px 20px; border: 1px solid var(--water); font-size: 15px; }
+.deck-notice strong { color: var(--water); }
+.deck-pages { display: grid; gap: 18px; }
+.deck-page { width: 100%; height: auto; display: block; box-shadow: 0 10px 40px rgba(41,36,32,.14); user-select: none; -webkit-user-select: none; }
+@media print { .deck-page { display: none !important; } .deck-pages::after { content: "This deck can't be printed."; } }
+[hidden] { display: none !important; }
+.deck-lock { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; margin-top: 48px; padding: clamp(24px, 3vw, 40px); border: 1px solid var(--bone); text-decoration: none; transition: background .3s, color .3s; }
+.deck-lock h3 { font-family: var(--display); font-weight: 400; font-size: clamp(28px, 3vw, 48px); margin: 8px 0 6px; }
+.deck-lock p { margin: 0; color: var(--bone-2); }
+.deck-lock-icon { font-size: 32px; width: 72px; height: 72px; border-radius: 50%; border: 1px solid var(--bone); display: grid; place-items: center; }
+.deck-lock-go { font-size: 40px; }
+.deck-lock:hover { background: var(--water); color: #E5E3DD; border-color: var(--water); }
+.deck-lock:hover p { color: #E5E3DD; }
