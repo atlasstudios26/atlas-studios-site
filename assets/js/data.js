@@ -12,6 +12,7 @@ window.ATLAS_FALLBACK = {
       summary: "Emerging 100's 10th annual summer fundraiser, reimagined as one night in Oak Bluffs, Martha's Vineyard, without leaving Atlanta.",
       stat: "1,250+ guests · $22,000+ in student programming",
       cover_url: "/assets/work/park-100-oak-bluffs/arch-entry.jpg",
+      wide_cover_url: "/assets/work/park-100-oak-bluffs/arch-day-guest.jpg",
       video_url: "/assets/work/park-100-oak-bluffs/recap.mp4",
       quote: "We don't just plan parties. We direct stories.",
       served: "Park 100 funded more than $22,000 of programming outside Emerging 100's normal budget: a five-week ACT and SAT prep bootcamp for 61 B.E.S.T. Academy students, a history trip to Gettysburg, and new uniforms for graduating seniors.",
@@ -197,3 +198,13 @@ window.ATLAS_FALLBACK = {
   ],
   media: []
 };
+
+// The six layers of an Atlas world, used by the solar system on Home and About.
+window.ATLAS_LAYERS = [
+    { name: "Environment", line: "Space, hospitality, atmosphere.", img: "/assets/work/park-100-oak-bluffs/arch-day-guest.jpg", example: "Park 100: arches, sail walls and a Summer House turned Park Tavern into Martha's Vineyard.", href: "/case-study?slug=park-100-oak-bluffs" },
+    { name: "Product", line: "Merch, artifacts, menus and cocktails.", img: "/assets/work/park-100-oak-bluffs/scarf.jpg", example: "Park 100: a scarf printed with Oak Bluffs and Atlanta landmarks, so the story went home with every guest.", href: "/case-study?slug=park-100-oak-bluffs" },
+    { name: "Identity", line: "Visual systems and branded materials.", img: "/assets/work/nightmare-on-westside/flyer-02.jpg", example: "Nightmare on Westside: nine flyers, one idea, with both partners' logos living inside every scene.", href: "/case-study?slug=nightmare-on-westside" },
+    { name: "Content", line: "Creative direction and digital extensions.", img: "/assets/work/nightmare-on-westside/recap-poster.jpg", example: "Nightmare on Westside: the Confessional, a set built so guests made the recap content themselves.", href: "/case-study?slug=nightmare-on-westside" },
+    { name: "Community", line: "Curated audiences and cultural proximity.", img: "/assets/work/the-art-of-blending/guests.jpg", example: "The Art of Blending: Just Add Honey's tea crowd and Edmond's Honor's bourbon crowd at one table.", href: "/case-study?slug=the-art-of-blending" },
+    { name: "Revenue", line: "Engagement, repeat visits, brand equity.", img: "/assets/work/park-100-oak-bluffs/titos-cart.jpg", example: "Park 100: six sponsors built into the theme, 498,000 views, and $22,000+ raised for students.", href: "/case-study?slug=park-100-oak-bluffs" }
+  ];

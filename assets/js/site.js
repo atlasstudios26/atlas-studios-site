@@ -94,8 +94,19 @@
     const list = await getCaseStudies();
     const want = box.dataset.featured.split(",").map((x) => x.trim());
     const items = want.map((slug) => list.find((c) => c.slug === slug)).filter(Boolean);
+    const media = (cs, lead) => {
+      const fig = el("div", { class: "feature-media" });
+      const still = (lead && cs.wide_cover_url) || cs.cover_url;
+      if (still) fig.append(el("img", { src: still, alt: cs.title, loading: "lazy" }));
+      else fig.append(el("img", { class: "cover-mark", src: "/assets/img/atlas-mark-bone.png", alt: "" }));
+      if (cs.video_url && !lead && !reduceMotion()) {
+        const v = el("video", { class: "hover-video", src: cs.video_url, muted: "", loop: "", playsinline: "", preload: "metadata", "aria-hidden": "true" });
+        v.muted = true; fig.append(v); fig.classList.add("has-video");
+      }
+      return fig;
+    };
     box.replaceChildren(...items.map((cs, i) => el("a", { class: "feature reveal in", href: `/case-study?slug=${encodeURIComponent(cs.slug)}` },
-      cover(cs, "feature-media"),
+      media(cs, i === 0),
       el("div", { class: "feature-text" },
         el("span", { class: "label", text: String(i + 1).padStart(2, "0") + " · " + (cs.category || "") }),
         el("h3", { class: "display-md", text: cs.title, "data-split": "" }),
@@ -104,7 +115,20 @@
         cs.stat ? el("p", { class: "feature-stat", text: cs.stat }) : null,
         el("span", { class: "feature-link", text: "View the world" })
       ))));
-    $$("video", box).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+    // Size every frame to its own image so nothing is cropped.
+    $$(".feature-media img:not(.cover-mark)", box).forEach((img) => {
+      const fit = () => { if (img.naturalWidth) img.parentElement.style.aspectRatio = img.naturalWidth + " / " + img.naturalHeight; };
+      img.complete ? fit() : img.addEventListener("load", fit);
+    });
+    // Recap videos play on hover (or while on screen for touch devices).
+    const hover = matchMedia("(hover: hover)").matches;
+    $$(".feature", box).forEach((card) => {
+      const v = $(".hover-video", card); if (!v) return;
+      const play = () => { card.classList.add("playing"); const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+      const stop = () => { card.classList.remove("playing"); v.pause(); };
+      if (hover) { card.addEventListener("mouseenter", play); card.addEventListener("mouseleave", stop); }
+      else new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? play() : stop())), { threshold: 0.6 }).observe(card);
+    });
     splitWords();
   }
 
@@ -279,7 +303,7 @@
           setTimeout(() => {
             out.replaceChildren(...[
               el("span", { class: "world-num", text: String(i + 1).padStart(2, "0") }),
-              w.href ? el("a", { href: w.href, text: w.name }) : el("span", { text: w.name }),
+              w.href ? el("a", { class: "world-go", href: w.href }, el("span", { text: w.name }), el("b", { text: "Enter →" })) : el("span", { text: w.name }),
               w.note ? el("span", { class: "world-note", text: w.note }) : null].filter(Boolean));
             out.classList.add("show");
           }, 180);

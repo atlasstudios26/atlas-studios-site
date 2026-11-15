@@ -737,3 +737,67 @@ body.dark-page .feature-link { margin-top: 18px; }
 body.dark-page .planet-name { text-shadow: none; }
 body.dark-page .serve-row h3 { filter: none; }
 body.dark-page .hero-title { color: rgba(229,227,221,0.42); -webkit-text-stroke-color: rgba(229,227,221,.95); }
+
+/* ===== Home pass 2 ===== */
+/* Cards: frames match each image; recap video fades in on hover */
+body.dark-page .feature-media { position: relative; aspect-ratio: 4 / 5; }
+body.dark-page .feature:first-child .feature-media { aspect-ratio: 3 / 2; }
+.feature-media img { width: 100%; height: 100%; object-fit: cover; }
+.hover-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s; }
+.feature.playing .hover-video { opacity: 1; }
+.feature-media.has-video::after { content: "▶ Hover to play"; position: absolute; left: 14px; bottom: 14px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #E5E3DD; background: rgba(41,36,32,.55); padding: 8px 12px; transition: opacity .3s; }
+@media (hover: none) { .feature-media.has-video::after { content: none; } }
+.feature.playing .feature-media::after { opacity: 0; }
+body.dark-page .features { align-items: start; }
+
+/* Clickable world labels on the film */
+.world-label { pointer-events: auto; }
+.world-label .world-go { display: inline-flex; gap: 14px; align-items: center; border: 1px solid rgba(229,227,221,.7); padding: 9px 14px; text-decoration: none; background: rgba(41,36,32,.35); backdrop-filter: blur(4px); transition: background .25s; }
+.world-label .world-go b { font-weight: 500; opacity: .85; }
+.world-label .world-go:hover { background: rgba(229,227,221,.92); color: #292420; }
+
+/* Home: solar system */
+.approach-head { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(24px, 4vw, 72px); align-items: end; }
+.eco-home .orbit-system { --size: min(92vw, 78vh, 820px); }
+@media (max-width: 860px) { .approach-head { grid-template-columns: 1fr; } }
+.planet-card figure { aspect-ratio: auto; max-height: 300px; display: grid; place-items: center; background: #d9d6ce; }
+.planet-card img { width: auto; max-width: 100%; height: auto; max-height: 300px; object-fit: contain; }
+
+/* Home: founder as a planet in orbit */
+.home-founder { padding: clamp(80px, 10vw, 160px) 0; overflow: hidden; }
+.hf-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 6vw, 110px); align-items: center; }
+.hf-orbit { position: relative; aspect-ratio: 1; width: min(100%, 620px); justify-self: center; }
+.hf-orbit svg { position: absolute; inset: -4%; width: 108%; height: 108%; overflow: visible; }
+.hf-orbit ellipse { fill: none; stroke: var(--water); stroke-width: 1.4; }
+.hf-orbit .dash { fill: none; stroke: var(--bone); stroke-width: 1; stroke-dasharray: 3 9; opacity: .5; }
+.hf-orbit img { position: absolute; inset: 14%; width: 72%; height: 72%; border-radius: 50%; object-fit: cover; object-position: 50% 18%; border: 1.4px solid var(--bone); }
+.hf-moon { position: absolute; inset: 0; animation: spin 26s linear infinite; }
+.hf-moon span { position: absolute; top: -1%; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--water); box-shadow: 0 0 0 6px rgba(79,107,151,.15); }
+.hf-copy .display { margin: 16px 0 24px; }
+.hf-line { font-family: var(--display); font-size: clamp(26px, 2.8vw, 46px); line-height: 1.2; margin: 0 0 28px; max-width: 34ch; }
+@media (max-width: 860px) { .hf-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .hf-moon { animation: none; } }
+
+/* Home: events as a moving title band + arch-framed photo */
+.home-events { padding: clamp(60px, 8vw, 120px) 0 clamp(80px, 10vw, 160px); overflow: hidden; }
+.ev-marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 18px 0; margin-bottom: clamp(48px, 6vw, 96px); }
+.ev-track { display: flex; gap: 40px; align-items: center; width: max-content; animation: marquee 40s linear infinite; font-family: var(--display); font-size: clamp(56px, 9vw, 160px); line-height: 1; white-space: nowrap; }
+.ev-track span:nth-child(4n+3) { font-style: normal; -webkit-text-stroke: 1.2px var(--bone); color: transparent; }
+.ev-track i { font-style: normal; font-size: .35em; color: var(--water); }
+.ev-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px, 6vw, 110px); align-items: center; }
+.ev-arch { margin: 0; aspect-ratio: 2 / 3; max-height: 80svh; border-radius: 999px 999px 0 0; overflow: hidden; border: 1.4px solid var(--bone); }
+.ev-arch img { width: 100%; height: 100%; object-fit: cover; }
+.ev-copy { font-family: var(--display); font-size: clamp(30px, 3.6vw, 60px); line-height: 1.12; margin: 18px 0 18px; max-width: 26ch; }
+.ev-next { color: var(--bone-2); font-size: 20px; margin: 0 0 32px; }
+@media (max-width: 860px) { .ev-grid { grid-template-columns: 1fr; } .ev-arch { max-height: 70svh; } }
+@media (prefers-reduced-motion: reduce) { .ev-track { animation: none; } }
+
+/* Case study photos: show whole images, no cropping */
+.chapter-media, .chapter-media.count-1, .chapter-media.count-3, .chapter-media.count-6 { display: block; columns: 2 220px; column-gap: 12px; }
+.chapter-media.count-1 { columns: 1; }
+.chapter-media figure { break-inside: avoid; margin: 0 0 12px; }
+.chapter-media img, .chapter-media video, .chapter-media.count-1 img { aspect-ratio: auto !important; height: auto; width: 100%; object-fit: contain; max-height: none; background: none; }
+.chapter-media figure.wide { column-span: all; }
+/* Service images: natural shape */
+.offer-img { aspect-ratio: auto; }
+.offer-img img { height: auto; }
