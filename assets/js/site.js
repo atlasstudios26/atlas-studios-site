@@ -223,6 +223,26 @@
     }
   }
 
+  // Contact: three-step form.
+  function wireSteps() {
+    const form = $("[data-steps]"); if (!form) return;
+    const steps = $$(".step", form), dots = $$(".step-dots li", form);
+    const back = $("[data-step-back]", form), next = $("[data-step-next]", form), send = $("[data-step-send]", form);
+    let i = 0;
+    const go = (n) => {
+      i = n;
+      steps.forEach((s, k) => s.classList.toggle("on", k === i));
+      dots.forEach((d, k) => d.classList.toggle("on", k <= i));
+      back.hidden = i === 0; next.hidden = i === steps.length - 1; send.hidden = i !== steps.length - 1;
+      const first = $("input:not(.hp), textarea", steps[i]); if (first && i) first.focus({ preventScroll: true });
+    };
+    const valid = () => $$("input, textarea, select", steps[i]).every((f) => f.reportValidity());
+    next.addEventListener("click", () => { if (valid()) go(i + 1); });
+    back.addEventListener("click", () => go(i - 1));
+    $$('input[name="project_type"]', form).forEach((r) => r.addEventListener("change", () => setTimeout(() => go(1), 250)));
+    form.addEventListener("reset", () => setTimeout(() => go(0)));
+  }
+
   function wireForms() {
     $$("form[data-table]").forEach((form) => {
       const status = $(".form-status", form);
@@ -582,7 +602,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); serviceTabs(); ticketLinks(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
+    wireNav(); wireForms(); wireSteps(); serviceTabs(); ticketLinks(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
     renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();

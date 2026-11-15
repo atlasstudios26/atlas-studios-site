@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Start a project · Atlas Studios</title>
-<meta name="description" content="Tell Atlas Studios about your brand, venue, or event.">
+<meta name="description" content="Tell Atlas Studios what you want to build.">
 <meta property="og:title" content="Start a project · Atlas Studios">
-<meta property="og:description" content="Tell Atlas Studios about your brand, venue, or event.">
+<meta property="og:description" content="Tell Atlas Studios what you want to build.">
 <meta property="og:image" content="/assets/img/favicon.png">
 <link rel="icon" href="/assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,36 +35,59 @@
 </header>
 <main>
 
-<section>
-  <div class="wrap split">
-    <div>
-      <span class="label">Start a project</span>
-      <h1 class="display" data-split style="margin:12px 0 28px">Let's build<br><span class="italic">your world.</span></h1>
-      <p class="lede">Tell us about your brand, venue, or moment. We reply within two business days.</p>
-    </div>
-    <form data-table="inquiries" data-success="Received. We'll be in touch within two business days.">
+<section class="build-form">
+  <div class="wrap">
+    <span class="label">Start a project</span>
+    <h1 class="display" data-split style="margin:12px 0 18px">Let's build your world.</h1>
+    <p class="lede">Three quick steps. We reply within two business days, or write to <a data-config-link="email" href="mailto:averyjordanj@gmail.com">averyjordanj@gmail.com</a>.</p>
+
+    <form class="steps" data-table="inquiries" data-steps data-success="Your world is in motion. We'll be in touch within two business days.">
       <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="form-row">
-        <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
-        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+      <ol class="step-dots" aria-hidden="true"><li class="on"><span>01</span>The idea</li><li><span>02</span>The world</li><li><span>03</span>You</li></ol>
+
+      <fieldset class="step on" data-step="1">
+        <legend class="step-q">What are we building?</legend>
+        <div class="tiles">
+          <label class="tile"><input type="radio" name="project_type" value="Launch World" required><span>Launch World</span></label>
+          <label class="tile"><input type="radio" name="project_type" value="Cultural moment activation"><span>Cultural moment activation</span></label>
+          <label class="tile"><input type="radio" name="project_type" value="Signature event or series"><span>Signature event or series</span></label>
+          <label class="tile"><input type="radio" name="project_type" value="Partnership or sponsorship"><span>Partnership or sponsorship</span></label>
+          <label class="tile"><input type="radio" name="project_type" value="Merch or product"><span>Merch or product</span></label>
+          <label class="tile"><input type="radio" name="project_type" value="Campaign creative"><span>Campaign creative</span></label>
+          <label class="tile"><input type="radio" name="project_type" value="Something new"><span>Something new</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" data-step="2">
+        <legend class="step-q">Tell us about the world.</legend>
+        <div class="field"><label for="message">The brand, the moment, the people it's for</label><textarea id="message" name="message" rows="5" required></textarea></div>
+        <div class="form-row">
+          <div class="field"><label for="company">Brand or company</label><input id="company" name="company"></div>
+          <div class="field"><label for="timeline">Timeline</label><input id="timeline" name="timeline" placeholder="Event date or launch window"></div>
+        </div>
+        <p class="field-label">Budget</p>
+        <div class="tiles tiles-sm">
+            <label class="tile sm"><input type="radio" name="budget" value="Under $5K"><span>Under $5K</span></label>
+            <label class="tile sm"><input type="radio" name="budget" value="$5K to $15K"><span>$5K to $15K</span></label>
+            <label class="tile sm"><input type="radio" name="budget" value="$15K to $50K"><span>$15K to $50K</span></label>
+            <label class="tile sm"><input type="radio" name="budget" value="$50K+"><span>$50K+</span></label>
+            <label class="tile sm"><input type="radio" name="budget" value="Not sure yet"><span>Not sure yet</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" data-step="3">
+        <legend class="step-q">Who's building it with us?</legend>
+        <div class="form-row">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+        </div>
+      </fieldset>
+
+      <div class="step-nav">
+        <button class="btn" type="button" data-step-back hidden>Back</button>
+        <button class="btn solid" type="button" data-step-next>Next</button>
+        <button class="btn solid" type="submit" data-step-send hidden>Send</button>
       </div>
-      <div class="form-row">
-        <div class="field"><label for="company">Brand or company</label><input id="company" name="company"></div>
-        <div class="field"><label for="project_type">Project type</label>
-          <select id="project_type" name="project_type">
-            <option>Brand activation</option><option>Experience design</option><option>Partnership</option>
-            <option>Creative direction</option><option>Product and merchandise</option><option>Other</option>
-          </select></div>
-      </div>
-      <div class="form-row">
-        <div class="field"><label for="budget">Budget</label>
-          <select id="budget" name="budget">
-            <option>Under $5K</option><option>$5K to $15K</option><option>$15K to $50K</option><option>$50K+</option><option>Not sure yet</option>
-          </select></div>
-        <div class="field"><label for="timeline">Timeline</label><input id="timeline" name="timeline" placeholder="Event date or launch window"></div>
-      </div>
-      <div class="field"><label for="message">Tell us about it</label><textarea id="message" name="message" required></textarea></div>
-      <button class="btn solid" type="submit">Send</button>
       <p class="form-status" aria-live="polite"></p>
     </form>
   </div>
