@@ -406,3 +406,142 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--o
 .clients-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
 .clients-list li { border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; font-size: 15px; }
 .olive .lede { color: var(--bone); opacity: .88; }
+
+/* ===== Site-wide motion ===== */
+[data-split] .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .06em; }
+[data-split] .w > span { display: inline-block; transform: translateY(105%); transition: transform .9s cubic-bezier(.2,.75,.15,1); }
+[data-split].split-in .w > span { transform: none; }
+.wipe { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s cubic-bezier(.7,0,.2,1); }
+.wipe.wipe-in { clip-path: inset(0 0 0 0); }
+.has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
+.cursor-dot, .cursor-ring { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 9999; border-radius: 50%; mix-blend-mode: difference; }
+.cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: #fff; }
+.cursor-ring { width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1px solid #fff; transition: width .3s, height .3s, margin .3s, opacity .3s; }
+.cursor-ring.big { width: 72px; height: 72px; margin: -36px 0 0 -36px; }
+.cursor-ring.hide { opacity: 0; }
+.has-cursor input, .has-cursor textarea { cursor: text; }
+
+/* ===== About v2: one color, all charcoal ===== */
+body.dark-page { background: var(--charcoal); color: var(--bone); }
+body.dark-page main { background: var(--charcoal); }
+body.dark-page .label { color: var(--bone-2); }
+body.dark-page .site-header.solid { background: rgba(41,36,32,.94); border-color: rgba(229,227,221,.12); color: var(--bone); }
+body.dark-page .site-header.solid .mark-dark { display: none; }
+body.dark-page .site-header.solid .mark-light { display: block; }
+body.dark-page .site-header.solid .site-nav .btn, body.dark-page .site-header.solid .nav-toggle { border-color: var(--bone); color: var(--bone); }
+body.dark-page .site-footer { border-top: 1px solid rgba(229,227,221,.1); }
+.ab-hero { height: 100svh; background: var(--charcoal); padding-bottom: clamp(48px, 8vw, 110px); }
+.ab-coords { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--bone-2); margin: 0 0 28px; }
+.ab-title { font-family: var(--display); font-weight: 400; font-size: clamp(52px, 9.2vw, 168px); line-height: .95; letter-spacing: -.01em; margin: 0; max-width: 14ch; }
+.ab-scroll { display: inline-flex; gap: 12px; margin-top: 44px; font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--bone); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 6px; }
+.ab-scroll span { display: inline-block; animation: bob 2.2s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(5px); } }
+.ab-statement { padding: clamp(80px, 14vw, 200px) 0; }
+.scrub { font-family: var(--display); font-size: clamp(32px, 4.6vw, 76px); line-height: 1.12; margin: 0; max-width: 22ch; }
+.sw { color: rgba(229,227,221,.16); transition: color .35s; }
+.sw.lit { color: var(--bone); }
+.ab-h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 6vw, 104px); line-height: 1; margin: 16px 0 24px; max-width: 16ch; }
+.ab-hint { color: var(--bone-2); font-size: 18px; max-width: 44ch; margin: 0; }
+
+/* Orbit system */
+.ab-eco { padding: clamp(60px, 8vw, 120px) 0 clamp(40px, 6vw, 80px); overflow: hidden; }
+.eco-stage { position: relative; display: grid; place-items: center; margin-top: clamp(24px, 4vw, 60px); }
+.orbit-system { --size: min(94vw, 86vh, 960px); position: relative; width: var(--size); height: var(--size); }
+.sun { position: absolute; inset: 0; margin: auto; width: 22%; height: 22%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3d3631, #1c1916 70%); box-shadow: 0 0 0 1px rgba(229,227,221,.12), 0 0 120px rgba(79,107,151,.35); display: grid; place-items: center; align-content: center; gap: 8px; z-index: 2; }
+.sun img { width: 40%; }
+.sun span { font-family: var(--display); font-size: clamp(14px, 1.6vw, 22px); }
+.orbit { position: absolute; inset: 0; margin: auto; border-radius: 50%; border: 1px solid rgba(229,227,221,.14); }
+.o1 { width: 46%; height: 46%; } .o2 { width: 70%; height: 70%; } .o3 { width: 96%; height: 96%; }
+.orbit-spin { position: absolute; inset: 0; animation: spin var(--dur) linear infinite; }
+.o1 { --dur: 70s; } .o2 { --dur: 110s; animation-direction: reverse; } .o3 { --dur: 160s; }
+.o2 .orbit-spin { animation-direction: reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.planet { position: absolute; left: 50%; background: none; border: 0; padding: 0; color: var(--bone); cursor: pointer; transform: translate(-50%, -50%); }
+.planet.p-top { top: 0; } .planet.p-bottom { top: 100%; }
+.planet-inner { display: grid; justify-items: center; animation: spin var(--dur) linear infinite reverse; }
+.o2 .planet-inner { animation-direction: normal; }
+
+.planet-body { width: clamp(54px, 8vw, 104px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #f3f1ec, #b9b3a7 55%, #6b645d); box-shadow: 0 0 0 0 rgba(79,107,151,0); transition: transform .4s, background .4s, box-shadow .4s; }
+.o2 .planet-body { background: radial-gradient(circle at 35% 30%, #a9b49f, #4F5C47 60%, #2c3428); }
+.o3 .planet-body { background: radial-gradient(circle at 35% 30%, #c9a98a, #7a5b43 60%, #3b2c21); }
+.planet-name { margin-top: 10px; font-family: var(--display); font-size: clamp(16px, 1.7vw, 24px); white-space: nowrap; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+.planet-name em { display: block; font-style: normal; font-family: var(--sans); font-size: 11px; letter-spacing: .2em; color: var(--bone-2); text-align: center; }
+.planet:hover .planet-body, .planet:focus-visible .planet-body { transform: scale(1.12); }
+.planet.on .planet-body { background: radial-gradient(circle at 35% 30%, #a9bde0, #4F6B97 60%, #2a3b57); box-shadow: 0 0 0 10px rgba(79,107,151,.18), 0 0 60px rgba(79,107,151,.6); transform: scale(1.2); }
+.orbit-system:hover .orbit-spin, .orbit-system:hover .planet-inner, .orbit-system.focused .orbit-spin, .orbit-system.focused .planet-inner { animation-play-state: paused; }
+.orbit-system.focused .planet:not(.on) { opacity: .45; }
+.planet-card { position: absolute; right: max(24px, calc((100vw - 1280px) / 2 + 24px)); top: 50%; width: min(400px, 34vw); transform: translate(24px, -50%); opacity: 0; pointer-events: none; background: rgba(28,25,22,.92); backdrop-filter: blur(10px); border: 1px solid rgba(229,227,221,.14); padding: 22px 22px 26px; transition: opacity .4s, transform .4s; z-index: 5; }
+.planet-card.in { opacity: 1; transform: translate(0, -50%); pointer-events: auto; }
+.planet-card figure { margin: 0 0 18px; aspect-ratio: 4 / 3; overflow: hidden; }
+.planet-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.planet-card h3 { font-family: var(--display); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 10px 0 10px; }
+.planet-card p { color: var(--bone-2); margin: 0 0 18px; }
+.planet-card .text-link { color: var(--bone); }
+.card-close { position: absolute; top: 8px; right: 12px; background: none; border: 0; color: var(--bone); font-size: 26px; cursor: pointer; }
+@media (max-width: 1100px) {
+  .planet-card { position: relative; right: auto; top: auto; width: min(92vw, 520px); transform: none; display: none; margin-top: 28px; }
+  .planet-card.in { display: block; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .orbit-spin, .planet-inner { animation: none !important; } }
+
+/* Process: world forms as you scroll */
+.process { padding: clamp(60px, 8vw, 120px) 0; }
+.process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 100px); }
+.process-sticky { position: sticky; top: 12vh; height: 76vh; display: grid; grid-template-rows: auto 1fr auto; align-items: center; }
+.world-form { width: 100%; max-height: 58vh; overflow: visible; }
+.world-form .wf { opacity: 0; transform: scale(.85); transform-origin: 200px 200px; transition: opacity .8s, transform 1s cubic-bezier(.2,.75,.15,1); }
+.world-form .wf.on { opacity: 1; transform: none; }
+.world-form .s1 circle { fill: var(--water); }
+.world-form .line { fill: none; stroke: var(--bone); stroke-width: 1.4; }
+.world-form .thin { stroke-width: .8; opacity: .6; }
+.world-form .ring { stroke: var(--water); stroke-width: 1.6; }
+.world-form .sat { fill: var(--bone); }
+.world-form .glow { fill: rgba(79,107,151,.28); }
+.world-form .dash { stroke-dasharray: 3 9; opacity: .6; }
+.process-count { font-family: var(--display); font-size: clamp(22px, 2vw, 30px); margin: 0; color: var(--bone-2); }
+.process-count span { color: var(--bone); font-size: 1.8em; }
+.proc-step { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; opacity: .22; transition: opacity .5s; }
+.proc-step.active { opacity: 1; }
+.proc-step h3 { font-family: var(--display); font-weight: 400; font-size: clamp(48px, 6.4vw, 112px); line-height: 1; margin: 14px 0 18px; }
+.proc-step p { font-size: clamp(19px, 1.6vw, 24px); color: var(--bone-2); max-width: 30ch; margin: 0; }
+@media (max-width: 860px) {
+  .process-grid { grid-template-columns: 1fr; }
+  .process-visual { position: sticky; top: 64px; z-index: 2; background: var(--charcoal); }
+  .process-sticky { position: static; height: auto; grid-template-rows: auto; padding: 12px 0; }
+  .world-form { max-height: 32vh; }
+  .proc-step { min-height: 60vh; }
+}
+
+/* Who it serves */
+.ab-serves { padding: clamp(60px, 8vw, 120px) 0; }
+.serve-row { display: grid; grid-template-columns: 7fr 4fr; gap: 24px 48px; align-items: end; padding: clamp(28px, 4vw, 48px) 0; border-top: 1px solid rgba(229,227,221,.16); }
+.serve-num { font-family: var(--display); font-size: clamp(64px, 12vw, 210px); line-height: .9; margin: 0; letter-spacing: -.02em; }
+.serve-row h3 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.4vw, 36px); margin: 0 0 10px; color: var(--water); filter: brightness(1.5); }
+.serve-row p:not(.serve-num) { color: var(--bone-2); font-size: 18px; margin: 0; }
+@media (max-width: 860px) { .serve-row { grid-template-columns: 1fr; } }
+
+/* Founder */
+.ab-founder { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; }
+.founder-full { margin: 0; height: 100%; min-height: 80svh; overflow: hidden; }
+.founder-full img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.founder-copy { padding: clamp(48px, 7vw, 120px) clamp(24px, 6vw, 100px); display: flex; flex-direction: column; justify-content: center; }
+.founder-name { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 8vw, 140px); line-height: .95; margin: 18px 0 28px; }
+.founder-line { font-family: var(--display); font-size: clamp(24px, 2.4vw, 38px); line-height: 1.2; margin: 0 0 28px; }
+.founder-bio { font-size: clamp(17px, 1.3vw, 20px); color: var(--bone-2); line-height: 1.6; margin: 0; max-width: 56ch; }
+@media (max-width: 860px) { .ab-founder { grid-template-columns: 1fr; } .founder-full { min-height: 70svh; } }
+
+/* Beliefs + CTA */
+.ab-beliefs { padding: clamp(80px, 10vw, 160px) 0; }
+.belief-lines { list-style: none; margin: 20px 0 clamp(60px, 8vw, 120px); padding: 0; }
+.belief-lines li { font-family: var(--display); font-size: clamp(36px, 6vw, 104px); line-height: 1.02; padding: 18px 0; border-bottom: 1px solid rgba(229,227,221,.14); }
+.ab-mv { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.ab-mv p { font-family: var(--display); font-size: clamp(22px, 2vw, 30px); line-height: 1.3; margin: 14px 0 0; }
+@media (max-width: 860px) { .ab-mv { grid-template-columns: 1fr; } }
+.ab-cta { padding: clamp(80px, 12vw, 180px) 0; border-top: 1px solid rgba(229,227,221,.12); }
+.ab-cta .btn { margin-top: 40px; border-color: var(--bone); color: var(--bone); }
+.ab-cta .btn:hover { background: var(--bone); color: var(--charcoal); }
+/* Start each orbit at a different angle so the planets spread around the sun */
+.o1 { --delay: -12s; } .o2 { --delay: -62s; } .o3 { --delay: -38s; }
+.orbit-spin, .planet-inner { animation-delay: var(--delay); }
+@media (max-width: 860px) { .planet-name { font-size: 14px; } .planet-body { width: 44px; } }
+@media (min-width: 1101px) { .orbit-system { transition: transform .7s cubic-bezier(.2,.75,.15,1); } .orbit-system.focused { transform: translateX(-17%); } }

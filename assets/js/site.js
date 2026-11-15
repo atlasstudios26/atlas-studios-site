@@ -98,13 +98,14 @@
       cover(cs, "feature-media"),
       el("div", { class: "feature-text" },
         el("span", { class: "label", text: String(i + 1).padStart(2, "0") + " · " + (cs.category || "") }),
-        el("h3", { class: "display-md", text: cs.title }),
+        el("h3", { class: "display-md", text: cs.title, "data-split": "" }),
         el("p", { class: "feature-client", text: cs.client || "" }),
         el("p", { class: "feature-summary", text: cs.summary || "" }),
         cs.stat ? el("p", { class: "feature-stat", text: cs.stat }) : null,
         el("span", { class: "feature-link", text: "View the world" })
       ))));
     $$("video", box).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+    splitWords();
   }
 
   async function renderGallery() {
@@ -389,6 +390,132 @@
     update();
   }
 
+
+  const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Split headings into words that rise into place when they enter the screen.
+  function splitWords() {
+    $$("[data-split]").forEach((node) => {
+      if (node.dataset.splitDone) return;
+      node.dataset.splitDone = "1";
+      const words = node.textContent.trim().split(/\s+/);
+      node.setAttribute("aria-label", node.textContent.trim());
+      node.replaceChildren(...words.map((w, i) => {
+        const outer = el("span", { class: "w", "aria-hidden": "true" });
+        const inner = el("span", { text: w });
+        inner.style.transitionDelay = (i * 55) + "ms";
+        outer.append(inner); return [outer, document.createTextNode(" ")];
+      }).flat());
+    });
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("split-in"); io.unobserve(e.target); } }), { threshold: 0.2 });
+    $$("[data-split]").forEach((n) => reduceMotion() ? n.classList.add("split-in") : io.observe(n));
+  }
+
+  // A paragraph whose words light up as you scroll through it.
+  function scrubText() {
+    const nodes = $$("[data-scrub]");
+    if (!nodes.length) return;
+    nodes.forEach((node) => {
+      const words = node.textContent.trim().split(/\s+/);
+      node.setAttribute("aria-label", node.textContent.trim());
+      node.replaceChildren(...words.map((w) => [el("span", { class: "sw", text: w, "aria-hidden": "true" }), document.createTextNode(" ")]).flat());
+    });
+    const tick = () => {
+      nodes.forEach((node) => {
+        const r = node.getBoundingClientRect(), vh = innerHeight;
+        const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+        const ws = node.querySelectorAll(".sw"), lit = Math.round(p * ws.length);
+        ws.forEach((w, i) => w.classList.toggle("lit", i < lit));
+      });
+    };
+    if (reduceMotion()) { $$(".sw").forEach((w) => w.classList.add("lit")); return; }
+    addEventListener("scroll", tick, { passive: true }); tick();
+  }
+
+  // The ecosystem as a solar system: six layers orbit the story.
+  function orbitSystem() {
+    const sys = $("[data-orbit]"), card = $("[data-planet-card]"), layers = window.ATLAS_LAYERS;
+    if (!sys || !card || !layers) return;
+    const planets = $$("[data-planet]", sys);
+    let current = -1;
+    function show(i) {
+      current = i;
+      sys.classList.add("focused");
+      planets.forEach((p) => p.classList.toggle("on", +p.dataset.planet === i));
+      const L = layers[i];
+      card.classList.remove("in");
+      card.replaceChildren(
+        el("button", { class: "card-close", type: "button", "aria-label": "Close", text: "×" }),
+        el("figure", {}, el("img", { src: L.img, alt: "" })),
+        el("span", { class: "label", text: String(i + 1).padStart(2, "0") + " · " + L.name }),
+        el("h3", { text: L.line }),
+        el("p", { text: L.example }),
+        el("a", { class: "text-link", href: L.href, text: "See it built" }));
+      $(".card-close", card).addEventListener("click", hide);
+      requestAnimationFrame(() => card.classList.add("in"));
+    }
+    function hide() { current = -1; sys.classList.remove("focused"); planets.forEach((p) => p.classList.remove("on")); card.classList.remove("in"); }
+    planets.forEach((p) => p.addEventListener("click", () => (+p.dataset.planet === current ? hide() : show(+p.dataset.planet))));
+    addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
+  }
+
+  // How a world gets built: the world forms as you scroll the steps.
+  function processScrolly() {
+    const sec = $("[data-process]");
+    if (!sec) return;
+    const steps = $$(".proc-step", sec), num = $("[data-process-num]", sec);
+    const set = (n) => {
+      sec.style.setProperty("--step", n);
+      $$(".wf", sec).forEach((g, i) => g.classList.toggle("on", i < n));
+      steps.forEach((s) => s.classList.toggle("active", +s.dataset.step === n));
+      if (num) num.textContent = String(n).padStart(2, "0");
+    };
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) set(+e.target.dataset.step); }), { rootMargin: "-45% 0px -45% 0px" });
+    steps.forEach((s) => io.observe(s));
+    set(1);
+  }
+
+  // Big numbers count up when they arrive.
+  function countUp() {
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return; io.unobserve(e.target);
+      const n = e.target, to = +n.dataset.count, pre = n.dataset.prefix || "", suf = n.dataset.suffix || "";
+      if (reduceMotion()) return;
+      const t0 = performance.now(), dur = 1600;
+      const step = (t) => { const k = Math.min(1, (t - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - k, 3)));
+        n.textContent = pre + v.toLocaleString("en-US") + suf; if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }), { threshold: 0.5 });
+    $$("[data-count]").forEach((n) => io.observe(n));
+  }
+
+  // A small orbit cursor that grows over anything you can click (desktop only).
+  function orbitCursor() {
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches || reduceMotion()) return;
+    const dot = el("div", { class: "cursor-dot", "aria-hidden": "true" }), ring = el("div", { class: "cursor-ring", "aria-hidden": "true" });
+    document.body.append(ring, dot); document.documentElement.classList.add("has-cursor");
+    let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y;
+    addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x}px,${y}px)`; }, { passive: true });
+    const loop = () => { rx += (x - rx) * 0.16; ry += (y - ry) * 0.16; ring.style.transform = `translate(${rx}px,${ry}px)`; requestAnimationFrame(loop); };
+    loop();
+    document.addEventListener("pointerover", (e) => ring.classList.toggle("big", !!e.target.closest("a, button, [data-planet], video, .feature")));
+    document.addEventListener("pointerleave", () => ring.classList.add("hide"));
+    document.addEventListener("pointerenter", () => ring.classList.remove("hide"));
+  }
+
+  // Images wipe open as they come into view. (A clipped element never counts as visible, so watch its parent.)
+  function imageReveal() {
+    if (reduceMotion()) return;
+    const SEL = ".feature-media, .chapter-media figure, .cs-gallery figure, .lenses video, .founder-full";
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      $$(":scope > .wipe:not(.wipe-in)", e.target).forEach((t) => t.classList.add("wipe-in"));
+    }), { threshold: 0.1 });
+    const add = (t) => { if (t.classList.contains("wipe")) return; t.classList.add("wipe"); if (t.parentElement) io.observe(t.parentElement); };
+    $$(SEL).forEach(add);
+    new MutationObserver(() => $$(SEL).forEach(add)).observe(document.body, { childList: true, subtree: true });
+  }
+
   function revealOnScroll() {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     document.documentElement.classList.add("anim");
@@ -400,7 +527,7 @@
 
   window.ATLAS = { db, hasSupabase, el, asList };
   document.addEventListener("DOMContentLoaded", () => {
-    wireNav(); wireForms(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); ecoWheel(); buildTrack(); revealOnScroll();
+    wireNav(); wireForms(); fillMarquee(); heroVideo(); worldLabels(); if (matchMedia("(prefers-reduced-motion: reduce)").matches) $$("video[autoplay]").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); headerOverFilm(); splitWords(); scrubText(); orbitSystem(); processScrolly(); countUp(); orbitCursor(); imageReveal(); ecoWheel(); buildTrack(); revealOnScroll();
     renderWorkGrids(); renderFeatured(); renderGallery(); renderCaseStudy();
   });
 })();
