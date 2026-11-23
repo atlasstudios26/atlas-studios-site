@@ -182,20 +182,9 @@ window.ATLAS_FALLBACK = {
           media: ["/assets/work/black-history-month-campaign/set-pour-2.jpg", "/assets/work/black-history-month-campaign/set-pour-1.jpg", "/assets/work/black-history-month-campaign/set-wide.jpg"] },
         { label: "03 · The finished campaign", title: "Live on Edmond's Honor.",
           body: "The finished cocktail films and Black History Month content, as published on Edmond's Honor's Instagram.",
+          // Testing with one post first; more to come once this one plays.
           instagram: [
-            "https://www.instagram.com/reel/DXh11fMgRNg/",
-            "https://www.instagram.com/reel/DXaHWA0AR7O/",
-            "https://www.instagram.com/reel/DW47D1DEVWX/",
-            "https://www.instagram.com/reel/DWhfATYATp1/",
-            "https://www.instagram.com/reel/DWSBbC7gS8W/",
-            "https://www.instagram.com/reel/DWPfRF-ATQh/",
-            "https://www.instagram.com/reel/DWH7aeREWwd/",
-            "https://www.instagram.com/reel/DV9kjMekW_h/",
-            "https://www.instagram.com/reel/DVj4fM6gZvH/",
-            "https://www.instagram.com/reel/DVSB18Hkc8P/",
-            "https://www.instagram.com/reel/DVKGqriAfai/",
-            "https://www.instagram.com/reel/DU4FpNhASt3/",
-            "https://www.instagram.com/reel/DUmMBM8EcRD/"
+            "https://www.instagram.com/reel/DXh11fMgRNg/"
           ],
           media: [] }
       ],

@@ -206,21 +206,31 @@
   // the account name and caption link out to Instagram). Six shown, rest on request.
   const IG_PROFILE = "https://www.instagram.com/edmondshonorbourbon/";
   function igGrid(urls) {
+    // Instagram's own embed code: a placeholder card that embed.js turns into the live post.
     const post = (u) => {
       const id = (u.match(/instagram\.com\/(?:p|reel)\/([^/?#]+)/) || [])[1];
       if (!id) return null;
-      return el("figure", { class: "ig-post" },
-        el("iframe", { src: `https://www.instagram.com/reel/${id}/embed/captioned/`, title: "Edmond's Honor on Instagram", loading: "lazy", allowtransparency: "true", allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", scrolling: "no" }));
+      const link = `https://www.instagram.com/reel/${id}/?utm_source=ig_embed&utm_campaign=loading`;
+      return el("blockquote", { class: "instagram-media", "data-instgrm-permalink": link, "data-instgrm-version": "14" },
+        el("a", { href: link, target: "_blank", rel: "noopener", text: "View this post on Instagram" }));
     };
     const grid = el("div", { class: "chapter-ig" }, urls.slice(0, 6).map(post).filter(Boolean));
     const actions = el("div", { class: "ig-actions" },
       el("a", { class: "btn", href: IG_PROFILE, target: "_blank", rel: "noopener", text: "Follow @edmondshonorbourbon" }));
     if (urls.length > 6) {
       const more = el("button", { class: "btn", type: "button", text: `Show all ${urls.length} posts` });
-      more.addEventListener("click", () => { urls.slice(6).map(post).filter(Boolean).forEach((n) => grid.append(n)); more.remove(); });
+      more.addEventListener("click", () => { urls.slice(6).map(post).filter(Boolean).forEach((n) => grid.append(n)); more.remove(); igProcess(); });
       actions.prepend(more);
     }
+    setTimeout(igProcess, 0);
     return el("div", { class: "ig-wrap" }, grid, actions);
+  }
+  function igProcess() {
+    if (window.instgrm) { window.instgrm.Embeds.process(); return; }
+    if (document.getElementById("ig-embed-js")) return;
+    const sc = document.createElement("script"); sc.id = "ig-embed-js"; sc.async = true; sc.src = "https://www.instagram.com/embed.js";
+    sc.onload = () => window.instgrm && window.instgrm.Embeds.process();
+    document.body.append(sc);
   }
   // Instagram tells each frame how tall its post is; size the frame to fit.
   window.addEventListener("message", (e) => {
