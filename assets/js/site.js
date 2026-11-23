@@ -213,6 +213,7 @@
           el("h2", { class: "display-md", text: c.title, "data-split": "" }),
           el("p", { class: "lede", text: c.body }),
           c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
+        (c.instagram && c.instagram.length) ? el("div", { class: "chapter-ig" }, c.instagram.map((u) => el("blockquote", { class: "instagram-media", "data-instgrm-permalink": u, "data-instgrm-version": "14" }, el("a", { href: u, target: "_blank", rel: "noopener", text: "View on Instagram" })))) : null,
         (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.filter((m) => !/-wide/.test(m)).length, 6) }, c.media.map((m) => el("figure", { class: /-wide/.test(m) ? "wide" : null }, media(m)))) : null
       )));
   }
@@ -257,6 +258,9 @@
       cs.served ? el("div", { class: "cs-served" }, el("span", { class: "label", text: "Who it served" }), el("p", { class: "display-sm", text: cs.served })) : null
     ].filter(Boolean));
     splitWords(); scrubText();
+    if ((cs.chapters || []).some((c) => c.instagram && c.instagram.length)) {
+      const sc = document.createElement("script"); sc.async = true; sc.src = "https://www.instagram.com/embed.js"; document.body.append(sc);
+    }
     if (world) {
       root.closest("section").before(world);
       document.body.classList.add("over-film");

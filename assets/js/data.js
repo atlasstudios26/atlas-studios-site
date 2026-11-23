@@ -170,7 +170,17 @@ window.ATLAS_FALLBACK = {
         "Elevated brand perception through premium, lifestyle driven visuals",
         "Scalable visual direction for future brand storytelling"
       ],
-      cover_url: "",
+      cover_url: "/assets/work/black-history-month-campaign/set-pour-2.jpg",
+      video_url: "/assets/work/black-history-month-campaign/recap.mp4",
+      stat: "Creative direction · Edmond's Honor × The James Room",
+      chapters: [
+        { label: "01 · The brief", title: "A bourbon, in the hands of Atlanta's creatives.",
+          body: "For Black History Month, Edmond's Honor and The James Room wanted more than product shots: a campaign that placed the bourbon inside the culture it belongs to, celebrating Black creatives across mixology, culinary and visual art.",
+          media: [] },
+        { label: "02 · On set", title: "Directed down to the pour.",
+          body: "Atlas creative directed the shoot at The James Room: the shot list, the talent and hand models, the styling of the bar and the cocktails, and every frame from the backlit pour to the seated portraits.",
+          media: ["/assets/work/black-history-month-campaign/set-pour-2.jpg", "/assets/work/black-history-month-campaign/set-pour-1.jpg", "/assets/work/black-history-month-campaign/set-wide.jpg"] }
+      ],
       sort_order: 2
     },
     {

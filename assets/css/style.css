@@ -1142,3 +1142,4 @@ html, body { overflow-x: clip; }
   .story-num { font-size: 36px; }
 }
 .founder-full img { object-position: 50% 20%; } @media (max-width: 860px) { .world-form { width: 150px; height: 150px; } .process-sticky { grid-template-columns: 150px 1fr; } }
+.chapter-ig { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px; } .chapter-ig .instagram-media { margin: 0 !important; min-width: 0 !important; }
