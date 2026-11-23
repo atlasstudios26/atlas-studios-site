@@ -210,7 +210,7 @@
       const id = (u.match(/instagram\.com\/(?:p|reel)\/([^/?#]+)/) || [])[1];
       if (!id) return null;
       return el("figure", { class: "ig-post" },
-        el("iframe", { src: `https://www.instagram.com/p/${id}/embed/captioned/`, title: "Edmond's Honor on Instagram", loading: "lazy", allowtransparency: "true", allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", scrolling: "no" }));
+        el("iframe", { src: `https://www.instagram.com/reel/${id}/embed/captioned/`, title: "Edmond's Honor on Instagram", loading: "lazy", allowtransparency: "true", allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", scrolling: "no" }));
     };
     const grid = el("div", { class: "chapter-ig" }, urls.slice(0, 6).map(post).filter(Boolean));
     const actions = el("div", { class: "ig-actions" },
