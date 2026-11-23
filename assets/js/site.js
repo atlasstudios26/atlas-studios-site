@@ -20,7 +20,14 @@
   };
   const asList = (v) => Array.isArray(v) ? v : (v ? String(v).split("\n").map((s) => s.trim()).filter(Boolean) : []);
 
+  function workOrder(list) {
+    const cfg = window.ATLAS_CONFIG || {}, hide = new Set(cfg.hiddenWork || []);
+    return list.filter((c) => !hide.has(c.slug)).sort((a, b) => (b.slug === cfg.leadWork) - (a.slug === cfg.leadWork));
+  }
   async function getCaseStudies() {
+    return workOrder(await getCaseStudiesRaw());
+  }
+  async function getCaseStudiesRaw() {
     if (db) {
       const { data, error } = await db.from("case_studies").select("*").eq("published", true).order("sort_order", { ascending: true });
       if (!error && data && data.length) {
@@ -374,6 +381,15 @@
     form.addEventListener("reset", () => setTimeout(() => go(0)));
   }
 
+  // Email Avery a copy of each new inquiry (Web3Forms). Saved in /admin either way.
+  function notify(table, data) {
+    const key = (window.ATLAS_CONFIG || {}).notifyKey;
+    if (!key || table !== "inquiries") return;
+    const body = Object.assign({ access_key: key, subject: `New Atlas inquiry from ${data.name || "the website"}`, from_name: "Atlas website" }, data);
+    if (data.email) body.replyto = data.email;
+    fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(body) }).catch(() => {});
+  }
+
   function wireForms() {
     $$("form[data-table]").forEach((form) => {
       const status = $(".form-status", form);
@@ -393,6 +409,7 @@
           status.textContent = error.code === "23505" ? "You're already on the list." : `Something went wrong. Please try again. (${error.code || error.message || "error"})`;
           return;
         }
+        notify(form.dataset.table, data);
         form.reset();
         status.textContent = form.dataset.success || "Received. Thank you.";
       });

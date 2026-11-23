@@ -8,5 +8,8 @@ window.ATLAS_CONFIG = {
   instagram: "",        // optional: full Instagram URL
   linkedin: "",         // optional: full LinkedIn URL
   houseOfRougeTickets: "https://posh.vip/e/emerging-100-of-atlanta-15th-annual-holiday-soiree",
+  hiddenWork: ["women-who-set-the-bar"],   // case studies never shown on the site, whatever /admin says
+  leadWork: "park-100-oak-bluffs",          // always first on the Work page
+  notifyKey: "",        // Web3Forms access key: emails each new inquiry to the address it was created with
   email: "averyjordanj@gmail.com"   // public contact email (switch to an Atlas address once bought)
 };
