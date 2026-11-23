@@ -179,14 +179,7 @@ window.ATLAS_FALLBACK = {
           media: ["/assets/work/black-history-month-campaign/bottle.jpg"] },
         { label: "02 · On set", title: "Directed down to the pour.",
           body: "Atlas creative directed the shoot at The James Room: the shot list, the talent and hand models, the styling of the bar and the cocktails, and every frame from the backlit pour to the seated portraits.",
-          media: ["/assets/work/black-history-month-campaign/set-pour-2.jpg", "/assets/work/black-history-month-campaign/set-pour-1.jpg", "/assets/work/black-history-month-campaign/set-wide.jpg"] },
-        { label: "03 · The finished campaign", title: "Live on Edmond's Honor.",
-          body: "The finished cocktail films and Black History Month content, as published on Edmond's Honor's Instagram.",
-          // Testing with one post first; more to come once this one plays.
-          instagram: [
-            "https://www.instagram.com/reel/DXh11fMgRNg/"
-          ],
-          media: [] }
+          media: ["/assets/work/black-history-month-campaign/set-pour-2.jpg", "/assets/work/black-history-month-campaign/set-pour-1.jpg", "/assets/work/black-history-month-campaign/set-wide.jpg"] }
       ],
       sort_order: 2
     },
