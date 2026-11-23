@@ -23,6 +23,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     $("#login-status").textContent = error ? error.message : "";
     boot();
   });
+  // Forgot password: email a reset link that returns here, then set a new password.
+  $("#forgot").addEventListener("click", async (e) => {
+    e.preventDefault();
+    const email = $("#le").value.trim();
+    if (!email) { $("#login-status").textContent = "Type your email above first, then click Forgot password."; return; }
+    $("#login-status").textContent = "Sending reset link...";
+    const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo: location.origin + "/admin" });
+    $("#login-status").textContent = error ? error.message : "Check your email for a reset link. Open it on this device.";
+  });
+  db.auth.onAuthStateChange((event) => {
+    if (event !== "PASSWORD_RECOVERY") return;
+    show($("#login"), true); show($("#app"), false);
+    show($("#login-form"), false); show($("#reset-form"), true);
+  });
+  $("#reset-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    $("#reset-status").textContent = "Saving...";
+    const { error } = await db.auth.updateUser({ password: $("#np").value });
+    if (error) { $("#reset-status").textContent = error.message; return; }
+    $("#reset-status").textContent = "Saved. You're signed in.";
+    show($("#reset-form"), false); show($("#login-form"), true);
+    history.replaceState(null, "", "/admin");
+    boot();
+  });
   $("#signout").addEventListener("click", async (e) => { e.preventDefault(); await db.auth.signOut(); boot(); });
 
   document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => {

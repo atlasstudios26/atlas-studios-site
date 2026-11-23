@@ -34,6 +34,13 @@
         <div class="field"><label for="lp">Password</label><input id="lp" type="password" required></div>
         <button class="btn solid" type="submit">Sign in</button>
         <p class="form-status" id="login-status"></p>
+        <p style="margin-top:16px"><a href="#" id="forgot">Forgot password?</a></p>
+      </form>
+      <form id="reset-form" style="max-width:420px" hidden>
+        <p>Choose a new password.</p>
+        <div class="field"><label for="np">New password</label><input id="np" type="password" minlength="8" required autocomplete="new-password"></div>
+        <button class="btn solid" type="submit">Save new password</button>
+        <p class="form-status" id="reset-status"></p>
       </form>
     </div>
 
