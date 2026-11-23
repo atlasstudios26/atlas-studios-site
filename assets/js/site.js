@@ -241,6 +241,27 @@
     document.querySelectorAll(".ig-post iframe").forEach((f) => { if (f.contentWindow === e.source) f.style.height = h + "px"; });
   });
 
+  // The series wall: self-hosted silent loops of each Reel, grouped, each opening Instagram.
+  function reelWall(reels) {
+    const groups = [];
+    reels.forEach((r) => { let g = groups.find((x) => x.name === r.group); if (!g) groups.push(g = { name: r.group, items: [] }); g.items.push(r); });
+    const tile = (r) => {
+      const v = el("video", { src: r.src, poster: r.poster, muted: "", loop: "", playsinline: "", preload: "none", "aria-hidden": "true" });
+      const a = el("a", { class: "reel", href: r.href, target: "_blank", rel: "noopener", "aria-label": `${r.title} on Instagram` },
+        el("div", { class: "reel-frame" }, v, el("span", { class: "reel-ig", text: "Watch on Instagram ↗" })),
+        el("div", { class: "reel-cap" }, el("strong", { text: r.title }), el("span", { text: r.credit })));
+      return a;
+    };
+    const wall = el("div", { class: "reel-wall" }, groups.map((g) =>
+      el("div", { class: "reel-group" }, el("span", { class: "label", text: g.name }),
+        el("div", { class: "reel-row n" + g.items.length }, g.items.map(tile)))),
+      el("div", { class: "ig-actions" }, el("a", { class: "btn", href: reels[0].href, target: "_blank", rel: "noopener", text: "Watch the full series on Instagram" })));
+    // play loops only while on screen
+    const io = new IntersectionObserver((es) => es.forEach((e) => { const v = e.target; v.muted = true; if (e.isIntersecting) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause(); }), { threshold: 0.35 });
+    requestAnimationFrame(() => wall.querySelectorAll("video").forEach((v) => io.observe(v)));
+    return wall;
+  }
+
   function chapters(list) {
     const media = (src) => /\.mp4$/i.test(src)
       ? el("video", { src, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata" })
@@ -253,6 +274,7 @@
           el("p", { class: "lede", text: c.body }),
           c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
         (c.instagram && c.instagram.length) ? igGrid(c.instagram) : null,
+        (c.reels && c.reels.length) ? reelWall(c.reels) : null,
         (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.filter((m) => !/-wide/.test(m)).length, 6) }, c.media.map((m) => el("figure", { class: /-wide/.test(m) ? "wide" : null }, media(m)))) : null
       )));
   }
