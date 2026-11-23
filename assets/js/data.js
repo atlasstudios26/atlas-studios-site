@@ -180,14 +180,15 @@ window.ATLAS_FALLBACK = {
         { label: "02 · On set", title: "Directed down to the pour.",
           body: "Atlas creative directed the shoot at The James Room: the shot list, the talent and hand models, the styling of the bar and the cocktails, and every frame from the backlit pour to the seated portraits.",
           media: ["/assets/work/black-history-month-campaign/set-pour-2.jpg", "/assets/work/black-history-month-campaign/set-pour-1.jpg", "/assets/work/black-history-month-campaign/set-wide.jpg"] },
-        { label: "03 · The series", title: "Five films. Atlanta's creatives, on camera.",
+        { label: "03 · The series", title: "Six films. Atlanta's creatives, on camera.",
           body: "The finished series ran on Edmond's Honor's Instagram: portraits of the bartenders, chefs and founders shaping Atlanta's food and drink culture, and the cocktails they built with the bourbon.",
           reels: [
             { group: "The creatives", src: "/assets/work/black-history-month-campaign/reels/raul.mp4", poster: "/assets/work/black-history-month-campaign/reels/raul.jpg", title: "Raul Ramos", credit: "Lead Bartender, The James Room", href: "https://www.instagram.com/reel/DXh11fMgRNg/" },
             { group: "The creatives", src: "/assets/work/black-history-month-campaign/reels/courtnee.mp4", poster: "/assets/work/black-history-month-campaign/reels/courtnee.jpg", title: "Courtnee Futch-Brinson", credit: "Chef & Founder, Brown Butter Supper Club", href: "https://www.instagram.com/reel/DWhfATYATp1/" },
             { group: "The creatives", src: "/assets/work/black-history-month-campaign/reels/erika.mp4", poster: "/assets/work/black-history-month-campaign/reels/erika.jpg", title: "Erika Moore", credit: "Mixologist & Co-Founder, Whiskey & Rosemary", href: "https://www.instagram.com/reel/DWPfRF-ATQh/" },
             { group: "The cocktails", src: "/assets/work/black-history-month-campaign/reels/banana.mp4", poster: "/assets/work/black-history-month-campaign/reels/banana.jpg", title: "Banana Bread Old Fashioned", credit: "Built by Raul Ramos", href: "https://www.instagram.com/reel/DXaHWA0AR7O/" },
-            { group: "The cocktails", src: "/assets/work/black-history-month-campaign/reels/espresso.mp4", poster: "/assets/work/black-history-month-campaign/reels/espresso.jpg", title: "Espresso Martini", credit: "Built by Raul Ramos", href: "https://www.instagram.com/reel/DWSBbC7gS8W/" }
+            { group: "The cocktails", src: "/assets/work/black-history-month-campaign/reels/espresso.mp4", poster: "/assets/work/black-history-month-campaign/reels/espresso.jpg", title: "Espresso Martini", credit: "Built by Raul Ramos", href: "https://www.instagram.com/reel/DWSBbC7gS8W/" },
+            { group: "The cocktails", src: "/assets/work/black-history-month-campaign/reels/smores.mp4", poster: "/assets/work/black-history-month-campaign/reels/smores.jpg", title: "S'mores Espresso Martini", credit: "Built by Raul Ramos", href: "https://www.instagram.com/reel/DV9kjMekW_h/" }
           ],
           media: [] }
       ],
