@@ -202,18 +202,34 @@
     g.replaceChildren(...media.map(mediaItem));
   }
 
-  // Instagram posts: show six, load the rest on request (each embed is heavy).
+  // Instagram posts: each one is Instagram's own player in a frame (plays in place;
+  // the account name and caption link out to Instagram). Six shown, rest on request.
+  const IG_PROFILE = "https://www.instagram.com/edmondshonorbourbon/";
   function igGrid(urls) {
-    const post = (u) => el("blockquote", { class: "instagram-media", "data-instgrm-permalink": u, "data-instgrm-version": "14", "data-instgrm-captioned": "false" }, el("a", { href: u, target: "_blank", rel: "noopener", text: "View on Instagram" }));
-    const grid = el("div", { class: "chapter-ig" }, urls.slice(0, 6).map(post));
-    const wrap = el("div", {}, grid);
+    const post = (u) => {
+      const id = (u.match(/instagram\.com\/(?:p|reel)\/([^/?#]+)/) || [])[1];
+      if (!id) return null;
+      return el("figure", { class: "ig-post" },
+        el("iframe", { src: `https://www.instagram.com/p/${id}/embed/captioned/`, title: "Edmond's Honor on Instagram", loading: "lazy", allowtransparency: "true", allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", scrolling: "no" }));
+    };
+    const grid = el("div", { class: "chapter-ig" }, urls.slice(0, 6).map(post).filter(Boolean));
+    const actions = el("div", { class: "ig-actions" },
+      el("a", { class: "btn", href: IG_PROFILE, target: "_blank", rel: "noopener", text: "Follow @edmondshonorbourbon" }));
     if (urls.length > 6) {
       const more = el("button", { class: "btn", type: "button", text: `Show all ${urls.length} posts` });
-      more.addEventListener("click", () => { urls.slice(6).forEach((u) => grid.append(post(u))); more.remove(); if (window.instgrm) window.instgrm.Embeds.process(); });
-      wrap.append(el("div", { style: "margin-top:24px" }, more));
+      more.addEventListener("click", () => { urls.slice(6).map(post).filter(Boolean).forEach((n) => grid.append(n)); more.remove(); });
+      actions.prepend(more);
     }
-    return wrap;
+    return el("div", { class: "ig-wrap" }, grid, actions);
   }
+  // Instagram tells each frame how tall its post is; size the frame to fit.
+  window.addEventListener("message", (e) => {
+    if (!/instagram\.com$/.test(new URL(e.origin).hostname)) return;
+    let d = e.data; try { if (typeof d === "string") d = JSON.parse(d); } catch (_) { return; }
+    const h = d && d.type === "MEASURE" && d.details && d.details.height;
+    if (!h) return;
+    document.querySelectorAll(".ig-post iframe").forEach((f) => { if (f.contentWindow === e.source) f.style.height = h + "px"; });
+  });
 
   function chapters(list) {
     const media = (src) => /\.mp4$/i.test(src)
@@ -271,9 +287,6 @@
       cs.served ? el("div", { class: "cs-served" }, el("span", { class: "label", text: "Who it served" }), el("p", { class: "display-sm", text: cs.served })) : null
     ].filter(Boolean));
     splitWords(); scrubText();
-    if ((cs.chapters || []).some((c) => c.instagram && c.instagram.length)) {
-      const sc = document.createElement("script"); sc.async = true; sc.src = "https://www.instagram.com/embed.js"; document.body.append(sc);
-    }
     if (world) {
       root.closest("section").before(world);
       document.body.classList.add("over-film");
