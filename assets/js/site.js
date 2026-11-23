@@ -202,6 +202,19 @@
     g.replaceChildren(...media.map(mediaItem));
   }
 
+  // Instagram posts: show six, load the rest on request (each embed is heavy).
+  function igGrid(urls) {
+    const post = (u) => el("blockquote", { class: "instagram-media", "data-instgrm-permalink": u, "data-instgrm-version": "14", "data-instgrm-captioned": "false" }, el("a", { href: u, target: "_blank", rel: "noopener", text: "View on Instagram" }));
+    const grid = el("div", { class: "chapter-ig" }, urls.slice(0, 6).map(post));
+    const wrap = el("div", {}, grid);
+    if (urls.length > 6) {
+      const more = el("button", { class: "btn", type: "button", text: `Show all ${urls.length} posts` });
+      more.addEventListener("click", () => { urls.slice(6).forEach((u) => grid.append(post(u))); more.remove(); if (window.instgrm) window.instgrm.Embeds.process(); });
+      wrap.append(el("div", { style: "margin-top:24px" }, more));
+    }
+    return wrap;
+  }
+
   function chapters(list) {
     const media = (src) => /\.mp4$/i.test(src)
       ? el("video", { src, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata" })
@@ -213,7 +226,7 @@
           el("h2", { class: "display-md", text: c.title, "data-split": "" }),
           el("p", { class: "lede", text: c.body }),
           c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
-        (c.instagram && c.instagram.length) ? el("div", { class: "chapter-ig" }, c.instagram.map((u) => el("blockquote", { class: "instagram-media", "data-instgrm-permalink": u, "data-instgrm-version": "14" }, el("a", { href: u, target: "_blank", rel: "noopener", text: "View on Instagram" })))) : null,
+        (c.instagram && c.instagram.length) ? igGrid(c.instagram) : null,
         (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.filter((m) => !/-wide/.test(m)).length, 6) }, c.media.map((m) => el("figure", { class: /-wide/.test(m) ? "wide" : null }, media(m)))) : null
       )));
   }
