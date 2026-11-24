@@ -1176,3 +1176,6 @@ body.dark-page .chapter:has(.chapter-ig) { grid-template-columns: minmax(0, 1fr)
 .reel-cap span { font-size: clamp(15px, 1.1vw, 18px); color: var(--bone-2, #6b625a); }
 @media (max-width: 860px) { .reel-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .reel-ig { opacity: 1; transform: none; font-size: 10px; } }
 @media (max-width: 560px) { .reel-wall { margin-inline: 0; } .reel-row { grid-template-columns: 1fr; } }
+/* Home: quieter "We create worlds." so the film leads */
+body.over-film .hero-title { font-size: clamp(30px, 4.8vw, 82px); color: rgba(229,227,221,0.16); -webkit-text-stroke: 1px rgba(229,227,221,0.62); text-shadow: 0 1px 14px rgba(0,0,0,0.22); }
+@media (max-width: 860px) { body.over-film .hero-title { font-size: clamp(28px, 9vw, 44px) !important; } }
