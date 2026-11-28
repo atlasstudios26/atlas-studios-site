@@ -1192,3 +1192,18 @@ body.over-film .hero-title { font-size: clamp(30px, 4.8vw, 82px); color: rgba(22
   .cap-approach-grid { grid-template-columns: minmax(0, 1fr); }
   .cap-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
 }
+/* Capabilities on phones: tap a service name to open it */
+@media (max-width: 860px) {
+  .svc-panel, .svc-panel.on { display: flex !important; flex-direction: column; gap: 14px; padding: 0 0 0; margin: 0; border-bottom: 1px solid var(--line); }
+  .svc-panel > div { display: contents; }
+  .svc-panel .svc-name { order: -1; cursor: pointer; margin: 0; padding: 22px 36px 22px 0; position: relative; font-size: clamp(28px, 8vw, 38px); }
+  .svc-panel .svc-name::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-family: var(--sans, "Jost", sans-serif); font-size: 28px; font-weight: 300; transition: transform .3s; }
+  .svc-panel.open .svc-name::after { transform: translateY(-50%) rotate(45deg); }
+  .svc-panel > figure, .svc-panel > div > :not(.svc-name) { display: none; }
+  .svc-panel.open > figure { display: block; }
+  .svc-panel.open > div > :not(.svc-name) { display: block; }
+  .svc-panel.open > div > .label { display: none; }
+  .svc-panel.open > div > :last-child { margin-bottom: 28px; }
+  .svc-panel figure img { object-fit: contain !important; height: auto; max-height: 60vh; width: auto; max-width: 100%; }
+  .svc-panels { border-top: 1px solid var(--line); }
+}

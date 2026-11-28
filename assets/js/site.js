@@ -725,6 +725,14 @@
       tabs.forEach((t) => t.classList.toggle("on", t.dataset.svc === i));
       panels.forEach((p) => p.classList.toggle("on", p.dataset.svcPanel === i));
     };
+    // Phones: each service name opens and closes its own panel.
+    panels.forEach((p) => {
+      const name = p.querySelector(".svc-name"); if (!name) return;
+      name.setAttribute("role", "button"); name.setAttribute("tabindex", "0"); name.setAttribute("aria-expanded", "false");
+      const toggle = () => { const open = p.classList.toggle("open"); name.setAttribute("aria-expanded", String(open)); };
+      name.addEventListener("click", toggle);
+      name.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+    });
     tabs.forEach((t) => {
       t.addEventListener("click", () => show(t.dataset.svc));
       if (matchMedia("(hover: hover)").matches) t.addEventListener("mouseenter", () => show(t.dataset.svc));
