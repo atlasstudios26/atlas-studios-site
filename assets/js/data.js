@@ -195,6 +195,33 @@ window.ATLAS_FALLBACK = {
       sort_order: 2
     },
     {
+      pinned: true,
+      slug: "third-semester",
+      services: ["Brand Identity", "Merch", "Campaign Creative"],
+      title: "Third Semester",
+      client: "An Atlas original",
+      category: "Brand Identity & Product",
+      summary: "An HBCU streetwear brand built to do what once did not exist.",
+      context: "Third Semester is Avery Jordan's own apparel brand: HBCU pride designed with streetwear's eye, for students and young alumni who want to rep their school without looking basic.",
+      cover_url: "/assets/work/third-semester/perdue-hall.jpg",
+      stat: "Mascot drops sold out at Morehouse and Howard",
+      chapters: [
+        { label: "01 · The gap", title: "HBCU pride, cut like streetwear.",
+          body: "School gear was bookstore-basic, and nobody was designing HBCU apparel the way the culture actually dresses. Third Semester fills that gap: campus motifs designed with the eye of Off-White, Stüssy, Aimé Leon Dore and Rowing Blazers, for students and young alumni who want one piece they can wear to the club and to homecoming's dressiest event.",
+          media: [] },
+        { label: "02 · The name", title: "The semester that doesn't exist.",
+          body: "Every school runs on two semesters. A third one doesn't exist, and that's the point: HBCUs produced Black lawyers, doctors, pilots and a vice president when none existed. The brand carries that idea. Third Semester does what once did not exist.",
+          media: ["/assets/work/third-semester/classroom.jpg"] },
+        { label: "03 · The collection", title: "Motifs from campus, made for now.", wall: true,
+          body: "Mascots in varsity jackets and sneakers. Alumni drawn as one class portrait. Thurgood Marshall's face built from text. FAMU's band spelling out the school's name. The local takeout spot turned into a graphic. Every piece hides a detail only someone who went there would catch.",
+          media: ["/assets/work/third-semester/morehouse-alumni-tee.jpg", "/assets/work/third-semester/howard-hoodie.jpg", "/assets/work/third-semester/mh-mascot-tee.jpg", "/assets/work/third-semester/hu-mascot-crewneck.jpg", "/assets/work/third-semester/third-for-thurgood.jpg", "/assets/work/third-semester/famu-tee.jpg", "/assets/work/third-semester/howard-china-tee.jpg", "/assets/work/third-semester/howard-jacket.jpg", "/assets/work/third-semester/cap.jpg"] },
+        { label: "04 · The campaign", title: "Shot where the stories come from.", wall: true,
+          body: "The campaign was photographed on campus: Morehouse's gates and signs, Perdue Hall, the stairwells students climb every day. One tee lists every residence hall under the school's motto on its back, a map only alumni can read.",
+          media: ["/assets/work/third-semester/perdue-hall.jpg", "/assets/work/third-semester/stairs.jpg", "/assets/work/third-semester/back-print.jpg", "/assets/work/third-semester/gate.jpg", "/assets/work/third-semester/sign.jpg"] }
+      ],
+      sort_order: 7
+    },
+    {
       slug: "legacy-class-varsity-jacket",
       services: ["Merch"],
       title: "The Legacy Class Jacket",

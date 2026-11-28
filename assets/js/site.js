@@ -274,7 +274,7 @@
       ? el("video", { src, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata" })
       : el("img", { src, alt: "", loading: "lazy" });
     return el("div", { class: "chapters" }, list.map((c) =>
-      el("section", { class: "chapter reveal in" },
+      el("section", { class: "chapter reveal in" + (c.wall ? " wall" : "") },
         el("div", { class: "chapter-text" },
           el("span", { class: "label", text: c.label }),
           el("h2", { class: "display-md", text: c.title, "data-split": "" }),

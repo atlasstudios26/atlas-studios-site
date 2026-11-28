@@ -1207,3 +1207,10 @@ body.over-film .hero-title { font-size: clamp(30px, 4.8vw, 82px); color: rgba(22
   .svc-panel figure img { object-fit: contain !important; height: auto; max-height: 60vh; width: auto; max-width: 100%; }
   .svc-panels { border-top: 1px solid var(--line); }
 }
+/* Case study chapters with many pieces: text on top, full-width wall of images (never cropped) */
+.chapter.wall, body.dark-page .chapter.wall { grid-template-columns: minmax(0, 1fr); }
+.chapter.wall .chapter-text { position: static; max-width: 900px; }
+.chapter.wall .chapter-media { display: block; column-count: 3; column-gap: clamp(14px, 1.6vw, 24px); margin-inline: min(0px, calc((100% - min(1680px, 92vw)) / 2)); }
+.chapter.wall .chapter-media figure { break-inside: avoid; margin: 0 0 clamp(14px, 1.6vw, 24px); height: auto; aspect-ratio: auto; }
+.chapter.wall .chapter-media img { width: 100%; height: auto; object-fit: contain; display: block; }
+@media (max-width: 860px) { .chapter.wall .chapter-media { column-count: 2; margin-inline: 0; } }
