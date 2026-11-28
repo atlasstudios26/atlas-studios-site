@@ -65,19 +65,25 @@ window.ATLAS_FALLBACK = {
       note: "Photos and the recap reel arrive after December 12.",
       chapters: [
         { label: "01 · The concept", title: "Not a Christmas party with a fashion theme.",
-          body: "This year Santa is the creative director of House of Rouge, a fictional fashion house built on a single color story: red. His elves are the seamstresses. Every marketing asset and every corner of the room comes from the same design language, so the party doesn't reference the concept. It lives inside it.",
+          body: "This year Santa is the creative director of House of Rouge, a fictional fashion house built on a single color story: red. His elves are the seamstresses. Every marketing asset and every corner of the room comes from the same design language, so the night feels like one world from the first post to the last song.",
           media: [] },
-        { label: "02 · The room", title: "Six moments inside the House.",
-          body: "Each moment is built to be photographed, and each one is available to a partner to make its own.",
-          list: [
-            ["The Rouge Arch", "A floral arch of red and ivory roses. The first photo of the night."],
-            ["The Rouge Room", "Ring the brass bell, and a white-gloved hand serves a cocktail through velvet."],
-            ["The Fitting Room", "Velvet-curtained fitting rooms framed by couture sketches and gowns."],
-            ["The Creative Director's Chair", "A holiday portrait with Santa, the House's creative director."],
-            ["The Wish List", "A vintage red phone booth that records guest wishes for the recap reel."],
-            ["The Gift Atelier", "A boxed, co-branded House of Rouge ornament for every guest."]
-          ],
-          media: [] }
+        { label: "02 · Walk through the House", title: "Scroll to step inside.",
+          body: "Every moment is built to be photographed, and each one is available to a partner to make its own.",
+          journey: [
+            { img: "/assets/work/house-of-rouge/ornament.jpg", label: "The invitation", line: "The House opens December 12.", sub: "Coca-Cola Roxy · The Battery Atlanta" },
+            { img: "/assets/work/house-of-rouge/rouge-arch.jpg", label: "The Rouge Arch", line: "Red and ivory roses. The first photo of the night." },
+            { img: "/assets/work/house-of-rouge/fitting-room.jpg", label: "The Fitting Room", line: "Velvet curtains, couture sketches, a gown on the form." },
+            { img: "/assets/work/house-of-rouge/wish-list.jpg", label: "The Wish List", line: "Pick up the phone. Tell Santa what you want.", sub: "Every wish is recorded for the recap reel." },
+            { img: "/assets/work/house-of-rouge/gift-atelier.jpg", label: "The Gift Atelier", line: "Nobody leaves without an ornament.", sub: "A boxed, co-branded House of Rouge keepsake for every guest." },
+            { img: "/assets/work/house-of-rouge/stage.jpg", label: "The Stage", line: "Then the lights come up." },
+            { img: "/assets/work/house-of-rouge/party.jpg", label: "The House", line: "Red velvet, chandeliers, the whole city in one room.", cta: true }
+          ] },
+        { label: "03 · The countdown", title: "Santa's workshop, one post at a time.", wall: true,
+          body: "The countdown is the world, told in pieces: a tape measure pinned into a 15, a 2 chalked onto velvet and cut by hand, a sketchbook gown that becomes a 4. Each post shows Santa's hands at work in his atelier.",
+          media: ["/assets/work/house-of-rouge/cd-15-days.jpg", "/assets/work/house-of-rouge/cd-4-weeks.jpg", "/assets/work/house-of-rouge/cd-2-weeks.jpg", "/assets/work/house-of-rouge/cd-1-week.jpg", "/assets/work/house-of-rouge/cd-5-days.jpg", "/assets/work/house-of-rouge/cd-2-days.jpg", "/assets/work/house-of-rouge/cd-1-day.jpg"] },
+        { label: "04 · The talent", title: "Santa hangs the portraits.", wall: true,
+          body: "Instead of a flyer, each talent announcement is a short film: Santa walks the House's portrait gallery and hangs the night's performers and hosts on the wall.",
+          media: ["/assets/work/house-of-rouge/talent-jae-murphy.mp4", "/assets/work/house-of-rouge/talent-dj-p-forreal.mp4", "/assets/work/house-of-rouge/talent-hosts.mp4"] }
       ],
       sort_order: 6
     },

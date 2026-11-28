@@ -1272,3 +1272,23 @@ body.over-film .cs-world .hero-title { font-size: clamp(36px, 5vw, 76px); color:
 .scrollfilm-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(229,227,221,.15); }
 .scrollfilm-progress span { display: block; height: 100%; background: #E5E3DD; transform-origin: left; transform: scaleX(0); }
 @media (max-width: 860px) { .scrollfilm { height: 700vh; } .sf-line { font-size: clamp(30px, 9vw, 44px); } }
+/* Walk-through journey (House of Rouge) */
+.journey { position: relative; margin-inline: min(0px, calc((100% - 100vw) / 2)); width: 100vw; max-width: 100vw; }
+.jr-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #120707; }
+.jr-layer { position: absolute; inset: 0; opacity: 0; will-change: opacity; }
+.jr-layer.on { opacity: 1; }
+.jr-blur { position: absolute; inset: -40px; background-size: cover; background-position: center; filter: blur(38px) brightness(.45) saturate(1.2); }
+.jr-layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform-origin: 50% 55%; will-change: transform; }
+.jr-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, rgba(18,7,7,.85) 0, rgba(18,7,7,.35) 30%, rgba(18,7,7,0) 55%); }
+.jr-lines { position: absolute; left: 0; right: 0; bottom: clamp(40px, 9vh, 100px); padding: 0 4vw; }
+.jr-line { position: absolute; left: 4vw; right: 4vw; bottom: 0; color: #E5E3DD; opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; pointer-events: none; }
+.jr-line.on { opacity: 1; transform: none; pointer-events: auto; }
+.jr-line .label { color: #E5E3DD; opacity: .75; }
+.jr-big { font-family: var(--display); font-size: clamp(32px, 4.6vw, 78px); line-height: 1.04; margin: 10px 0 0; max-width: 18ch; text-shadow: 0 2px 22px rgba(0,0,0,.5); }
+.jr-sub { margin: 12px 0 0; font-size: clamp(16px, 1.3vw, 20px); opacity: .85; max-width: 46ch; }
+.jr-line .btn { margin-top: 24px; color: #E5E3DD; border-color: #E5E3DD; display: inline-block; }
+.jr-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(229,227,221,.15); }
+.jr-progress span { display: block; height: 100%; background: #E5E3DD; transform-origin: left; transform: scaleX(0); }
+@media (max-width: 860px) { .jr-layer img { height: 70%; top: 6%; } .jr-big { font-size: clamp(28px, 8vw, 40px); } }
+@media (prefers-reduced-motion: reduce) { .jr-layer img { transform: none !important; } }
+.jr-line .label { opacity: 1; font-size: 13px; letter-spacing: .2em; text-shadow: 0 1px 10px rgba(0,0,0,.6); }

@@ -269,6 +269,36 @@
     return wall;
   }
 
+  // Walk-through: a full-screen stage that crossfades from room to room as you scroll.
+  function journey(stops) {
+    const tickets = (window.ATLAS_CONFIG || {}).houseOfRougeTickets;
+    const layers = stops.map((st, i) => el("div", { class: "jr-layer" + (i === 0 ? " on" : "") },
+      el("div", { class: "jr-blur", style: `background-image:url('${st.img}')` }),
+      el("img", { src: st.img, alt: st.label, loading: i < 2 ? "eager" : "lazy" })));
+    const lines = stops.map((st, i) => el("div", { class: "jr-line" + (i === 0 ? " on" : "") },
+      el("span", { class: "label", text: `${String(i + 1).padStart(2, "0")} · ${st.label}` }),
+      el("p", { class: "jr-big", text: st.line }),
+      st.sub ? el("p", { class: "jr-sub", text: st.sub }) : null,
+      st.cta ? el("a", { class: "btn", href: tickets || "/events", target: tickets ? "_blank" : null, rel: tickets ? "noopener" : null, text: tickets ? "Get tickets" : "See events" }) : null));
+    const bar = el("span");
+    const stage = el("div", { class: "jr-stage" }, ...layers, el("div", { class: "jr-shade" }), el("div", { class: "jr-lines" }, ...lines), el("div", { class: "jr-progress" }, bar));
+    const root = el("div", { class: "journey", style: `height:${stops.length * 90 + 60}vh` }, stage);
+    const n = stops.length;
+    const tick = () => {
+      const r = root.getBoundingClientRect(), total = r.height - innerHeight;
+      const p = Math.min(1, Math.max(0, -r.top / total)), f = p * (n - 1);
+      const cur = Math.round(f);
+      layers.forEach((l, i) => { const d = Math.abs(f - i); l.style.opacity = Math.max(0, 1 - d * 1.6).toFixed(3);
+        const img = l.lastChild; img.style.transform = `scale(${(1 + Math.min(1, Math.max(0, f - i + 0.5)) * 0.045).toFixed(4)})`; });
+      lines.forEach((l, i) => l.classList.toggle("on", i === cur));
+      bar.style.transform = `scaleX(${p})`;
+    };
+    addEventListener("scroll", () => requestAnimationFrame(tick), { passive: true });
+    addEventListener("resize", tick);
+    requestAnimationFrame(tick);
+    return root;
+  }
+
   // One side of a render/built pair; sized by its own shape so both sides share a height.
   function rrSide(src, alt, tag, cls) {
     const img = el("img", { src, alt, loading: "lazy" });
@@ -285,7 +315,7 @@
       ? el("video", { src, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata" })
       : el("img", { src, alt: "", loading: "lazy" });
     return el("div", { class: "chapters" }, list.map((c) =>
-      el("section", { class: "chapter reveal in" + (c.wall || c.pairs ? " wall" : "") },
+      el("section", { class: "chapter reveal in" + (c.wall || c.pairs || c.journey ? " wall" : "") },
         el("div", { class: "chapter-text" },
           el("span", { class: "label", text: c.label }),
           el("h2", { class: "display-md", text: c.title, "data-split": "" }),
@@ -293,6 +323,7 @@
           c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
         (c.instagram && c.instagram.length) ? igGrid(c.instagram) : null,
         (c.reels && c.reels.length) ? reelWall(c.reels) : null,
+        (c.journey && c.journey.length) ? journey(c.journey) : null,
         (c.pairs && c.pairs.length) ? el("div", { class: "rr" }, c.pairs.map((pr) => el("figure", { class: "rr-pair" },
           rrSide(pr.render, `Deck render: ${pr.caption}`, "Render", ""),
           el("span", { class: "rr-arrow", "aria-hidden": "true", text: "→" }),
