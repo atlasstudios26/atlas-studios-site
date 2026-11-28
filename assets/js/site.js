@@ -269,6 +269,15 @@
     return wall;
   }
 
+  // One side of a render/built pair; sized by its own shape so both sides share a height.
+  function rrSide(src, alt, tag, cls) {
+    const img = el("img", { src, alt, loading: "lazy" });
+    const box = el("div", { class: "rr-side" }, img, el("span", { class: "rr-tag" + cls, text: tag }));
+    const fit = () => { if (img.naturalWidth) box.style.flex = `${img.naturalWidth / img.naturalHeight} 1 0`; };
+    img.complete ? fit() : img.addEventListener("load", fit);
+    return box;
+  }
+
   function chapters(list) {
     const media = (src) => /-film\.mp4$/i.test(src)
       ? el("video", { class: "film", src, poster: src.replace(/\.mp4$/i, ".jpg"), controls: "", playsinline: "", preload: "none" })
@@ -276,7 +285,7 @@
       ? el("video", { src, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata" })
       : el("img", { src, alt: "", loading: "lazy" });
     return el("div", { class: "chapters" }, list.map((c) =>
-      el("section", { class: "chapter reveal in" + (c.wall ? " wall" : "") },
+      el("section", { class: "chapter reveal in" + (c.wall || c.pairs ? " wall" : "") },
         el("div", { class: "chapter-text" },
           el("span", { class: "label", text: c.label }),
           el("h2", { class: "display-md", text: c.title, "data-split": "" }),
@@ -284,6 +293,11 @@
           c.list ? el("ol", { class: "chapter-list" }, c.list.map((li) => el("li", {}, el("strong", { text: li[0] }), el("span", { text: li[1] })))) : null),
         (c.instagram && c.instagram.length) ? igGrid(c.instagram) : null,
         (c.reels && c.reels.length) ? reelWall(c.reels) : null,
+        (c.pairs && c.pairs.length) ? el("div", { class: "rr" }, c.pairs.map((pr) => el("figure", { class: "rr-pair" },
+          rrSide(pr.render, `Deck render: ${pr.caption}`, "Render", ""),
+          el("span", { class: "rr-arrow", "aria-hidden": "true", text: "→" }),
+          rrSide(pr.built, `Built: ${pr.caption}`, "Built", " built"),
+          el("figcaption", { class: "label", text: pr.caption })))) : null,
         (c.media && c.media.length) ? el("div", { class: "chapter-media count-" + Math.min(c.media.filter((m) => !/-wide/.test(m)).length, 6) }, c.media.map((m) => el("figure", { class: /-wide/.test(m) ? "wide" : null }, media(m)))) : null
       )));
   }
