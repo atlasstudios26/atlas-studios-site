@@ -1214,3 +1214,24 @@ body.over-film .hero-title { font-size: clamp(30px, 4.8vw, 82px); color: rgba(22
 .chapter.wall .chapter-media figure { break-inside: avoid; margin: 0 0 clamp(14px, 1.6vw, 24px); height: auto; aspect-ratio: auto; }
 .chapter.wall .chapter-media img { width: 100%; height: auto; object-fit: contain; display: block; }
 @media (max-width: 860px) { .chapter.wall .chapter-media { column-count: 2; margin-inline: 0; } }
+/* World interactions */
+.world-dark { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: rgb(6,5,4);
+  -webkit-mask-image: radial-gradient(circle var(--r, 240px) at var(--x, 50%) var(--y, 45%), transparent 0, transparent 38%, rgba(0,0,0,.55) 70%, #000 100%);
+          mask-image: radial-gradient(circle var(--r, 240px) at var(--x, 50%) var(--y, 45%), transparent 0, transparent 38%, rgba(0,0,0,.55) 70%, #000 100%); }
+.world-gl { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0; transition: opacity .8s ease; }
+.hero-media.gl-on .world-gl { opacity: 1; }
+.hero-media.gl-on video { visibility: hidden; }
+.world-hint { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--bone, #E5E3DD); opacity: .85; letter-spacing: .22em; text-shadow: 0 1px 10px rgba(0,0,0,.6); pointer-events: none; transition: opacity .8s ease; animation: hintPulse 2.4s ease-in-out infinite; }
+.world-hint.gone { opacity: 0; animation: none; }
+@keyframes hintPulse { 50% { opacity: .45; } }
+.cs-world .hero-row { position: relative; z-index: 2; }
+.cs-world { touch-action: pan-y; }
+/* Case-study world titles: keep them readable (the quieter home treatment is home-only) */
+body.over-film .cs-world .hero-title { font-size: clamp(36px, 5vw, 76px); color: rgba(229,227,221,0.42); -webkit-text-stroke: 1px rgba(229,227,221,0.95); text-shadow: 0 0 2px rgba(0,0,0,0.45), 0 2px 22px rgba(0,0,0,0.35); }
+@media (max-width: 860px) {
+  body.over-film .cs-world .hero-title { color: var(--charcoal-ink, #292420); -webkit-text-stroke: 0; text-shadow: none; font-size: clamp(30px, 8.5vw, 44px) !important; }
+  .cs-world .world-tag { color: #292420; text-shadow: none; }
+  .cs-world .world-hint { top: calc(64px + 28vw); }
+}
+.world-hint { white-space: nowrap; }
+@media (max-width: 860px) { body.over-film .cs-world .world-tag, body.dark-page .cs-world .world-tag { color: #292420 !important; opacity: .7; text-shadow: none; } }

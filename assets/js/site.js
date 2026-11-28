@@ -35,7 +35,7 @@
         // Built-in photos and video fill in anything a managed case study is missing.
         data.forEach((c) => {
           const f = fallback.caseStudies.find((x) => x.slug === c.slug);
-          if (f) ["cover_url", "hero_url", "video_url", "world_url", "gallery", "chapters", "stat", "served", "quote", "note"].forEach((k) => { if (!c[k] && f[k]) c[k] = f[k]; });
+          if (f) ["cover_url", "hero_url", "video_url", "world_url", "interaction", "gallery", "chapters", "stat", "served", "quote", "note"].forEach((k) => { if (!c[k] && f[k]) c[k] = f[k]; });
         });
         const have = new Set(data.map((c) => c.slug));
         const pinned = fallback.caseStudies.filter((c) => c.pinned && !have.has(c.slug));
@@ -331,6 +331,7 @@
       document.body.classList.add("over-film");
       $$("video", world).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
       headerOverFilm();
+      if (cs.interaction && window.atlasWorldInteraction) window.atlasWorldInteraction(world, cs.interaction);
     }
     // Private decks for this project appear as locked cards (set up in /admin).
     if (db) db.from("decks").select("slug, title").eq("case_study_slug", cs.slug).eq("published", true).then(({ data }) => {
