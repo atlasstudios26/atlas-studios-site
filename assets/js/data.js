@@ -33,7 +33,10 @@ window.ATLAS_FALLBACK = {
           media: ["/assets/work/park-100-oak-bluffs/the-neighborhood.jpg", "/assets/work/park-100-oak-bluffs/park-bluff-sails.jpg", "/assets/work/park-100-oak-bluffs/pecan-jacks.jpg", "/assets/work/park-100-oak-bluffs/scent-souk.jpg", "/assets/work/park-100-oak-bluffs/illustration-guest.jpg", "/assets/work/park-100-oak-bluffs/beauty-bar.jpg"] },
         { label: "05 · The keepsakes", title: "The last party favor.",
           body: "A \"What comes with your ticket\" reveal set it up; a wall of crested tote bags at the arch delivered it. Scarves printed with Oak Bluffs and Atlanta landmarks, fans, tennis balls and golf balls: gifting designed as part of the world, so the story went home with every guest.",
-          media: ["/assets/work/park-100-oak-bluffs/ticket-reveal.jpg", "/assets/work/park-100-oak-bluffs/tote-wall.jpg", "/assets/work/park-100-oak-bluffs/keepsakes-table.jpg", "/assets/work/park-100-oak-bluffs/golf-balls.jpg", "/assets/work/park-100-oak-bluffs/scarf.jpg", "/assets/work/park-100-oak-bluffs/guests-tote.jpg"] }
+          media: ["/assets/work/park-100-oak-bluffs/ticket-reveal.jpg", "/assets/work/park-100-oak-bluffs/tote-wall.jpg", "/assets/work/park-100-oak-bluffs/keepsakes-table.jpg", "/assets/work/park-100-oak-bluffs/golf-balls.jpg", "/assets/work/park-100-oak-bluffs/scarf.jpg", "/assets/work/park-100-oak-bluffs/guests-tote.jpg"] },
+        { label: "06 · The night", title: "Watch the world come alive.",
+          body: "From the marketplace to the last song under the tent: the full Park 100 recap. Sound on.",
+          media: ["/assets/work/park-100-oak-bluffs/recap-film.mp4"] }
       ],
       results: [
         "1,250+ guests at the 10th anniversary edition",

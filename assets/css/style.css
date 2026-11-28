@@ -1235,3 +1235,5 @@ body.over-film .cs-world .hero-title { font-size: clamp(36px, 5vw, 76px); color:
 }
 .world-hint { white-space: nowrap; }
 @media (max-width: 860px) { body.over-film .cs-world .world-tag, body.dark-page .cs-world .world-tag { color: #292420 !important; opacity: .7; text-shadow: none; } }
+.chapter-media video.film { width: 100%; height: auto; max-height: 86vh; object-fit: contain; background: #151210; display: block; }
+.chapter-media video.film { width: auto; max-width: 100%; background: transparent; margin: 0 auto; }

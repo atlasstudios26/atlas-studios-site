@@ -270,7 +270,9 @@
   }
 
   function chapters(list) {
-    const media = (src) => /\.mp4$/i.test(src)
+    const media = (src) => /-film\.mp4$/i.test(src)
+      ? el("video", { class: "film", src, poster: src.replace(/\.mp4$/i, ".jpg"), controls: "", playsinline: "", preload: "none" })
+      : /\.mp4$/i.test(src)
       ? el("video", { src, muted: "", loop: "", playsinline: "", autoplay: "", preload: "metadata" })
       : el("img", { src, alt: "", loading: "lazy" });
     return el("div", { class: "chapters" }, list.map((c) =>
@@ -343,7 +345,7 @@
     if (cs.gallery && cs.gallery.length) {
       root.append(el("div", { class: "cs-gallery" }, cs.gallery.map((src) => el("figure", {}, el("img", { src, alt: "", loading: "lazy" })))));
     }
-    $$("video", root).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+    $$("video:not(.film)", root).forEach((v) => { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
     if (cs.id) {
       const media = await getMedia(cs.id);
       if (media.length) root.append(el("div", { class: "gallery" }, media.map(mediaItem)));
