@@ -149,3 +149,41 @@
     try { if (kind === "flashlight") flashlight(world); else if (kind === "water") water(world); } catch (e) { /* the film still plays */ }
   };
 })();
+
+/* Scroll film: scrolling drives the camera. Frames are drawn to a canvas from an image sequence
+   (smoother than scrubbing a video, especially on iPhone). Lines of copy fade in at set points. */
+(function () {
+  const root = document.querySelector("[data-scrollfilm]"); if (!root) return;
+  const N = +root.dataset.frames, path = root.dataset.path, ext = root.dataset.ext || ".webp";
+  const canvas = root.querySelector("canvas"), ctx = canvas.getContext("2d");
+  const lines = [...root.querySelectorAll(".sf-line")], bar = root.querySelector(".scrollfilm-progress span");
+  const imgs = new Array(N); let want = 0, shown = -1;
+  const src = (i) => `${path}${String(i + 1).padStart(3, "0")}${ext}`;
+  const load = (i) => new Promise((res) => { if (imgs[i]) return res(); const im = new Image(); im.decoding = "async"; im.onload = () => { imgs[i] = im; res(); }; im.onerror = res; im.src = src(i); });
+  // Load coarse first (every 8th frame) so scrolling works right away, then fill in.
+  (async () => { for (const step of [8, 4, 2, 1]) { const jobs = []; for (let i = 0; i < N; i += step) jobs.push(load(i)); await Promise.all(jobs); draw(true); } })();
+  function size() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr; draw(true);
+  }
+  function nearest(i) { for (let d = 0; d < N; d++) { if (imgs[i - d]) return imgs[i - d]; if (imgs[i + d]) return imgs[i + d]; } return null; }
+  function draw(force) {
+    if (!force && want === shown) return;
+    const im = nearest(want); if (!im) return;
+    shown = want;
+    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / im.width, ch / im.height); // cover the screen
+    const w = im.width * s, h = im.height * s;
+    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+  function onScroll() {
+    const r = root.getBoundingClientRect(), total = r.height - innerHeight;
+    const p = Math.min(1, Math.max(0, -r.top / total));
+    want = Math.min(N - 1, Math.round(p * (N - 1)));
+    lines.forEach((l) => l.classList.toggle("on", p >= +l.dataset.at && p < +l.dataset.to));
+    if (bar) bar.style.transform = `scaleX(${p})`;
+    requestAnimationFrame(() => draw(false));
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", size);
+  size(); onScroll();
+})();

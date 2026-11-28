@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /admin
 Disallow: /deck
+Disallow: /lab
 Sitemap: https://www.theatlasstudios.com/sitemap.xml

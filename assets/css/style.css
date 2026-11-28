@@ -1258,3 +1258,17 @@ body.over-film .cs-world .hero-title { font-size: clamp(36px, 5vw, 76px); color:
 .rr-arrow { flex: 0 0 auto; }
 .rr-pair figcaption { flex-basis: 100%; }
 @media (max-width: 860px) { .rr-pair { flex-direction: column; align-items: stretch; } .rr-side { flex: none !important; } .rr-side img { max-height: none; } }
+/* Scroll film */
+.scrollfilm { position: relative; height: 900vh; background: #0d0b09; }
+.scrollfilm-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.scrollfilm-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.scrollfilm-shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(13,11,9,.55) 0, rgba(13,11,9,0) 45%); pointer-events: none; }
+.scrollfilm-lines { position: absolute; left: 0; right: 0; bottom: clamp(48px, 10vh, 120px); padding: 0 var(--gutter, 48px); }
+.sf-line { position: absolute; left: var(--gutter, 48px); right: var(--gutter, 48px); bottom: 0; margin: 0; font-family: var(--display); font-size: clamp(34px, 5.6vw, 92px); line-height: 1.02; color: #E5E3DD; text-shadow: 0 2px 24px rgba(0,0,0,.45); opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; max-width: 14ch; }
+.sf-line.on { opacity: 1; transform: none; }
+.sf-line .label { display: block; font-size: 12px; letter-spacing: .24em; margin-bottom: 14px; opacity: .75; }
+.sf-end { max-width: 16ch; }
+.sf-end .btn { display: inline-block; margin-top: 28px; font-size: 13px; color: #E5E3DD; border-color: #E5E3DD; vertical-align: middle; }
+.scrollfilm-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(229,227,221,.15); }
+.scrollfilm-progress span { display: block; height: 100%; background: #E5E3DD; transform-origin: left; transform: scaleX(0); }
+@media (max-width: 860px) { .scrollfilm { height: 700vh; } .sf-line { font-size: clamp(30px, 9vw, 44px); } }
